@@ -1,0 +1,33 @@
+# Environment & config
+config.local.php
+.env
+.env.*
+
+# Database
+*.sqlite
+*.db
+
+# PHP dependencies
+vendor/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Uploads (don't commit client uploads)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Build artifacts
+*.zip
+*.tar.gz
+
+# Logs
+*.log
+error_log
