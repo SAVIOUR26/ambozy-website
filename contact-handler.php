@@ -42,19 +42,24 @@ if (!empty($_POST['website'])) {
     exit;
 }
 
-// Store in DB (if available) - optional, gracefully skipped
+// Store in DB as CRM lead (if available)
 try {
     if (file_exists(__DIR__ . '/config.php')) {
         require_once __DIR__ . '/config.php';
         if (isset($pdo)) {
-            $stmt = $pdo->prepare("INSERT INTO inquiries (name, email, phone, company, service, budget, message, created_at)
-                                   VALUES (:name, :email, :phone, :company, :service, :budget, :message, NOW())");
-            $stmt->execute(compact('name','email','phone','company','service','budget','message'));
+            require_once __DIR__ . '/includes/crm_helpers.php';
+            $ref  = next_doc_number($pdo, 'LEAD');
+            $ip   = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? null;
+            $stmt = $pdo->prepare(
+                "INSERT INTO leads (ref, name, email, phone, company, service_interest, budget, message, status, source, ip_address)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'new', 'website', ?)"
+            );
+            $stmt->execute([$ref, $name, $email, $phone ?: null, $company ?: null, $service ?: null, $budget ?: null, $message, $ip]);
         }
     }
 } catch (Throwable $e) {
     // DB save failed — still try to send email
-    error_log('Ambozy inquiry DB error: ' . $e->getMessage());
+    error_log('Ambozy lead DB error: ' . $e->getMessage());
 }
 
 // Send email notification
