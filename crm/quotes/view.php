@@ -50,6 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
        class="text-sm bg-white border border-gray-200 hover:border-indigo-400 text-gray-700 px-3 py-2 rounded-lg transition-colors">
       🖨 Print / PDF
     </a>
+    <?php if (!in_array($quote['status'], ['accepted','invoiced'])): ?>
+      <a href="/crm/quotes/edit.php?id=<?= $id ?>"
+         class="text-sm bg-white border border-gray-200 hover:border-amber-400 text-gray-700 px-3 py-2 rounded-lg transition-colors">
+        ✎ Edit
+      </a>
+    <?php endif; ?>
     <?php if ($quote['status'] === 'draft'): ?>
       <a href="/crm/quotes/send.php?id=<?= $id ?>"
          class="text-sm bg-blue-500 hover:bg-blue-400 text-white px-3 py-2 rounded-lg font-medium transition-colors">
