@@ -7,7 +7,7 @@ require_once __DIR__ . '/../partials/header.php';
 $status = $_GET['status'] ?? ''; $search = trim($_GET['q'] ?? '');
 $page = max(1,(int)($_GET['page']??1)); $limit=20; $offset=($page-1)*$limit;
 $orders=[]; $total=0; $counts=[];
-if ($pdo) {
+if ($pdo) { try {
     $rows=$pdo->query("SELECT status,COUNT(*) n FROM orders GROUP BY status")->fetchAll();
     foreach($rows as $r){$counts[$r['status']]=$r['n'];}
     $where=['1=1'];$params=[];
@@ -17,7 +17,7 @@ if ($pdo) {
     $cnt=$pdo->prepare("SELECT COUNT(*) FROM orders o JOIN clients c ON o.client_id=c.id WHERE $sw");$cnt->execute($params);$total=(int)$cnt->fetchColumn();
     $stmt=$pdo->prepare("SELECT o.*,c.name client_name FROM orders o JOIN clients c ON o.client_id=c.id WHERE $sw ORDER BY FIELD(o.status,'pending','in_production','ready','delivered','completed','cancelled'),o.created_at DESC LIMIT $limit OFFSET $offset");
     $stmt->execute($params);$orders=$stmt->fetchAll();
-}
+} catch (PDOException $e) { error_log('Orders: ' . $e->getMessage()); } }
 $pages=max(1,(int)ceil($total/$limit));
 $all_statuses=['pending','in_production','ready','delivered','completed','cancelled'];
 ?>

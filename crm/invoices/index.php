@@ -7,10 +7,9 @@ require_once __DIR__ . '/../partials/header.php';
 $status=$_GET['status']??''; $search=trim($_GET['q']??'');
 $page=max(1,(int)($_GET['page']??1));$limit=20;$offset=($page-1)*$limit;
 $invoices=[];$total=0;$counts=[];
-if($pdo){
+if($pdo){ try {
     $rows=$pdo->query("SELECT status,COUNT(*) n FROM invoices GROUP BY status")->fetchAll();
     foreach($rows as $r){$counts[$r['status']]=$r['n'];}
-    // auto-mark overdue
     $pdo->query("UPDATE invoices SET status='overdue' WHERE status='sent' AND due_date < CURDATE()");
     $where=['1=1'];$params=[];
     if($status){$where[]='i.status=?';$params[]=$status;}
@@ -19,7 +18,7 @@ if($pdo){
     $cnt=$pdo->prepare("SELECT COUNT(*) FROM invoices i JOIN clients c ON i.client_id=c.id WHERE $sw");$cnt->execute($params);$total=(int)$cnt->fetchColumn();
     $stmt=$pdo->prepare("SELECT i.*,c.name client_name,(i.total-i.amount_paid) balance FROM invoices i JOIN clients c ON i.client_id=c.id WHERE $sw ORDER BY i.created_at DESC LIMIT $limit OFFSET $offset");
     $stmt->execute($params);$invoices=$stmt->fetchAll();
-}
+} catch (PDOException $e) { error_log('Invoices: ' . $e->getMessage()); } }
 $pages=max(1,(int)ceil($total/$limit));
 ?>
 <div class="flex gap-2 mb-5 flex-wrap">

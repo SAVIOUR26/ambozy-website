@@ -10,7 +10,7 @@ $page   = max(1,(int)($_GET['page'] ?? 1));
 $limit  = 20; $offset = ($page-1)*$limit;
 $quotes = []; $total = 0; $counts = [];
 
-if ($pdo) {
+if ($pdo) { try {
     $rows = $pdo->query("SELECT status, COUNT(*) n FROM quotations GROUP BY status")->fetchAll();
     foreach ($rows as $r) { $counts[$r['status']] = $r['n']; }
     $where = ['1=1']; $params = [];
@@ -20,7 +20,7 @@ if ($pdo) {
     $cnt = $pdo->prepare("SELECT COUNT(*) FROM quotations q JOIN clients c ON q.client_id=c.id WHERE $sw"); $cnt->execute($params); $total=(int)$cnt->fetchColumn();
     $stmt = $pdo->prepare("SELECT q.*, c.name client_name FROM quotations q JOIN clients c ON q.client_id=c.id WHERE $sw ORDER BY q.created_at DESC LIMIT $limit OFFSET $offset");
     $stmt->execute($params); $quotes = $stmt->fetchAll();
-}
+} catch (PDOException $e) { error_log('Quotes: ' . $e->getMessage()); } }
 $pages = max(1,(int)ceil($total/$limit));
 ?>
 <div class="flex gap-2 mb-5 flex-wrap">
