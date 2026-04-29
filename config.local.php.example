@@ -1,0 +1,54 @@
+<?php
+/**
+ * PRODUCTION CONFIGURATION — Ambozy Graphics Solutions Ltd
+ *
+ * HOW TO USE:
+ *   1. Copy this file to config.local.php in your public_html/ folder
+ *      (via cPanel File Manager or FTP — never commit it to git)
+ *   2. Fill in your real database credentials and admin password hash
+ *   3. Delete setup.php from the server once you have logged in
+ *
+ * To generate ADMIN_HASH, visit: https://yoursite.com/setup.php
+ * (deploy first, then delete setup.php immediately after use)
+ */
+
+// ── Site identity ────────────────────────────────────────────────────
+define('SITE_NAME',  'Ambozy Graphics Solutions Ltd');
+define('SITE_URL',   'https://ambozygraphics.shop');
+define('SITE_EMAIL', 'ambozygraphics@gmail.com');
+define('SITE_PHONE', '+256 782 187 799');
+define('WHATSAPP_NO','256782187799');
+
+// ── Database (get these from cPanel → MySQL Databases) ───────────────
+define('DB_HOST',    'localhost');
+define('DB_NAME',    'REPLACE_WITH_YOUR_DB_NAME');
+define('DB_USER',    'REPLACE_WITH_YOUR_DB_USER');
+define('DB_PASS',    'REPLACE_WITH_YOUR_DB_PASSWORD');
+define('DB_CHARSET', 'utf8mb4');
+
+// ── CRM admin login ───────────────────────────────────────────────────
+// Username: whatever you want to log in with
+// Hash:     bcrypt hash of your password — generate it via setup.php
+define('ADMIN_USER', 'admin');
+define('ADMIN_HASH', 'REPLACE_WITH_BCRYPT_HASH_FROM_SETUP_PHP');
+
+// ── Mail ──────────────────────────────────────────────────────────────
+define('MAIL_FROM',  'noreply@ambozygraphics.shop');
+define('MAIL_TO',    'ambozygraphics@gmail.com');
+
+// ── Database connection (do not change this block) ────────────────────
+try {
+    $pdo = new PDO(
+        'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=' . DB_CHARSET,
+        DB_USER,
+        DB_PASS,
+        [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES   => false,
+        ]
+    );
+} catch (PDOException $e) {
+    $pdo = null;
+    error_log('Ambozy DB: ' . $e->getMessage());
+}
