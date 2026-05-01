@@ -19,7 +19,7 @@ $offset = ($page - 1) * $limit;
 $clients = [];
 $total   = 0;
 
-if ($pdo) {
+if ($pdo) { try {
     $where  = ['1=1'];
     $params = [];
 
@@ -33,10 +33,6 @@ if ($pdo) {
 
     $sql_where = implode(' AND ', $where);
 
-    $total = (int)$pdo->prepare("SELECT COUNT(*) FROM clients c WHERE $sql_where")->execute($params) ?
-             $pdo->prepare("SELECT COUNT(*) FROM clients c WHERE $sql_where")->execute($params) ? 0 : 0 : 0;
-
-    // recount properly
     $cnt = $pdo->prepare("SELECT COUNT(*) FROM clients c WHERE $sql_where");
     $cnt->execute($params);
     $total = (int)$cnt->fetchColumn();
@@ -53,7 +49,7 @@ if ($pdo) {
     );
     $stmt->execute($params);
     $clients = $stmt->fetchAll();
-}
+} catch (PDOException $e) { error_log('Clients: ' . $e->getMessage()); } }
 
 $pages = max(1, (int)ceil($total / $limit));
 ?>

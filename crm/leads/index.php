@@ -18,11 +18,8 @@ $leads  = [];
 $total  = 0;
 $counts = [];
 
-if ($pdo) {
-    // Status counts for the filter tabs
-    $rows = $pdo->query(
-        "SELECT status, COUNT(*) AS n FROM leads GROUP BY status"
-    )->fetchAll();
+if ($pdo) { try {
+    $rows = $pdo->query("SELECT status, COUNT(*) AS n FROM leads GROUP BY status")->fetchAll();
     foreach ($rows as $r) { $counts[$r['status']] = $r['n']; }
 
     $where  = ['1=1'];
@@ -50,7 +47,7 @@ if ($pdo) {
     );
     $stmt->execute($params);
     $leads = $stmt->fetchAll();
-}
+} catch (PDOException $e) { error_log('Leads: ' . $e->getMessage()); } }
 
 $pages = max(1, (int)ceil($total / $limit));
 $all_statuses = ['new','contacted','qualified','quoted','won','lost'];

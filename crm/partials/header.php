@@ -17,15 +17,17 @@ $_flash      = get_flash();
 // New-lead badge count
 $_new_leads = 0;
 if ($pdo) {
-    $_new_leads = (int) $pdo->query("SELECT COUNT(*) FROM leads WHERE status='new'")->fetchColumn();
+    try { $_new_leads = (int) $pdo->query("SELECT COUNT(*) FROM leads WHERE status='new'")->fetchColumn(); } catch (PDOException $e) {}
 }
 
 // Overdue invoice count
 $_overdue = 0;
 if ($pdo) {
-    $_overdue = (int) $pdo->query(
-        "SELECT COUNT(*) FROM invoices WHERE status NOT IN ('paid','cancelled') AND due_date < CURDATE()"
-    )->fetchColumn();
+    try {
+        $_overdue = (int) $pdo->query(
+            "SELECT COUNT(*) FROM invoices WHERE status NOT IN ('paid','cancelled') AND due_date < CURDATE()"
+        )->fetchColumn();
+    } catch (PDOException $e) {}
 }
 
 function _nav(string $href, string $key, string $active, string $icon, string $label, int $badge = 0): void { ?>

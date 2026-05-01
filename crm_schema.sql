@@ -1,9 +1,11 @@
 -- ============================================================
 -- AMBOZY GRAPHICS CRM — Extended Schema (Phase 1)
--- Run AFTER schema.sql:  mysql -u root -p ambozy_db < crm_schema.sql
+-- HOW TO IMPORT IN phpMyAdmin (cPanel):
+--   1. Click your database name in the LEFT panel of phpMyAdmin
+--   2. Click the Import tab at the top
+--   3. Choose this file and click Go
+-- (Do NOT use the USE statement — cPanel handles database selection)
 -- ============================================================
-
-USE `ambozy_db`;
 
 -- ── Document number sequences ────────────────────────────────
 CREATE TABLE IF NOT EXISTS `doc_sequences` (

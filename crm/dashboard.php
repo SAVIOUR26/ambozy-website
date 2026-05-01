@@ -16,7 +16,7 @@ $recent_leads    = [];
 $recent_orders   = [];
 $recent_payments = [];
 
-if ($pdo) {
+if ($pdo) { try {
     $stats['clients']       = (int)$pdo->query("SELECT COUNT(*) FROM clients WHERE status='active'")->fetchColumn();
     $stats['new_leads']     = (int)$pdo->query("SELECT COUNT(*) FROM leads WHERE status='new'")->fetchColumn();
     $stats['active_orders'] = (int)$pdo->query("SELECT COUNT(*) FROM orders WHERE status IN ('pending','in_production','ready')")->fetchColumn();
@@ -44,7 +44,7 @@ if ($pdo) {
          JOIN invoices i ON p.invoice_id = i.id
          ORDER BY p.created_at DESC LIMIT 5"
     )->fetchAll();
-}
+} catch (PDOException $e) { error_log('Dashboard: ' . $e->getMessage()); } }
 ?>
 
 <!-- KPI Cards -->

@@ -3,10 +3,10 @@
 -- Run this in phpMyAdmin or via: mysql -u root -p ambozy_db < schema.sql
 -- ============================================================
 
-CREATE DATABASE IF NOT EXISTS `ambozy_db`
-  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
-USE `ambozy_db`;
+-- HOW TO IMPORT IN phpMyAdmin (cPanel):
+--   1. Click your database name in the LEFT panel of phpMyAdmin
+--   2. Click the Import tab at the top
+--   3. Choose this file and click Go
 
 -- ── Quote Inquiries ─────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS `inquiries` (

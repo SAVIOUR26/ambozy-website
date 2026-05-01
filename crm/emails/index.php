@@ -18,7 +18,7 @@ if ($pdo) {
     if ($type_filter) { $where[] = 'type=?'; $params[] = $type_filter; }
     if ($status_filter) { $where[] = 'status=?'; $params[] = $status_filter; }
     if ($search) {
-        $where[] = '(to_email LIKE ? OR to_name LIKE ? OR subject LIKE ?)';
+        $where[] = '(recipient_email LIKE ? OR recipient_name LIKE ? OR subject LIKE ?)';
         $params[] = "%$search%"; $params[] = "%$search%"; $params[] = "%$search%";
     }
 
@@ -123,8 +123,8 @@ function email_type_badge(string $t): string {
               </span>
             </td>
             <td class="px-4 py-3">
-              <p class="font-medium text-gray-800"><?= htmlspecialchars($em['to_name'] ?: '—') ?></p>
-              <p class="text-xs text-gray-400"><?= htmlspecialchars($em['to_email']) ?></p>
+              <p class="font-medium text-gray-800"><?= htmlspecialchars($em['recipient_name'] ?: '—') ?></p>
+              <p class="text-xs text-gray-400"><?= htmlspecialchars($em['recipient_email']) ?></p>
             </td>
             <td class="px-4 py-3 text-gray-700 max-w-xs truncate" title="<?= htmlspecialchars($em['subject']) ?>">
               <?= htmlspecialchars($em['subject']) ?>
