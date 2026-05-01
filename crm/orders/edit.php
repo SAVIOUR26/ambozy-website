@@ -32,12 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         )->execute([$f['client_id'],$f['title'],$f['due_date']?:null,$f['priority'],$f['status'],$f['delivery_address']?:null,$f['notes']?:null,$id]);
         log_activity($pdo,'order_updated',"Order {$order['order_number']} updated.",'order',$id);
         flash('success','Order updated.');
-        redirect("/crm/orders/view.php?id=$id");
+        redirect("/crm/orders/view?id=$id");
     }
 }
 ?>
 <div class="max-w-xl">
-  <div class="mb-5"><a href="/crm/orders/view.php?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>Back to Order</a></div>
+  <div class="mb-5"><a href="/crm/orders/view?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>Back to Order</a></div>
   <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
     <div class="px-6 py-5 border-b border-gray-100">
       <h2 class="font-semibold text-gray-800">Edit Order</h2>
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
       </div>
       <div class="flex items-center gap-3 pt-2">
         <button type="submit" class="bg-amber-500 hover:bg-amber-400 text-white font-semibold text-sm px-6 py-2.5 rounded-lg">Save Changes</button>
-        <a href="/crm/orders/view.php?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600">Cancel</a>
+        <a href="/crm/orders/view?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600">Cancel</a>
       </div>
     </form>
   </div>

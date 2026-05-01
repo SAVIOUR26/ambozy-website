@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         $id = (int)$pdo->lastInsertId();
         log_activity($pdo,'lead_created',"Lead $ref — {$f['name']} added manually.",'lead',$id);
         flash('success',"Lead $ref created.");
-        redirect("/crm/leads/view.php?id=$id");
+        redirect("/crm/leads/view?id=$id");
     }
 }
 

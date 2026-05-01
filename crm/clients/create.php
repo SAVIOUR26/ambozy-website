@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         $id = (int)$pdo->lastInsertId();
         log_activity($pdo, 'client_created', "Client {$code} — {$f['name']} created.", 'client', $id);
         flash('success', "Client {$code} created successfully.");
-        redirect("/crm/clients/view.php?id=$id");
+        redirect("/crm/clients/view?id=$id");
     }
 }
 ?>

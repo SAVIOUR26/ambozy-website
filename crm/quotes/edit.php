@@ -22,7 +22,7 @@ if ($pdo) {
 if (!$quote) { flash('error', 'Quotation not found.'); redirect('/crm/quotes/'); }
 if (in_array($quote['status'], ['accepted', 'invoiced'])) {
     flash('error', 'Accepted or invoiced quotes cannot be edited.');
-    redirect("/crm/quotes/view.php?id=$id");
+    redirect("/crm/quotes/view?id=$id");
 }
 
 $errors = [];
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
 
         log_activity($pdo, 'quote_updated', "Quote {$quote['quote_number']} updated.", 'quotation', $id);
         flash('success', "Quote {$quote['quote_number']} updated.");
-        redirect("/crm/quotes/view.php?id=$id");
+        redirect("/crm/quotes/view?id=$id");
     }
 }
 
@@ -109,7 +109,7 @@ $prefill_items = json_encode(array_map(fn($it) => [
 ?>
 <div class="max-w-4xl">
   <div class="mb-5">
-    <a href="/crm/quotes/view.php?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1">
+    <a href="/crm/quotes/view?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
       Back to Quote
     </a>
@@ -301,7 +301,7 @@ $prefill_items = json_encode(array_map(fn($it) => [
                     class="w-full bg-amber-500 hover:bg-amber-400 text-white font-semibold text-sm py-2.5 rounded-lg transition-colors">
               Save Changes
             </button>
-            <a href="/crm/quotes/view.php?id=<?= $id ?>" class="block text-center text-sm text-gray-400 hover:text-gray-600 py-1">Cancel</a>
+            <a href="/crm/quotes/view?id=<?= $id ?>" class="block text-center text-sm text-gray-400 hover:text-gray-600 py-1">Cancel</a>
           </div>
         </div>
       </div>

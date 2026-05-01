@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         }
         log_activity($pdo,'order_created',"Order $order_no booked.",'order',$oid);
         flash('success',"Order $order_no created.");
-        redirect("/crm/orders/view.php?id=$oid");
+        redirect("/crm/orders/view?id=$oid");
     }
 }
 ?>

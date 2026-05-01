@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
 
         log_activity($pdo,'invoice_created',"Invoice $inv_no created.",'invoice',$iid);
         flash('success',"Invoice $inv_no created.");
-        redirect("/crm/invoices/view.php?id=$iid");
+        redirect("/crm/invoices/view?id=$iid");
     }
 }
 

@@ -16,7 +16,7 @@ function is_logged_in(): bool {
 
 function require_login(): void {
     if (!is_logged_in()) {
-        header('Location: /crm/login.php');
+        header('Location: /crm/login');
         exit;
     }
 }

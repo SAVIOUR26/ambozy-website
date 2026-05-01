@@ -3,7 +3,7 @@ require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../includes/auth.php';
 
 if (is_logged_in()) {
-    header('Location: /crm/dashboard.php');
+    header('Location: /crm/dashboard');
     exit;
 }
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user && password_verify($password, $user['password_hash'])) {
             login_user((int)$user['id'], $user['username']);
             $pdo->prepare("UPDATE admin_users SET last_login = NOW() WHERE id = ?")->execute([$user['id']]);
-            header('Location: /crm/dashboard.php');
+            header('Location: /crm/dashboard');
             exit;
         } else {
             sleep(1);

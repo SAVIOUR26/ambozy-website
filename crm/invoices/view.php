@@ -27,7 +27,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'&&$pdo){
             $pdo->prepare("UPDATE invoices SET status=?$paid_at$sent_at WHERE id=?")->execute([$ns,$id]);
             log_activity($pdo,'invoice_status',"Invoice {$invoice['invoice_number']} → $ns.",'invoice',$id);
             flash('success',"Status updated to $ns.");
-            redirect("/crm/invoices/view.php?id=$id");
+            redirect("/crm/invoices/view?id=$id");
         }
     }
 }
@@ -39,12 +39,12 @@ if($_SERVER['REQUEST_METHOD']==='POST'&&$pdo){
     Invoices
   </a>
   <div class="flex items-center gap-2 flex-wrap">
-    <a href="/crm/invoices/pdf.php?id=<?=$id?>" target="_blank" class="text-sm bg-white border border-gray-200 hover:border-indigo-400 text-gray-700 px-3 py-2 rounded-lg">🖨 Print / PDF</a>
+    <a href="/crm/invoices/pdf?id=<?=$id?>" target="_blank" class="text-sm bg-white border border-gray-200 hover:border-indigo-400 text-gray-700 px-3 py-2 rounded-lg">🖨 Print / PDF</a>
     <?php if(in_array($invoice['status'],['draft','sent','partial','overdue'])): ?>
-      <a href="/crm/invoices/send.php?id=<?=$id?>" class="text-sm bg-blue-500 hover:bg-blue-400 text-white px-3 py-2 rounded-lg font-medium">✉ Send to Client</a>
+      <a href="/crm/invoices/send?id=<?=$id?>" class="text-sm bg-blue-500 hover:bg-blue-400 text-white px-3 py-2 rounded-lg font-medium">✉ Send to Client</a>
     <?php endif; ?>
     <?php if(!in_array($invoice['status'],['paid','cancelled'])): ?>
-      <a href="/crm/invoices/payment.php?id=<?=$id?>" class="text-sm bg-green-500 hover:bg-green-400 text-white px-3 py-2 rounded-lg font-medium">+ Record Payment</a>
+      <a href="/crm/invoices/payment?id=<?=$id?>" class="text-sm bg-green-500 hover:bg-green-400 text-white px-3 py-2 rounded-lg font-medium">+ Record Payment</a>
     <?php endif; ?>
   </div>
 </div>
@@ -155,7 +155,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'&&$pdo){
       <?php if($balance>0):?>
         <div class="mt-3 bg-gray-100 rounded-full h-2"><div class="bg-green-500 h-2 rounded-full" style="width:<?=min(100,round($invoice['amount_paid']/$invoice['total']*100))?>%"></div></div>
         <p class="text-xs text-gray-400 mt-1"><?=round($invoice['amount_paid']/$invoice['total']*100)?>% paid</p>
-        <a href="/crm/invoices/payment.php?id=<?=$id?>" class="mt-3 inline-block w-full text-center bg-green-500 hover:bg-green-400 text-white text-sm font-semibold py-2 rounded-lg transition-colors">+ Record Payment</a>
+        <a href="/crm/invoices/payment?id=<?=$id?>" class="mt-3 inline-block w-full text-center bg-green-500 hover:bg-green-400 text-white text-sm font-semibold py-2 rounded-lg transition-colors">+ Record Payment</a>
       <?php endif;?>
     </div>
 
@@ -165,7 +165,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'&&$pdo){
       <?php if($invoice['client_company']): ?><p class="text-sm text-gray-500"><?=htmlspecialchars($invoice['client_company'])?></p><?php endif;?>
       <?php if($invoice['client_email']): ?><p class="text-sm text-amber-600 mt-1"><?=htmlspecialchars($invoice['client_email'])?></p><?php endif;?>
       <?php if($invoice['client_phone']): ?><p class="text-sm text-gray-500"><?=htmlspecialchars($invoice['client_phone'])?></p><?php endif;?>
-      <a href="/crm/clients/view.php?id=<?=$invoice['client_id']?>" class="mt-3 inline-block text-xs text-amber-600 font-medium">View client →</a>
+      <a href="/crm/clients/view?id=<?=$invoice['client_id']?>" class="mt-3 inline-block text-xs text-amber-600 font-medium">View client →</a>
     </div>
   </div>
 </div>

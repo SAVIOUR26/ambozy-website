@@ -35,14 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         ]);
         log_activity($pdo,'client_updated',"Client {$client['code']} updated.",'client',$id);
         flash('success','Client updated successfully.');
-        redirect("/crm/clients/view.php?id=$id");
+        redirect("/crm/clients/view?id=$id");
     }
 }
 ?>
 
 <div class="max-w-2xl">
   <div class="mb-5">
-    <a href="/crm/clients/view.php?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1">
+    <a href="/crm/clients/view?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
       Back to <?= htmlspecialchars($client['name']) ?>
     </a>
@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
                 class="bg-amber-500 hover:bg-amber-400 text-white font-semibold text-sm px-6 py-2.5 rounded-lg transition-colors">
           Save Changes
         </button>
-        <a href="/crm/clients/view.php?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600">Cancel</a>
+        <a href="/crm/clients/view?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600">Cancel</a>
       </div>
     </form>
   </div>

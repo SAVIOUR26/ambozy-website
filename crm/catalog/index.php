@@ -1,7 +1,7 @@
 <?php
 $page_title = 'Price Catalog';
 $active_nav = 'catalog';
-$header_actions = '<a href="/crm/catalog/create.php" class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>Add Item</a>';
+$header_actions = '<a href="/crm/catalog/create" class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>Add Item</a>';
 require_once __DIR__ . '/../partials/header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id']) && $pdo) {
@@ -41,7 +41,7 @@ foreach ($items as $item) { $grouped[$item['category'] ?? 'Uncategorised'][] = $
     <p class="text-3xl mb-3">📋</p>
     <p class="text-gray-500 font-medium">No catalog items yet</p>
     <p class="text-gray-400 text-sm mt-1">Add your services and products to use them in quotes and invoices.</p>
-    <a href="/crm/catalog/create.php" class="mt-4 inline-block text-amber-600 hover:text-amber-700 text-sm font-medium">+ Add first item</a>
+    <a href="/crm/catalog/create" class="mt-4 inline-block text-amber-600 hover:text-amber-700 text-sm font-medium">+ Add first item</a>
   </div>
 <?php else: ?>
   <?php foreach ($grouped as $cat => $cat_items): ?>
@@ -76,7 +76,7 @@ foreach ($items as $item) { $grouped[$item['category'] ?? 'Uncategorised'][] = $
             </td>
             <td class="px-4 py-3.5 text-right">
               <div class="flex items-center justify-end gap-2">
-                <a href="/crm/catalog/edit.php?id=<?= $it['id'] ?>" class="text-gray-400 hover:text-blue-600">
+                <a href="/crm/catalog/edit?id=<?= $it['id'] ?>" class="text-gray-400 hover:text-blue-600">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                 </a>
                 <form method="POST" onsubmit="return confirm('Delete this item?')">

@@ -257,7 +257,7 @@ $chart_data_json   = json_encode($chart_data);
       <?php foreach ($top_clients as $i => $cl): ?>
       <div class="px-5 py-3">
         <div class="flex items-center justify-between mb-1">
-          <a href="/crm/clients/view.php?id=<?= $cl['id'] ?>" class="text-sm font-medium text-gray-800 hover:text-amber-600">
+          <a href="/crm/clients/view?id=<?= $cl['id'] ?>" class="text-sm font-medium text-gray-800 hover:text-amber-600">
             <?= htmlspecialchars($cl['name']) ?><?= $cl['company']?' <span class="text-gray-400 font-normal text-xs">('.htmlspecialchars($cl['company']).')</span>':'' ?>
           </a>
           <span class="text-sm font-semibold text-green-700"><?= fmt_money($cl['paid']) ?></span>
@@ -343,7 +343,7 @@ $chart_data_json   = json_encode($chart_data);
           </td>
           <td class="px-5 py-3 text-right font-bold text-red-600"><?= fmt_money($ov['balance']) ?></td>
           <td class="px-4 py-3 text-right">
-            <a href="/crm/invoices/view.php?id=<?= $ov['id'] ?>" class="text-xs text-amber-600 hover:text-amber-700 font-medium">View →</a>
+            <a href="/crm/invoices/view?id=<?= $ov['id'] ?>" class="text-xs text-amber-600 hover:text-amber-700 font-medium">View →</a>
           </td>
         </tr>
         <?php endforeach; ?>
@@ -373,7 +373,7 @@ $chart_data_json   = json_encode($chart_data);
         <tr>
           <td class="px-5 py-3 text-gray-500 text-xs"><?= date('d M Y', strtotime($pay['payment_date'])) ?></td>
           <td class="px-4 py-3 font-medium text-gray-800"><?= htmlspecialchars($pay['client_name']) ?></td>
-          <td class="px-4 py-3"><a href="/crm/invoices/view.php?id=<?= $pay['invoice_id'] ?>" class="font-mono text-xs text-amber-600 hover:text-amber-700"><?= htmlspecialchars($pay['invoice_number']) ?></a></td>
+          <td class="px-4 py-3"><a href="/crm/invoices/view?id=<?= $pay['invoice_id'] ?>" class="font-mono text-xs text-amber-600 hover:text-amber-700"><?= htmlspecialchars($pay['invoice_number']) ?></a></td>
           <td class="px-4 py-3 text-gray-500 capitalize"><?= str_replace('_',' ',$pay['method']) ?><?= $pay['reference']?' <span class="text-gray-300">·</span> <span class="text-xs text-gray-400">'.htmlspecialchars($pay['reference']).'</span>':'' ?></td>
           <td class="px-5 py-3 text-right font-semibold text-green-700"><?= fmt_money($pay['amount']) ?></td>
         </tr>

@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $pdo) {
         }
         log_activity($pdo,'lead_status',"Lead {$lead['ref']} status → $new_status.",'lead',$id);
         flash('success','Lead status updated.');
-        redirect("/crm/leads/view.php?id=$id");
+        redirect("/crm/leads/view?id=$id");
     }
 }
 
@@ -51,17 +51,17 @@ if ($pdo) {
   </a>
   <div class="flex items-center gap-2">
     <?php if (!$lead['client_id']): ?>
-      <a href="/crm/leads/convert.php?id=<?= $id ?>"
+      <a href="/crm/leads/convert?id=<?= $id ?>"
          class="text-sm bg-green-500 hover:bg-green-400 text-white px-3 py-2 rounded-lg transition-colors font-medium">
         Convert to Client
       </a>
     <?php else: ?>
-      <a href="/crm/clients/view.php?id=<?= $lead['cid'] ?>"
+      <a href="/crm/clients/view?id=<?= $lead['cid'] ?>"
          class="text-sm bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg transition-colors">
         View Client →
       </a>
     <?php endif; ?>
-    <a href="/crm/leads/edit.php?id=<?= $id ?>"
+    <a href="/crm/leads/edit?id=<?= $id ?>"
        class="text-sm bg-amber-500 hover:bg-amber-400 text-white px-3 py-2 rounded-lg transition-colors font-medium">
       Edit
     </a>
@@ -111,7 +111,7 @@ if ($pdo) {
         <?php if ($lead['client_name']): ?>
           <div class="flex gap-3 pt-2 border-t border-gray-100">
             <dt class="text-gray-400 w-24 shrink-0">Client</dt>
-            <dd><a href="/crm/clients/view.php?id=<?= $lead['cid'] ?>" class="text-amber-600 hover:underline"><?= htmlspecialchars($lead['client_name']) ?></a></dd>
+            <dd><a href="/crm/clients/view?id=<?= $lead['cid'] ?>" class="text-amber-600 hover:underline"><?= htmlspecialchars($lead['client_name']) ?></a></dd>
           </div>
         <?php endif; ?>
       </dl>

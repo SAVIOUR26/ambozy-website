@@ -35,11 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
                     "Order {$order['order_number']} — ".ucfirst(str_replace('_',' ',$ns)), $html, 'order',$id);
             }
             flash('success','Order status updated.');
-            redirect("/crm/orders/view.php?id=$id");
+            redirect("/crm/orders/view?id=$id");
         }
     }
     if ($act === 'create_invoice') {
-        redirect("/crm/invoices/create.php?order_id=$id");
+        redirect("/crm/invoices/create?order_id=$id");
     }
 }
 
@@ -61,7 +61,7 @@ $cur_idx  = array_search($order['status'], $pipeline);
       </button>
     </form>
     <?php endif; ?>
-    <a href="/crm/orders/edit.php?id=<?= $id ?>" class="text-sm bg-amber-500 hover:bg-amber-400 text-white px-3 py-2 rounded-lg font-medium">
+    <a href="/crm/orders/edit?id=<?= $id ?>" class="text-sm bg-amber-500 hover:bg-amber-400 text-white px-3 py-2 rounded-lg font-medium">
       Edit
     </a>
   </div>
@@ -200,7 +200,7 @@ $cur_idx  = array_search($order['status'], $pipeline);
       <p class="text-sm font-semibold text-gray-800"><?= htmlspecialchars($order['client_name']) ?></p>
       <?php if ($order['client_email']): ?><p class="text-sm text-amber-600 mt-1"><?= htmlspecialchars($order['client_email']) ?></p><?php endif; ?>
       <?php if ($order['client_phone']): ?><p class="text-sm text-gray-500"><?= htmlspecialchars($order['client_phone']) ?></p><?php endif; ?>
-      <a href="/crm/clients/view.php?id=<?= $order['client_id'] ?>" class="mt-3 inline-block text-xs text-amber-600 hover:text-amber-700 font-medium">View client →</a>
+      <a href="/crm/clients/view?id=<?= $order['client_id'] ?>" class="mt-3 inline-block text-xs text-amber-600 hover:text-amber-700 font-medium">View client →</a>
     </div>
   </div>
 

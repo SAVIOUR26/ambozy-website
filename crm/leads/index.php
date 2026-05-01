@@ -1,7 +1,7 @@
 <?php
 $page_title = 'Leads';
 $active_nav = 'leads';
-$header_actions = '<a href="/crm/leads/create.php"
+$header_actions = '<a href="/crm/leads/create"
    class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
   New Lead
@@ -103,7 +103,7 @@ $all_statuses = ['new','contacted','qualified','quoted','won','lost'];
       <p class="text-3xl mb-3">📥</p>
       <p class="text-gray-500 font-medium">No leads found</p>
       <p class="text-gray-400 text-sm mt-1">Leads appear when clients submit the contact form, or you can add one manually.</p>
-      <a href="/crm/leads/create.php" class="mt-3 inline-block text-amber-600 hover:text-amber-700 text-sm font-medium">
+      <a href="/crm/leads/create" class="mt-3 inline-block text-amber-600 hover:text-amber-700 text-sm font-medium">
         + Add a lead manually
       </a>
     </div>
@@ -129,7 +129,7 @@ $all_statuses = ['new','contacted','qualified','quoted','won','lost'];
                     <?= strtoupper(substr($lead['name'],0,1)) ?>
                   </div>
                   <div>
-                    <a href="/crm/leads/view.php?id=<?= $lead['id'] ?>"
+                    <a href="/crm/leads/view?id=<?= $lead['id'] ?>"
                        class="font-medium text-gray-900 hover:text-amber-600 transition-colors">
                       <?= htmlspecialchars($lead['name']) ?>
                     </a>
@@ -162,12 +162,12 @@ $all_statuses = ['new','contacted','qualified','quoted','won','lost'];
               </td>
               <td class="px-4 py-3.5 text-right">
                 <div class="flex items-center justify-end gap-2">
-                  <a href="/crm/leads/view.php?id=<?= $lead['id'] ?>"
+                  <a href="/crm/leads/view?id=<?= $lead['id'] ?>"
                      class="text-gray-400 hover:text-amber-600 transition-colors" title="View">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                   </a>
                   <?php if (!$lead['client_id']): ?>
-                    <a href="/crm/leads/convert.php?id=<?= $lead['id'] ?>"
+                    <a href="/crm/leads/convert?id=<?= $lead['id'] ?>"
                        class="text-gray-400 hover:text-green-600 transition-colors" title="Convert to client">
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                     </a>

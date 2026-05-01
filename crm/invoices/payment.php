@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../includes/crm_email.php';
 $invoice=null;
 if($pdo){$s=$pdo->prepare("SELECT i.*,c.name client_name,c.email client_email FROM invoices i JOIN clients c ON i.client_id=c.id WHERE i.id=?");$s->execute([$id]);$invoice=$s->fetch();}
 if(!$invoice){flash('error','Invoice not found.');redirect('/crm/invoices/');}
-if(in_array($invoice['status'],['paid','cancelled'])){flash('error','This invoice is already '.ucfirst($invoice['status']).'.');redirect("/crm/invoices/view.php?id=$id");}
+if(in_array($invoice['status'],['paid','cancelled'])){flash('error','This invoice is already '.ucfirst($invoice['status']).'.');redirect("/crm/invoices/view?id=$id");}
 
 $balance=max(0,$invoice['total']-$invoice['amount_paid']);
 $errors=[];
@@ -45,12 +45,12 @@ if($_SERVER['REQUEST_METHOD']==='POST'&&$pdo){
         }
 
         flash('success',fmt_money($f['amount']).' recorded. Invoice is now '.ucfirst($new_status).'.');
-        redirect("/crm/invoices/view.php?id=$id");
+        redirect("/crm/invoices/view?id=$id");
     }
 }
 ?>
 <div class="max-w-lg">
-  <div class="mb-5"><a href="/crm/invoices/view.php?id=<?=$id?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>Back to Invoice</a></div>
+  <div class="mb-5"><a href="/crm/invoices/view?id=<?=$id?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>Back to Invoice</a></div>
 
   <!-- Balance summary -->
   <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-5 mb-5">
@@ -120,7 +120,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'&&$pdo){
         <button type="submit" class="bg-green-500 hover:bg-green-400 text-white font-semibold text-sm px-6 py-2.5 rounded-lg transition-colors">
           ✓ Record Payment
         </button>
-        <a href="/crm/invoices/view.php?id=<?=$id?>" class="text-sm text-gray-400 hover:text-gray-600">Cancel</a>
+        <a href="/crm/invoices/view?id=<?=$id?>" class="text-sm text-gray-400 hover:text-gray-600">Cancel</a>
       </div>
     </form>
   </div>
