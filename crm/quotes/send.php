@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
 
     if (!filter_var($to_email, FILTER_VALIDATE_EMAIL)) {
         flash('error','Please enter a valid recipient email address.');
-        redirect("/crm/quotes/send.php?id=$id");
+        redirect("/crm/quotes/send?id=$id");
     }
 
     // Format totals for email
@@ -38,17 +38,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         $pdo->prepare("UPDATE quotations SET status='sent', sent_at=NOW() WHERE id=? AND status='draft'")->execute([$id]);
         log_activity($pdo,'quote_sent',"Quote {$quote['quote_number']} sent to {$to_email}.",'quotation',$id);
         flash('success', "Quote emailed to {$to_email} successfully.");
-        redirect("/crm/quotes/view.php?id=$id");
+        redirect("/crm/quotes/view?id=$id");
     } else {
         flash('error', 'Email could not be sent. Please check server mail configuration.');
-        redirect("/crm/quotes/send.php?id=$id");
+        redirect("/crm/quotes/send?id=$id");
     }
 }
 ?>
 
 <div class="max-w-lg">
   <div class="mb-5">
-    <a href="/crm/quotes/view.php?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1">
+    <a href="/crm/quotes/view?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
       Back to Quote
     </a>
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         <button type="submit" class="bg-blue-500 hover:bg-blue-400 text-white font-semibold text-sm px-6 py-2.5 rounded-lg transition-colors">
           ✉ Send Quote Now
         </button>
-        <a href="/crm/quotes/view.php?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600">Cancel</a>
+        <a href="/crm/quotes/view?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600">Cancel</a>
       </div>
     </form>
   </div>

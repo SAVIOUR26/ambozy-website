@@ -59,19 +59,19 @@ if ($pdo) {
     Clients
   </a>
   <div class="flex items-center gap-2">
-    <a href="/crm/quotes/create.php?client_id=<?= $id ?>"
+    <a href="/crm/quotes/create?client_id=<?= $id ?>"
        class="text-sm bg-white border border-gray-200 hover:border-amber-400 text-gray-700 px-3 py-2 rounded-lg transition-colors">
       + Quote
     </a>
-    <a href="/crm/orders/create.php?client_id=<?= $id ?>"
+    <a href="/crm/orders/create?client_id=<?= $id ?>"
        class="text-sm bg-white border border-gray-200 hover:border-amber-400 text-gray-700 px-3 py-2 rounded-lg transition-colors">
       + Order
     </a>
-    <a href="/crm/invoices/create.php?client_id=<?= $id ?>"
+    <a href="/crm/invoices/create?client_id=<?= $id ?>"
        class="text-sm bg-white border border-gray-200 hover:border-amber-400 text-gray-700 px-3 py-2 rounded-lg transition-colors">
       + Invoice
     </a>
-    <a href="/crm/clients/edit.php?id=<?= $id ?>"
+    <a href="/crm/clients/edit?id=<?= $id ?>"
        class="text-sm bg-amber-500 hover:bg-amber-400 text-white px-3 py-2 rounded-lg transition-colors font-medium">
       Edit
     </a>
@@ -191,7 +191,7 @@ if ($pdo) {
         <?php if (empty($orders)): ?>
           <p class="text-center text-gray-400 text-sm py-10">No orders yet.</p>
         <?php else: foreach ($orders as $o): ?>
-          <a href="/crm/orders/view.php?id=<?= $o['id'] ?>"
+          <a href="/crm/orders/view?id=<?= $o['id'] ?>"
              class="flex items-center gap-4 px-5 py-3.5 hover:bg-gray-50 transition-colors">
             <div class="flex-1">
               <p class="text-sm font-medium text-gray-900"><?= htmlspecialchars($o['order_number']) ?> — <?= htmlspecialchars($o['title']) ?></p>
@@ -209,7 +209,7 @@ if ($pdo) {
         <?php if (empty($quotes)): ?>
           <p class="text-center text-gray-400 text-sm py-10">No quotations yet.</p>
         <?php else: foreach ($quotes as $q): ?>
-          <a href="/crm/quotes/view.php?id=<?= $q['id'] ?>"
+          <a href="/crm/quotes/view?id=<?= $q['id'] ?>"
              class="flex items-center gap-4 px-5 py-3.5 hover:bg-gray-50 transition-colors">
             <div class="flex-1">
               <p class="text-sm font-medium text-gray-900"><?= htmlspecialchars($q['quote_number']) ?> — <?= htmlspecialchars($q['title']) ?></p>
@@ -230,7 +230,7 @@ if ($pdo) {
         <?php if (empty($invoices)): ?>
           <p class="text-center text-gray-400 text-sm py-10">No invoices yet.</p>
         <?php else: foreach ($invoices as $inv): ?>
-          <a href="/crm/invoices/view.php?id=<?= $inv['id'] ?>"
+          <a href="/crm/invoices/view?id=<?= $inv['id'] ?>"
              class="flex items-center gap-4 px-5 py-3.5 hover:bg-gray-50 transition-colors">
             <div class="flex-1">
               <p class="text-sm font-medium text-gray-900"><?= htmlspecialchars($inv['invoice_number']) ?></p>
@@ -251,7 +251,7 @@ if ($pdo) {
         <?php if (empty($leads)): ?>
           <p class="text-center text-gray-400 text-sm py-10">No linked leads.</p>
         <?php else: foreach ($leads as $l): ?>
-          <a href="/crm/leads/view.php?id=<?= $l['id'] ?>"
+          <a href="/crm/leads/view?id=<?= $l['id'] ?>"
              class="flex items-center gap-4 px-5 py-3.5 hover:bg-gray-50 transition-colors">
             <div class="flex-1">
               <p class="text-sm font-medium text-gray-900"><?= htmlspecialchars($l['ref']) ?> — <?= htmlspecialchars($l['service_interest'] ?? 'General') ?></p>

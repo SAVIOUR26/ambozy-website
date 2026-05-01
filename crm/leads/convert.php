@@ -15,7 +15,7 @@ if ($pdo) {
 if (!$lead) { flash('error','Lead not found.'); redirect('/crm/leads/'); }
 if ($lead['client_id']) {
     flash('error','This lead has already been converted.');
-    redirect("/crm/leads/view.php?id=$id");
+    redirect("/crm/leads/view?id=$id");
 }
 
 $errors = [];
@@ -57,14 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         log_activity($pdo,'client_created', "Client $code created from lead {$lead['ref']}.",'client',$client_id);
 
         flash('success',"Lead converted. Client {$code} created.");
-        redirect("/crm/clients/view.php?id=$client_id");
+        redirect("/crm/clients/view?id=$client_id");
     }
 }
 ?>
 
 <div class="max-w-2xl">
   <div class="mb-5">
-    <a href="/crm/leads/view.php?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1">
+    <a href="/crm/leads/view?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
       Back to Lead
     </a>
@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
                 class="bg-green-500 hover:bg-green-400 text-white font-semibold text-sm px-6 py-2.5 rounded-lg transition-colors">
           Convert &amp; Create Client
         </button>
-        <a href="/crm/leads/view.php?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600">Cancel</a>
+        <a href="/crm/leads/view?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600">Cancel</a>
       </div>
     </form>
   </div>

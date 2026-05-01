@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         }
         log_activity($pdo, 'quote_created', "Quote $quote_no created.", 'quotation', $qid);
         flash('success', "Quote $quote_no created.");
-        redirect("/crm/quotes/view.php?id=$qid");
+        redirect("/crm/quotes/view?id=$qid");
     }
 }
 

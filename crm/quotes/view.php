@@ -28,14 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
             log_activity($pdo,'quote_status',"Quote {$quote['quote_number']} → $ns.",'quotation',$id);
             // If accepted, offer to create order
             flash('success', "Status updated to $ns.");
-            redirect("/crm/quotes/view.php?id=$id");
+            redirect("/crm/quotes/view?id=$id");
         }
     }
     if ($act === 'create_order') {
-        redirect("/crm/orders/create.php?quote_id=$id");
+        redirect("/crm/orders/create?quote_id=$id");
     }
     if ($act === 'create_invoice') {
-        redirect("/crm/invoices/create.php?quote_id=$id");
+        redirect("/crm/invoices/create?quote_id=$id");
     }
 }
 ?>
@@ -46,18 +46,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
     Quotations
   </a>
   <div class="flex items-center gap-2 flex-wrap">
-    <a href="/crm/quotes/pdf.php?id=<?= $id ?>" target="_blank"
+    <a href="/crm/quotes/pdf?id=<?= $id ?>" target="_blank"
        class="text-sm bg-white border border-gray-200 hover:border-indigo-400 text-gray-700 px-3 py-2 rounded-lg transition-colors">
       🖨 Print / PDF
     </a>
     <?php if (!in_array($quote['status'], ['accepted','invoiced'])): ?>
-      <a href="/crm/quotes/edit.php?id=<?= $id ?>"
+      <a href="/crm/quotes/edit?id=<?= $id ?>"
          class="text-sm bg-white border border-gray-200 hover:border-amber-400 text-gray-700 px-3 py-2 rounded-lg transition-colors">
         ✎ Edit
       </a>
     <?php endif; ?>
     <?php if ($quote['status'] === 'draft'): ?>
-      <a href="/crm/quotes/send.php?id=<?= $id ?>"
+      <a href="/crm/quotes/send?id=<?= $id ?>"
          class="text-sm bg-blue-500 hover:bg-blue-400 text-white px-3 py-2 rounded-lg font-medium transition-colors">
         ✉ Send to Client
       </a>
@@ -208,7 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         <?php if ($quote['client_email']): ?><p class="text-amber-600"><?= htmlspecialchars($quote['client_email']) ?></p><?php endif; ?>
         <?php if ($quote['client_phone']): ?><p class="text-gray-500"><?= htmlspecialchars($quote['client_phone']) ?></p><?php endif; ?>
       </div>
-      <a href="/crm/clients/view.php?id=<?= $quote['client_id'] ?>"
+      <a href="/crm/clients/view?id=<?= $quote['client_id'] ?>"
          class="mt-3 inline-block text-xs text-amber-600 hover:text-amber-700 font-medium">
         View client profile →
       </a>

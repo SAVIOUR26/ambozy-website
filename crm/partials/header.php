@@ -101,7 +101,7 @@ $_icons = [
     <!-- Navigation -->
     <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
 
-      <?php _nav('/crm/dashboard.php', 'dashboard', $_active, $_icons['dashboard'], 'Dashboard') ?>
+      <?php _nav('/crm/dashboard', 'dashboard', $_active, $_icons['dashboard'], 'Dashboard') ?>
 
       <p class="px-3 pt-4 pb-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">Sales</p>
       <?php _nav('/crm/leads/',   'leads',   $_active, $_icons['leads'],   'Leads',      $_new_leads) ?>
@@ -127,7 +127,7 @@ $_icons = [
         </div>
         <div class="flex-1 min-w-0">
           <p class="text-white text-sm font-medium truncate"><?= htmlspecialchars($_admin_name) ?></p>
-          <a href="/crm/logout.php" class="text-slate-400 hover:text-red-400 text-xs transition-colors">Sign out</a>
+          <a href="/crm/logout" class="text-slate-400 hover:text-red-400 text-xs transition-colors">Sign out</a>
         </div>
         <a href="/" target="_blank" title="View website"
            class="p-1.5 text-slate-500 hover:text-white rounded transition-colors shrink-0">

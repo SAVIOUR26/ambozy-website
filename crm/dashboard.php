@@ -84,7 +84,7 @@ if ($pdo) { try {
     <?php else: ?>
       <div class="divide-y divide-gray-50">
         <?php foreach ($recent_leads as $lead): ?>
-          <a href="/crm/leads/view.php?id=<?= $lead['id'] ?>"
+          <a href="/crm/leads/view?id=<?= $lead['id'] ?>"
              class="flex items-center gap-4 px-5 py-3.5 hover:bg-gray-50 transition-colors">
             <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs font-bold shrink-0">
               <?= strtoupper(substr($lead['name'], 0, 1)) ?>
@@ -119,7 +119,7 @@ if ($pdo) { try {
       <?php else: ?>
         <div class="divide-y divide-gray-50">
           <?php foreach ($recent_orders as $ord): ?>
-            <a href="/crm/orders/view.php?id=<?= $ord['id'] ?>"
+            <a href="/crm/orders/view?id=<?= $ord['id'] ?>"
                class="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition-colors">
               <div class="flex-1 min-w-0">
                 <p class="text-sm font-medium text-gray-900 truncate"><?= htmlspecialchars($ord['order_number']) ?></p>

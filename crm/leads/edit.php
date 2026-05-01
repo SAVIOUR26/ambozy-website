@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         ]);
         log_activity($pdo,'lead_updated',"Lead {$lead['ref']} updated.",'lead',$id);
         flash('success','Lead updated.');
-        redirect("/crm/leads/view.php?id=$id");
+        redirect("/crm/leads/view?id=$id");
     }
 }
 
@@ -44,7 +44,7 @@ $budgets  = ['Under 100,000 UGX','100,000 – 500,000 UGX','500,000 – 1,000,00
 
 <div class="max-w-2xl">
   <div class="mb-5">
-    <a href="/crm/leads/view.php?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1">
+    <a href="/crm/leads/view?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
       Back to Lead
     </a>
@@ -142,7 +142,7 @@ $budgets  = ['Under 100,000 UGX','100,000 – 500,000 UGX','500,000 – 1,000,00
                 class="bg-amber-500 hover:bg-amber-400 text-white font-semibold text-sm px-6 py-2.5 rounded-lg transition-colors">
           Save Changes
         </button>
-        <a href="/crm/leads/view.php?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600">Cancel</a>
+        <a href="/crm/leads/view?id=<?= $id ?>" class="text-sm text-gray-400 hover:text-gray-600">Cancel</a>
       </div>
     </form>
   </div>

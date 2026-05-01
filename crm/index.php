@@ -1,3 +1,3 @@
 <?php
-header('Location: /crm/dashboard.php');
+header('Location: /crm/dashboard');
 exit;

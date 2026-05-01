@@ -143,10 +143,10 @@ function email_type_badge(string $t): string {
               <?php if ($em['related_type'] && $em['related_id']): ?>
                 <?php
                 $link = match($em['related_type']) {
-                    'invoice'   => "/crm/invoices/view.php?id={$em['related_id']}",
-                    'quotation' => "/crm/quotes/view.php?id={$em['related_id']}",
-                    'order'     => "/crm/orders/view.php?id={$em['related_id']}",
-                    'lead'      => "/crm/leads/view.php?id={$em['related_id']}",
+                    'invoice'   => "/crm/invoices/view?id={$em['related_id']}",
+                    'quotation' => "/crm/quotes/view?id={$em['related_id']}",
+                    'order'     => "/crm/orders/view?id={$em['related_id']}",
+                    'lead'      => "/crm/leads/view?id={$em['related_id']}",
                     default     => null,
                 };
                 ?>
