@@ -38,7 +38,7 @@ function next_doc_number(PDO $pdo, string $prefix): string
 /**
  * Log an activity to the activity stream.
  */
-function log_activity(PDO $pdo, string $type, string $description, string $related_type = null, int $related_id = null): void
+function log_activity(PDO $pdo, string $type, string $description, ?string $related_type = null, ?int $related_id = null): void
 {
     $uid = $_SESSION['admin_id'] ?? null;
     $stmt = $pdo->prepare(
