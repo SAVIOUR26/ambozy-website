@@ -583,32 +583,50 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 .clients .blob:nth-child(2) { width: 400px; height: 400px; left: -80px;  bottom: -80px; opacity: 0.09; }
 
 .clients__header { text-align: center; margin-bottom: 56px; position: relative; z-index: 1; }
-.clients__track-wrap {
-  position: relative; z-index: 1; overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-}
-.clients__track {
-  display: flex; gap: 14px; align-items: center;
-  width: max-content;
-  animation: scroll-track 38s linear infinite;
-}
-.clients__track:hover { animation-play-state: paused; }
-@keyframes scroll-track { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-.client-badge {
-  display: flex; align-items: center; padding: 12px 22px;
-  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-  border-radius: 99px; white-space: nowrap;
-  font-family: var(--fd); font-weight: 700; font-size: 0.82rem;
-  letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim);
-  transition: var(--ease); flex-shrink: 0;
+.clients__marquee-wrap {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; gap: 20px;
+  padding: 4px 0 28px;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
-.client-badge:nth-child(5n+1):hover { color: var(--pink);   border-color: rgba(255,45,120,0.5);  background: rgba(255,45,120,0.06); }
-.client-badge:nth-child(5n+2):hover { color: var(--cyan);   border-color: rgba(0,212,255,0.5);   background: rgba(0,212,255,0.06); }
-.client-badge:nth-child(5n+3):hover { color: var(--amber);  border-color: rgba(255,184,0,0.5);   background: rgba(255,184,0,0.06); }
-.client-badge:nth-child(5n+4):hover { color: var(--violet); border-color: rgba(139,92,246,0.5);  background: rgba(139,92,246,0.06); }
-.client-badge:nth-child(5n+5):hover { color: var(--teal);   border-color: rgba(6,214,160,0.5);   background: rgba(6,214,160,0.06); }
+.clients__row { overflow: hidden; }
+
+.clients__track {
+  display: flex; gap: 20px; align-items: center;
+  width: max-content;
+}
+.clients__track--left  { animation: scroll-left  40s linear infinite; }
+.clients__track--right { animation: scroll-right 44s linear infinite; }
+.clients__marquee-wrap:hover .clients__track { animation-play-state: paused; }
+
+@keyframes scroll-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
+@keyframes scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); }    }
+
+.client-logo-card {
+  flex-shrink: 0;
+  width: 168px; height: 96px;
+  background: #ffffff;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 14px 18px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.05) inset;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  cursor: default; overflow: hidden;
+}
+.client-logo-card img {
+  width: 100%; height: 100%;
+  object-fit: contain; object-position: center;
+  display: block;
+  pointer-events: none;
+}
+.client-logo-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.45), 0 0 0 2px rgba(255,255,255,0.15);
+}
 
 .clients__count-row {
   display: grid; grid-template-columns: repeat(3, 1fr);

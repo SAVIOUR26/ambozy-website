@@ -38,12 +38,31 @@ $values = [
     ['fa' => 'fa-people-group', 'name' => 'Team Work'],
 ];
 
-$clients = [
-    'Min. of Trade & Industry','Min. of Water & Environment','Inspectorate of Govt.',
-    'Uganda Investment Authority','ChildFund International','NCDC','Marie Stopes Uganda',
-    'AFENET','Finance Trust Bank','Kyambogo University','MSC','ERAM (U) Ltd',
-    'Semliki Dairy','Dooba Enterprises','Embassy of Eritrea','InterAid Uganda',
-    'LACCODEF','CEHURD','PACE','Private Sector Foundation UG',
+$client_logos = [
+    ['img' => 'assets/images/clients/client-1.jpeg',  'name' => 'Min. of Trade & Industry'],
+    ['img' => 'assets/images/clients/client-2.jpeg',  'name' => 'Min. of Water & Environment'],
+    ['img' => 'assets/images/clients/client-3.jpeg',  'name' => 'Inspectorate of Govt.'],
+    ['img' => 'assets/images/clients/client-4.jpeg',  'name' => 'Uganda Investment Authority'],
+    ['img' => 'assets/images/clients/client-5.jpeg',  'name' => 'ChildFund International'],
+    ['img' => 'assets/images/clients/client-6.jpeg',  'name' => 'NCDC'],
+    ['img' => 'assets/images/clients/client-8.jpeg',  'name' => 'Marie Stopes Uganda'],
+    ['img' => 'assets/images/clients/client-9.jpeg',  'name' => 'AFENET'],
+    ['img' => 'assets/images/clients/client-10.jpeg', 'name' => 'Finance Trust Bank'],
+    ['img' => 'assets/images/clients/client-11.jpeg', 'name' => 'Kyambogo University'],
+    ['img' => 'assets/images/clients/client-12.jpeg', 'name' => 'MSC'],
+    ['img' => 'assets/images/clients/client-13.jpeg', 'name' => 'ERAM (U) Ltd'],
+    ['img' => 'assets/images/clients/client-14.jpeg', 'name' => 'Semliki Dairy'],
+    ['img' => 'assets/images/clients/client-15.jpeg', 'name' => 'Dooba Enterprises'],
+    ['img' => 'assets/images/clients/client-16.jpeg', 'name' => 'Embassy of Eritrea'],
+    ['img' => 'assets/images/clients/client-17.jpeg', 'name' => 'InterAid Uganda'],
+    ['img' => 'assets/images/clients/client-18.jpeg', 'name' => 'LACCODEF'],
+    ['img' => 'assets/images/clients/client-19.jpeg', 'name' => 'CEHURD'],
+    ['img' => 'assets/images/clients/client-20.jpeg', 'name' => 'PACE'],
+    ['img' => 'assets/images/clients/client-21.jpeg', 'name' => 'Private Sector Foundation UG'],
+    ['img' => 'assets/images/clients/client-22.jpeg', 'name' => 'Partner Organisation'],
+    ['img' => 'assets/images/clients/client-23.jpeg', 'name' => 'Partner Organisation'],
+    ['img' => 'assets/images/clients/client-24.jpeg', 'name' => 'Partner Organisation'],
+    ['img' => 'assets/images/clients/client-25.jpeg', 'name' => 'Partner Organisation'],
 ];
 ?>
 <!DOCTYPE html>
@@ -307,14 +326,33 @@ $clients = [
     </div>
   </div>
 
-  <!-- Infinite scroll ticker -->
-  <div class="clients__track-wrap">
-    <div class="clients__track">
-      <?php
-        $all = array_merge($clients, $clients);
-        foreach ($all as $c): ?>
-      <div class="client-badge"><?= htmlspecialchars($c) ?></div>
-      <?php endforeach; ?>
+  <!-- Dual-row logo marquee -->
+  <div class="clients__marquee-wrap">
+    <!-- Row 1 — scrolls left -->
+    <div class="clients__row">
+      <div class="clients__track clients__track--left">
+        <?php
+          $row1 = array_slice($client_logos, 0, 12);
+          $row1 = array_merge($row1, $row1);
+          foreach ($row1 as $c): ?>
+        <div class="client-logo-card" title="<?= htmlspecialchars($c['name']) ?>">
+          <img src="<?= htmlspecialchars($c['img']) ?>" alt="<?= htmlspecialchars($c['name']) ?>" loading="lazy">
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+    <!-- Row 2 — scrolls right -->
+    <div class="clients__row">
+      <div class="clients__track clients__track--right">
+        <?php
+          $row2 = array_slice($client_logos, 12);
+          $row2 = array_merge($row2, $row2);
+          foreach ($row2 as $c): ?>
+        <div class="client-logo-card" title="<?= htmlspecialchars($c['name']) ?>">
+          <img src="<?= htmlspecialchars($c['img']) ?>" alt="<?= htmlspecialchars($c['name']) ?>" loading="lazy">
+        </div>
+        <?php endforeach; ?>
+      </div>
     </div>
   </div>
 
