@@ -1,7 +1,7 @@
 # Ambozy Graphics Solutions Ltd — Website Project
 
 **Client:** Ambozy Graphics Solutions Ltd  
-**Domain:** [ambozygraphics.shop](http://ambozygraphics.shop)  
+**Domain:** [ambozygraphics.com](http://ambozygraphics.com)  
 **Deployment:** FTP  
 **Stack:** PHP (landing) + PHP CMS (admin)  
 **Built by:** Thirdsan Enterprises / SEVIA
@@ -131,7 +131,7 @@ Ministry of Trade Industry & Co-operatives · Ministry of Water & Environment ·
 
 ### Phase 4 — FTP Deployment
 - Build production ZIP
-- FTP deploy to `ambozygraphics.shop`
+- FTP deploy to `ambozygraphics.com`
 - Test all PHP forms and DB connections on live server
 
 ---

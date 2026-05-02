@@ -1,7 +1,7 @@
 <?php
 /**
  * TEMPORARY DIAGNOSTIC v2 — delete after use
- * Visit: https://ambozygraphics.shop/crm_diag.php
+ * Visit: https://ambozygraphics.com/crm_diag.php
  */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

@@ -1,4 +1,4 @@
-name: Deploy to ambozygraphics.shop
+name: Deploy to ambozygraphics.com
 
 on:
   push:
@@ -40,4 +40,4 @@ jobs:
             *.log
 
       - name: Deployment complete
-        run: echo "✅ Deployed to ambozygraphics.shop"
+        run: echo "✅ Deployed to ambozygraphics.com"

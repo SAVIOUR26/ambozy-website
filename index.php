@@ -1,12 +1,12 @@
 <?php
 /**
  * AMBOZY GRAPHICS SOLUTIONS LTD
- * Landing Page — ambozygraphics.shop
+ * Landing Page — ambozygraphics.com
  */
 
 $site_name  = 'Ambozy Graphics Solutions Ltd';
 $site_desc  = 'Printing · Designing · Contractors · General Supplies — Kampala, Uganda';
-$site_url   = 'https://ambozygraphics.shop';
+$site_url   = 'https://ambozygraphics.com';
 $whatsapp   = '256782187799'; // no +, no spaces
 $phone_1    = '+256 782 187 799';
 $phone_2    = '+256 702 371 230';
