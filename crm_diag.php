@@ -37,7 +37,7 @@ if (isset($pdo) && $pdo) {
         } else {
             echo '<p class="warn">⚠️ admin_users table is EMPTY — you cannot log in. Run the INSERT below.</p>';
             echo '<pre>INSERT INTO admin_users (username, password_hash, full_name, email)
-VALUES (\'admin\', \''.password_hash('Admin@2026', PASSWORD_DEFAULT).'\', \'Ambozy Admin\', \'ambozygraphics@gmail.com\');</pre>';
+VALUES (\'admin\', \''.password_hash('Admin@2026', PASSWORD_DEFAULT).'\', \'Ambozy Admin\', \'info@ambozygraphics.com\');</pre>';
             echo '<p class="warn">Password will be: <strong>Admin@2026</strong> — change it after first login.</p>';
         }
     } catch (Throwable $e) {
@@ -55,7 +55,7 @@ VALUES (\'admin\', \''.password_hash('Admin@2026', PASSWORD_DEFAULT).'\', \'Ambo
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO admin_users (username, password_hash, full_name, email)
-VALUES (\'admin\', \''.password_hash('Admin@2026', PASSWORD_DEFAULT).'\', \'Ambozy Admin\', \'ambozygraphics@gmail.com\');</pre>';
+VALUES (\'admin\', \''.password_hash('Admin@2026', PASSWORD_DEFAULT).'\', \'Ambozy Admin\', \'info@ambozygraphics.com\');</pre>';
     }
 }
 

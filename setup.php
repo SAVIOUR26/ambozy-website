@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php
 define('SITE_NAME',  'Ambozy Graphics Solutions Ltd');
 define('SITE_URL',   'https://ambozygraphics.com');
-define('SITE_EMAIL', 'ambozygraphics@gmail.com');
+define('SITE_EMAIL', 'info@ambozygraphics.com');
 define('SITE_PHONE', '+256 782 187 799');
 define('WHATSAPP_NO','256782187799');
 
@@ -80,7 +80,7 @@ define('ADMIN_USER', '$admin_user');
 define('ADMIN_HASH', '$hash');
 
 define('MAIL_FROM',  'noreply@ambozygraphics.com');
-define('MAIL_TO',    'ambozygraphics@gmail.com');
+define('MAIL_TO',    'info@ambozygraphics.com');
 
 try {
     \$pdo = new PDO(

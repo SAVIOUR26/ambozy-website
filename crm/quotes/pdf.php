@@ -162,7 +162,7 @@ $tax_amt   = round($tax_base * $quote['tax_percent'] / 100, 0);
 
   <!-- Footer -->
   <div class="footer-strip">
-    <span><?= SITE_NAME ?> | Plot 43 Nasser/Nkrumah Road, Kampala</span>
+    <span><?= SITE_NAME ?> | Plot 1314 Church Road, Buye, Ntinda, Kampala</span>
     <span><?= SITE_PHONE ?> | <?= SITE_EMAIL ?></span>
     <span>Printed <?= date('d M Y') ?></span>
   </div>

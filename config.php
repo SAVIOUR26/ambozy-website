@@ -16,7 +16,7 @@ if (file_exists(__DIR__ . '/config.local.php')) {
 // ── Site constants ──────────────────────────────────────────────────
 define('SITE_NAME',  'Ambozy Graphics Solutions Ltd');
 define('SITE_URL',   'https://ambozygraphics.com');
-define('SITE_EMAIL', 'ambozygraphics@gmail.com');
+define('SITE_EMAIL', 'info@ambozygraphics.com');
 define('SITE_PHONE', '+256 782 187 799');
 define('WHATSAPP_NO','256782187799');   // digits only, no +
 
@@ -33,7 +33,7 @@ define('ADMIN_HASH', password_hash('CHANGE_ME_PASSWORD', PASSWORD_DEFAULT));
 
 // ── Mail ────────────────────────────────────────────────────────────
 define('MAIL_FROM',  'noreply@ambozygraphics.com');
-define('MAIL_TO',    'ambozygraphics@gmail.com');
+define('MAIL_TO',    'info@ambozygraphics.com');
 
 // ── PDO connection ──────────────────────────────────────────────────
 try {

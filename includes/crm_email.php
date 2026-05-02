@@ -211,7 +211,7 @@ function email_invoice(array $invoice, array $client, array $items): string
 <p style="font-size:13px;color:#475569">
   📱 Mobile Money (MTN/Airtel) — 0782 187 799<br>
   🏦 Bank Transfer — Please contact us for bank details<br>
-  💵 Cash — At our offices, Plot 43 Nasser/Nkrumah Road, Kampala
+  💵 Cash — At our offices, Plot 1314 Church Road, Buye, Ntinda, Kampala
 </p>
 <p>Please include the invoice number <strong>{$invoice['invoice_number']}</strong> as the payment reference.</p>
 <a href="https://wa.me/256782187799" class="btn">Confirm Payment via WhatsApp</a>

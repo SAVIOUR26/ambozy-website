@@ -63,7 +63,7 @@ try {
 }
 
 // Send email notification
-$to      = 'ambozygraphics@gmail.com';
+$to      = 'info@ambozygraphics.com';
 $subject = "New Quote Inquiry from $name — Ambozy Graphics";
 $body    = "New quote inquiry received via ambozygraphics.com\n\n"
          . "Name:     $name\n"

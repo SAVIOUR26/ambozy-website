@@ -120,7 +120,7 @@ $tax_amt=round($tax_base*$invoice['tax_percent']/100,0);
 
   <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:16px;margin-bottom:20px;font-size:12px;color:#1e40af">
     <strong>Payment Options:</strong><br>
-    📱 Mobile Money (MTN/Airtel): 0782 187 799 &nbsp;·&nbsp; 🏦 Bank Transfer: Contact us for details &nbsp;·&nbsp; 💵 Cash: Plot 43 Nasser/Nkrumah Road, Kampala<br>
+    📱 Mobile Money (MTN/Airtel): 0782 187 799 &nbsp;·&nbsp; 🏦 Bank Transfer: Contact us for details &nbsp;·&nbsp; 💵 Cash: Plot 1314 Church Road, Buye, Ntinda, Kampala<br>
     Please quote invoice number <strong><?=htmlspecialchars($invoice['invoice_number'])?></strong> as your payment reference.
   </div>
 
@@ -132,7 +132,7 @@ $tax_amt=round($tax_base*$invoice['tax_percent']/100,0);
   <?php endif;?>
 
   <div class="footer-strip">
-    <span><?=SITE_NAME?> | Plot 43 Nasser/Nkrumah Road, Kampala</span>
+    <span><?=SITE_NAME?> | Plot 1314 Church Road, Buye, Ntinda, Kampala</span>
     <span><?=SITE_PHONE?> | <?=SITE_EMAIL?></span>
     <span>Printed <?=date('d M Y')?></span>
   </div>
