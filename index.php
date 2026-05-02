@@ -16,16 +16,26 @@ $address    = 'Plot 1314 Church Road, Buye, Ntinda, Kampala, Uganda';
 $pobox      = 'P.O. Box 14521, Kampala';
 
 $services = [
-    ['icon' => '👕', 'title' => 'Branded Merchandise',   'items' => 'T-shirts, Polo Shirts, Caps, Aprons, Fleece, Overalls, Bags'],
-    ['icon' => '🎁', 'title' => 'Branded Giveaways',     'items' => 'Keyrings, Mugs, Pens, USB Drives, Umbrellas, Wristbands, Watches'],
-    ['icon' => '📖', 'title' => 'Books & Magazines',     'items' => 'Magazines, Invite Cards, Certificates, Business Cards, Newsletters'],
-    ['icon' => '📋', 'title' => 'Stationery',            'items' => 'Letterheads, Envelopes, Corporate & Computer Stationery'],
-    ['icon' => '📣', 'title' => 'Marketing Materials',   'items' => 'Posters, Brochures, Banners, Calendars, Diaries, Car Branding'],
-    ['icon' => '🪟', 'title' => 'Signage & Signs',       'items' => 'Neon, Illuminated, Light Boxes, Acrylic, Pull-ups, Backdrops'],
-    ['icon' => '🛒', 'title' => 'Point of Sale',         'items' => 'Wobblers, Shelf Strips, Danglers, POS Displays'],
-    ['icon' => '📦', 'title' => 'Packaging Solutions',   'items' => 'Product Labels, Shopping Bags, Kraft Paper, Boxes, Paper Cups'],
-    ['icon' => '🏆', 'title' => 'Awards & Plaques',      'items' => 'Crystal Awards, Wooden Plaques, Trophies, Desk Sign Holders'],
-    ['icon' => '📡', 'title' => 'Outdoor Advertising',   'items' => 'Tents, Billboards, Pavement Signs, Pull-up Banners, Light Boxes'],
+    ['fa' => 'fa-shirt',        'title' => 'Branded Merchandise',  'items' => 'T-shirts, Polo Shirts, Caps, Aprons, Fleece, Overalls, Bags'],
+    ['fa' => 'fa-gift',         'title' => 'Branded Giveaways',    'items' => 'Keyrings, Mugs, Pens, USB Drives, Umbrellas, Wristbands, Watches'],
+    ['fa' => 'fa-book-open',    'title' => 'Books & Magazines',    'items' => 'Magazines, Invite Cards, Certificates, Business Cards, Newsletters'],
+    ['fa' => 'fa-file-lines',   'title' => 'Stationery',           'items' => 'Letterheads, Envelopes, Corporate & Computer Stationery'],
+    ['fa' => 'fa-bullhorn',     'title' => 'Marketing Materials',  'items' => 'Posters, Brochures, Banners, Calendars, Diaries, Car Branding'],
+    ['fa' => 'fa-signs-post',   'title' => 'Signage & Signs',      'items' => 'Neon, Illuminated, Light Boxes, Acrylic, Pull-ups, Backdrops'],
+    ['fa' => 'fa-cash-register','title' => 'Point of Sale',        'items' => 'Wobblers, Shelf Strips, Danglers, POS Displays'],
+    ['fa' => 'fa-box-open',     'title' => 'Packaging Solutions',  'items' => 'Product Labels, Shopping Bags, Kraft Paper, Boxes, Paper Cups'],
+    ['fa' => 'fa-trophy',       'title' => 'Awards & Plaques',     'items' => 'Crystal Awards, Wooden Plaques, Trophies, Desk Sign Holders'],
+    ['fa' => 'fa-flag',         'title' => 'Outdoor Advertising',  'items' => 'Tents, Billboards, Pavement Signs, Pull-up Banners, Light Boxes'],
+];
+
+$values = [
+    ['fa' => 'fa-handshake',    'name' => 'Service'],
+    ['fa' => 'fa-gem',          'name' => 'Premium Quality'],
+    ['fa' => 'fa-briefcase',    'name' => 'Professionalism'],
+    ['fa' => 'fa-star',         'name' => 'Exceptional Value'],
+    ['fa' => 'fa-shield-halved','name' => 'Integrity'],
+    ['fa' => 'fa-palette',      'name' => 'Creativity'],
+    ['fa' => 'fa-people-group', 'name' => 'Team Work'],
 ];
 
 $clients = [
@@ -43,11 +53,20 @@ $clients = [
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= $site_name ?> — Printing, Branding & Promotional Solutions</title>
   <meta name="description" content="<?= $site_desc ?>">
-  <meta property="og:title" content="<?= $site_name ?>">
+  <meta property="og:title"       content="<?= $site_name ?>">
   <meta property="og:description" content="<?= $site_desc ?>">
-  <meta property="og:url" content="<?= $site_url ?>">
-  <meta property="og:type" content="website">
-  <link rel="icon" type="image/png" href="assets/images/logo_main.png">
+  <meta property="og:url"         content="<?= $site_url ?>">
+  <meta property="og:type"        content="website">
+
+  <!-- SVG favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="alternate icon"      href="assets/images/favicon.svg">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Brand CSS -->
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
@@ -57,8 +76,13 @@ $clients = [
 ============================================================ -->
 <nav class="nav" id="nav">
   <a href="#" class="nav__logo">
-    <img src="assets/images/logo_main.png" alt="Ambozy Graphics Solutions Ltd">
+    <div class="logo-badge"><i class="fa-solid fa-palette"></i></div>
+    <div class="logo-wordmark">
+      <span class="logo-wordmark__main">Ambozy</span>
+      <span class="logo-wordmark__sub">Graphics Solutions Ltd</span>
+    </div>
   </a>
+
   <ul class="nav__links">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
@@ -66,7 +90,9 @@ $clients = [
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav__cta">
-    <a href="#contact" class="btn btn-primary">Get a Quote</a>
+    <a href="#contact" class="btn btn-primary">
+      <i class="fa-solid fa-paper-plane"></i> Get a Quote
+    </a>
   </div>
   <button class="nav__hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -85,34 +111,36 @@ $clients = [
      HERO
 ============================================================ -->
 <section class="hero" id="home">
-  <div class="hero__bg">
-    <!-- Compass star SVG background motif -->
-    <svg class="hero__star-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#F15E24" d="M100 10 L115 85 L190 100 L115 115 L100 190 L85 115 L10 100 L85 85 Z"/>
-      <circle cx="100" cy="100" r="90" fill="none" stroke="#F15E24" stroke-width="2"/>
-      <circle cx="100" cy="100" r="70" fill="none" stroke="#F15E24" stroke-width="1"/>
-    </svg>
+  <!-- Paint blobs -->
+  <div class="blobs">
+    <div class="blob blob--pink"   style="width:650px;height:650px;top:-200px;left:-180px"></div>
+    <div class="blob blob--cyan"   style="width:550px;height:550px;top:-80px;right:-180px"></div>
+    <div class="blob blob--orange" style="width:420px;height:420px;bottom:-80px;right:18%"></div>
+    <div class="blob blob--violet" style="width:280px;height:280px;bottom:15%;left:10%;opacity:0.08"></div>
   </div>
 
   <div class="hero__content">
+
+    <!-- Left copy -->
     <div class="hero__left">
-      <div class="hero__eyebrow">Est. 2010 — Kampala, Uganda</div>
+      <div class="hero__eyebrow">
+        <i class="fa-solid fa-location-dot" style="color:var(--pink)"></i>
+        Est. 2010 — Kampala, Uganda
+      </div>
       <h1 class="hero__title">
         <span class="line-1">We Print.</span><br>
-        <span class="line-orange">We Brand.</span><br>
-        <span class="line-outline">We Deliver.</span>
+        <span class="line-2">We Brand.</span><br>
+        <span class="line-3">We Deliver.</span>
       </h1>
       <p class="hero__body">
         From bold branded merchandise to stunning outdoor signage — Ambozy Graphics Solutions brings your brand to life with premium printing, creative design, and end-to-end supply.
       </p>
       <div class="hero__actions">
         <a href="#contact" class="btn btn-primary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          Get a Quote
+          <i class="fa-solid fa-comment-dots"></i> Get a Quote
         </a>
         <a href="#services" class="btn btn-outline">
-          View Services
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          View Services <i class="fa-solid fa-arrow-right"></i>
         </a>
       </div>
       <div class="hero__services-strip">
@@ -126,13 +154,28 @@ $clients = [
       </div>
     </div>
 
+    <!-- Right graphic composition -->
     <div class="hero__right">
-      <div class="hero__logo-showcase">
-        <div class="hero__logo-ring">
-          <div class="hero__logo-inner">
-            <img src="assets/images/logo_main.png" alt="Ambozy Graphics">
-          </div>
+      <div class="hero__art">
+        <!-- Spinning arcs -->
+        <div class="hero__arc"></div>
+        <div class="hero__arc"></div>
+        <div class="hero__arc"></div>
+
+        <!-- Center palette icon -->
+        <div class="hero__art-center">
+          <i class="fa-solid fa-palette"></i>
         </div>
+
+        <!-- Orbit bubbles: top · right · bottom · left · top-right · bottom-right -->
+        <div class="hero__orb" title="Design"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="hero__orb" title="Print"><i class="fa-solid fa-print"></i></div>
+        <div class="hero__orb" title="Merchandise"><i class="fa-solid fa-shirt"></i></div>
+        <div class="hero__orb" title="Marketing"><i class="fa-solid fa-bullhorn"></i></div>
+        <div class="hero__orb" title="Awards"><i class="fa-solid fa-trophy"></i></div>
+        <div class="hero__orb" title="Packaging"><i class="fa-solid fa-box-open"></i></div>
+
+        <!-- Floating stat badges -->
         <div class="hero__stat">
           <div class="hero__stat-num" data-target="14" data-suffix="+">0+</div>
           <div class="hero__stat-label">Years Active</div>
@@ -143,6 +186,7 @@ $clients = [
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -150,20 +194,29 @@ $clients = [
      ABOUT
 ============================================================ -->
 <section class="section about" id="about">
+  <!-- Paint blobs -->
+  <div class="blobs">
+    <div class="blob blob--violet" style="width:500px;height:500px;right:-80px;top:-100px"></div>
+    <div class="blob blob--teal"   style="width:380px;height:380px;left:-80px;bottom:-60px;opacity:0.1"></div>
+  </div>
+
   <div class="container">
     <div class="about__grid">
+
       <div class="about__left reveal">
-        <div class="tag">Who We Are</div>
-        <h2 class="section-title">Built on <span>Quality</span><br>& Creativity</h2>
+        <div class="tag tag--fire">
+          <i class="fa-solid fa-circle-info"></i> Who We Are
+        </div>
+        <h2 class="section-title">Built on <span>Quality</span><br>&amp; Creativity</h2>
         <p class="section-sub">Incorporated in 2010, Ambozy Graphics Solutions Ltd is Kampala's trusted partner for printing, branding, and promotional services — delivering individualized solutions that add real value.</p>
 
         <div class="about__vm">
           <div class="about__vm-card reveal reveal-delay-1">
-            <div class="about__vm-label">Our Vision</div>
+            <div class="about__vm-label"><i class="fa-solid fa-eye"></i> &nbsp;Our Vision</div>
             <p class="about__vm-text">To maintain and be the acknowledged leader in designing, printing, branding and promotional services through consistent improvement of quality.</p>
           </div>
           <div class="about__vm-card reveal reveal-delay-2">
-            <div class="about__vm-label">Our Mission</div>
+            <div class="about__vm-label"><i class="fa-solid fa-rocket"></i> &nbsp;Our Mission</div>
             <p class="about__vm-text">To provide exceptional designing, printing, branding and promotional services — delivering individualized solutions that add value to all our stakeholders.</p>
           </div>
         </div>
@@ -172,19 +225,9 @@ $clients = [
       <div class="about__right reveal reveal-delay-1">
         <div class="about__values-title">Our Core Values</div>
         <div class="about__values">
-          <?php
-          $values = [
-            ['icon'=>'⭐','name'=>'Service'],
-            ['icon'=>'💎','name'=>'Premium Quality'],
-            ['icon'=>'🤝','name'=>'Professionalism'],
-            ['icon'=>'💡','name'=>'Exceptional Value'],
-            ['icon'=>'🛡️','name'=>'Integrity'],
-            ['icon'=>'🎨','name'=>'Creativity'],
-            ['icon'=>'👥','name'=>'Team Work'],
-          ];
-          foreach ($values as $v): ?>
+          <?php foreach ($values as $v): ?>
           <div class="about__value">
-            <div class="about__value-icon"><?= $v['icon'] ?></div>
+            <div class="about__value-icon"><i class="fa-solid <?= $v['fa'] ?>"></i></div>
             <span class="about__value-name"><?= $v['name'] ?></span>
           </div>
           <?php endforeach; ?>
@@ -194,10 +237,13 @@ $clients = [
           <div class="about__founded-year">2010</div>
           <div>
             <div class="about__founded-text">Founded in Kampala</div>
-            <div class="about__founded-text" style="opacity:0.6;font-size:0.78rem;margin-top:4px;">Plot 1314 Church Road, Buye, Ntinda</div>
+            <div class="about__founded-text" style="opacity:0.75;font-size:0.78rem;margin-top:5px;">
+              <i class="fa-solid fa-location-dot" style="margin-right:5px"></i>Plot 1314 Church Road, Buye, Ntinda
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -206,10 +252,18 @@ $clients = [
      SERVICES
 ============================================================ -->
 <section class="section services" id="services">
+  <!-- Paint blobs -->
+  <div class="blobs">
+    <div class="blob blob--pink"  style="width:600px;height:600px;left:-180px;top:50%;transform:translateY(-50%)"></div>
+    <div class="blob blob--amber" style="width:450px;height:450px;right:-120px;bottom:0"></div>
+  </div>
+
   <div class="container">
     <div class="services__header">
       <div>
-        <div class="tag reveal">What We Do</div>
+        <div class="tag tag--cool reveal">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> What We Do
+        </div>
         <h2 class="section-title reveal">Our <span>Services</span></h2>
       </div>
       <p class="section-sub reveal" style="text-align:right">
@@ -219,12 +273,12 @@ $clients = [
 
     <div class="services__grid">
       <?php foreach ($services as $i => $s): ?>
-      <div class="service-card reveal" style="transition-delay: <?= ($i % 4) * 0.08 ?>s">
+      <div class="service-card reveal" style="transition-delay:<?= ($i % 4) * 0.07 ?>s">
         <div class="service-card__num"><?= str_pad($i + 1, 2, '0', STR_PAD_LEFT) ?></div>
-        <span class="service-card__icon"><?= $s['icon'] ?></span>
+        <div class="service-card__icon"><i class="fa-solid <?= $s['fa'] ?>"></i></div>
         <div class="service-card__title"><?= $s['title'] ?></div>
         <div class="service-card__items"><?= $s['items'] ?></div>
-        <div class="service-card__arrow">→</div>
+        <div class="service-card__arrow"><i class="fa-solid fa-arrow-right"></i></div>
       </div>
       <?php endforeach; ?>
     </div>
@@ -235,9 +289,17 @@ $clients = [
      CLIENTS
 ============================================================ -->
 <section class="section clients" id="clients">
+  <!-- Paint blobs -->
+  <div class="blobs">
+    <div class="blob blob--cyan"   style="width:500px;height:500px;right:-80px;top:-80px"></div>
+    <div class="blob blob--orange" style="width:400px;height:400px;left:-80px;bottom:-80px;opacity:0.09"></div>
+  </div>
+
   <div class="container">
     <div class="clients__header reveal">
-      <div class="tag">Trusted By</div>
+      <div class="tag tag--violet">
+        <i class="fa-solid fa-building"></i> Trusted By
+      </div>
       <h2 class="section-title">Our <span>Clients</span></h2>
       <p class="section-sub" style="margin:16px auto 0;text-align:center">
         We've served government ministries, international NGOs, universities, and businesses across Uganda and beyond.
@@ -249,7 +311,6 @@ $clients = [
   <div class="clients__track-wrap">
     <div class="clients__track">
       <?php
-        // Duplicate for seamless loop
         $all = array_merge($clients, $clients);
         foreach ($all as $c): ?>
       <div class="client-badge"><?= htmlspecialchars($c) ?></div>
@@ -279,45 +340,46 @@ $clients = [
      QUOTE / CONTACT
 ============================================================ -->
 <section class="section quote" id="contact">
+  <!-- Paint blobs -->
+  <div class="blobs">
+    <div class="blob blob--pink"  style="width:520px;height:520px;right:-100px;top:-80px"></div>
+    <div class="blob blob--teal"  style="width:380px;height:380px;left:-80px;bottom:-80px;opacity:0.1"></div>
+  </div>
+
   <div class="container">
     <div class="quote__wrap">
+
       <div class="quote__left reveal">
-        <div class="tag">Reach Out</div>
+        <div class="tag tag--amber">
+          <i class="fa-solid fa-envelope-open-text"></i> Reach Out
+        </div>
         <h2 class="section-title">Request a <span>Quote</span></h2>
         <p class="section-sub">Tell us about your project and we'll get back to you within 24 hours with a custom quote.</p>
 
         <div class="quote__contact-items">
           <div class="quote__contact-item">
-            <div class="quote__contact-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.09 1.18 2 2 0 012.09 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.45-.45a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.9v2.02z"/></svg>
-            </div>
+            <div class="quote__contact-icon"><i class="fa-solid fa-phone"></i></div>
             <div>
               <div class="quote__contact-label">Phone / WhatsApp</div>
               <div class="quote__contact-value"><?= $phone_1 ?> &nbsp;|&nbsp; <?= $phone_2 ?></div>
             </div>
           </div>
           <div class="quote__contact-item">
-            <div class="quote__contact-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
+            <div class="quote__contact-icon"><i class="fa-solid fa-envelope"></i></div>
             <div>
               <div class="quote__contact-label">Email</div>
               <div class="quote__contact-value"><?= $email_main ?></div>
             </div>
           </div>
           <div class="quote__contact-item">
-            <div class="quote__contact-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
+            <div class="quote__contact-icon"><i class="fa-solid fa-location-dot"></i></div>
             <div>
               <div class="quote__contact-label">Location</div>
               <div class="quote__contact-value"><?= $address ?></div>
             </div>
           </div>
           <div class="quote__contact-item">
-            <div class="quote__contact-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-            </div>
+            <div class="quote__contact-icon"><i class="fa-solid fa-building-columns"></i></div>
             <div>
               <div class="quote__contact-label">Office</div>
               <div class="quote__contact-value"><?= $phone_off ?> &nbsp;|&nbsp; <?= $pobox ?></div>
@@ -383,18 +445,21 @@ $clients = [
 
           <div class="form__group">
             <label class="form__label" for="message">Project Details *</label>
-            <textarea class="form__textarea" id="message" name="message" placeholder="Describe your project — quantities, sizes, deadline, special requirements…" required></textarea>
+            <textarea class="form__textarea" id="message" name="message"
+                      placeholder="Describe your project — quantities, sizes, deadline, special requirements…" required></textarea>
           </div>
 
           <button type="submit" class="btn btn-primary form__submit">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Send Inquiry
+            <i class="fa-solid fa-paper-plane"></i> Send Inquiry
           </button>
 
-          <div id="formSuccess" class="form__success">✓ Inquiry sent! We'll contact you within 24 hours.</div>
+          <div id="formSuccess" class="form__success">
+            <i class="fa-solid fa-circle-check"></i> Inquiry sent! We'll contact you within 24 hours.
+          </div>
           <div id="formError" class="form__error"></div>
         </form>
       </div>
+
     </div>
   </div>
 </section>
@@ -405,73 +470,72 @@ $clients = [
 <footer class="footer">
   <div class="container">
     <div class="footer__grid">
+
       <div>
-        <img src="assets/images/logo_main.png" alt="Ambozy Graphics Solutions Ltd" class="footer__logo" style="height:40px;filter:brightness(0) invert(1);margin-bottom:16px">
+        <div class="footer__logo">
+          <div class="logo-badge"><i class="fa-solid fa-palette"></i></div>
+          <div class="logo-wordmark">
+            <span class="logo-wordmark__main">Ambozy</span>
+            <span class="logo-wordmark__sub">Graphics Solutions Ltd</span>
+          </div>
+        </div>
         <p class="footer__desc">Your trusted partner for printing, branding, and promotional solutions in Uganda since 2010.</p>
         <div class="footer__social">
-          <!-- Social icons — links to be added later -->
-          <a href="#" title="Facebook" aria-label="Facebook">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-          </a>
-          <a href="#" title="Instagram" aria-label="Instagram">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-          <a href="#" title="Twitter/X" aria-label="Twitter">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-          <a href="https://wa.me/<?= $whatsapp ?>" title="WhatsApp" aria-label="WhatsApp">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          </a>
+          <a href="#" title="Facebook"  aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" title="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" title="Twitter/X" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://wa.me/<?= $whatsapp ?>" title="WhatsApp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
       </div>
 
       <div>
         <div class="footer__col-title">Services</div>
         <ul class="footer__links">
-          <li><a href="#services">Branded Merchandise</a></li>
-          <li><a href="#services">Marketing Materials</a></li>
-          <li><a href="#services">Signage & Signs</a></li>
-          <li><a href="#services">Packaging Solutions</a></li>
-          <li><a href="#services">Outdoor Advertising</a></li>
-          <li><a href="#services">Awards & Plaques</a></li>
+          <li><a href="#services"><i class="fa-solid fa-chevron-right"></i>Branded Merchandise</a></li>
+          <li><a href="#services"><i class="fa-solid fa-chevron-right"></i>Marketing Materials</a></li>
+          <li><a href="#services"><i class="fa-solid fa-chevron-right"></i>Signage &amp; Signs</a></li>
+          <li><a href="#services"><i class="fa-solid fa-chevron-right"></i>Packaging Solutions</a></li>
+          <li><a href="#services"><i class="fa-solid fa-chevron-right"></i>Outdoor Advertising</a></li>
+          <li><a href="#services"><i class="fa-solid fa-chevron-right"></i>Awards &amp; Plaques</a></li>
         </ul>
       </div>
 
       <div>
         <div class="footer__col-title">Quick Links</div>
         <ul class="footer__links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#services">Our Services</a></li>
-          <li><a href="#clients">Our Clients</a></li>
-          <li><a href="#contact">Request Quote</a></li>
+          <li><a href="#home"><i class="fa-solid fa-chevron-right"></i>Home</a></li>
+          <li><a href="#about"><i class="fa-solid fa-chevron-right"></i>About Us</a></li>
+          <li><a href="#services"><i class="fa-solid fa-chevron-right"></i>Our Services</a></li>
+          <li><a href="#clients"><i class="fa-solid fa-chevron-right"></i>Our Clients</a></li>
+          <li><a href="#contact"><i class="fa-solid fa-chevron-right"></i>Request Quote</a></li>
         </ul>
       </div>
 
       <div>
         <div class="footer__col-title">Get in Touch</div>
         <div class="footer__contact-item">
-          <span class="footer__contact-icon">📍</span>
+          <span class="footer__contact-icon"><i class="fa-solid fa-location-dot"></i></span>
           <span class="footer__contact-text">Plot 1314 Church Road, Buye, Ntinda, Kampala</span>
         </div>
         <div class="footer__contact-item">
-          <span class="footer__contact-icon">📞</span>
+          <span class="footer__contact-icon"><i class="fa-solid fa-phone"></i></span>
           <span class="footer__contact-text"><?= $phone_1 ?><br><?= $phone_2 ?></span>
         </div>
         <div class="footer__contact-item">
-          <span class="footer__contact-icon">✉️</span>
+          <span class="footer__contact-icon"><i class="fa-solid fa-envelope"></i></span>
           <span class="footer__contact-text"><?= $email_main ?></span>
         </div>
         <div class="footer__contact-item">
-          <span class="footer__contact-icon">📮</span>
+          <span class="footer__contact-icon"><i class="fa-solid fa-inbox"></i></span>
           <span class="footer__contact-text"><?= $pobox ?></span>
         </div>
       </div>
+
     </div>
 
     <div class="footer__bottom">
       <div class="footer__copy">
-        © <?= date('Y') ?> <span>Ambozy Graphics Solutions Ltd</span>. All rights reserved.
+        &copy; <?= date('Y') ?> <span>Ambozy Graphics Solutions Ltd</span>. All rights reserved.
       </div>
       <div class="footer__strip">
         Printing <span>◆</span> Designing <span>◆</span> Contractors <span>◆</span> General Supplies
@@ -483,7 +547,8 @@ $clients = [
 <!-- ============================================================
      WHATSAPP BUTTON
 ============================================================ -->
-<a class="wa-btn" href="https://wa.me/<?= $whatsapp ?>?text=Hello%20Ambozy%20Graphics%21%20I%20would%20like%20to%20request%20a%20quote." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+<a class="wa-btn" href="https://wa.me/<?= $whatsapp ?>?text=Hello%20Ambozy%20Graphics%21%20I%20would%20like%20to%20request%20a%20quote."
+   target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>

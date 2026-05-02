@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF2D78"/>
+      <stop offset="50%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#FFB800"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.18)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded square base -->
+  <rect width="100" height="100" rx="22" fill="url(#bg)"/>
+  <!-- Shine overlay -->
+  <rect width="100" height="50" rx="22" fill="url(#shine)"/>
+  <!-- Paint palette body -->
+  <ellipse cx="50" cy="48" rx="26" ry="22" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="4.5"/>
+  <!-- Thumb hole -->
+  <ellipse cx="60" cy="58" rx="5" ry="5" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="4"/>
+  <!-- Color dots on palette -->
+  <circle cx="38" cy="40" r="5" fill="white"/>
+  <circle cx="50" cy="36" r="5" fill="rgba(255,255,255,0.75)"/>
+  <circle cx="62" cy="40" r="5" fill="rgba(255,255,255,0.55)"/>
+  <circle cx="40" cy="52" r="5" fill="rgba(255,255,255,0.75)"/>
+  <!-- Brush handle -->
+  <line x1="68" y1="34" x2="80" y2="22" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <line x1="63" y1="37" x2="70" y2="30" stroke="rgba(255,255,255,0.5)" stroke-width="6" stroke-linecap="round"/>
+</svg>
