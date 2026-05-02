@@ -1,18 +1,18 @@
 <?php
 /**
  * AMBOZY GRAPHICS SOLUTIONS LTD
- * Landing Page — ambozygraphics.shop
+ * Landing Page — ambozygraphics.com
  */
 
 $site_name  = 'Ambozy Graphics Solutions Ltd';
 $site_desc  = 'Printing · Designing · Contractors · General Supplies — Kampala, Uganda';
-$site_url   = 'https://ambozygraphics.shop';
+$site_url   = 'https://ambozygraphics.com';
 $whatsapp   = '256782187799'; // no +, no spaces
 $phone_1    = '+256 782 187 799';
 $phone_2    = '+256 702 371 230';
 $phone_off  = '+256 392 839 447';
-$email_main = 'ambozygraphics@gmail.com';
-$address    = 'Plot 43 Nasser / Nkrumah Road, opposite Picfare, Kampala, Uganda';
+$email_main = 'info@ambozygraphics.com';
+$address    = 'Plot 1314 Church Road, Buye, Ntinda, Kampala, Uganda';
 $pobox      = 'P.O. Box 14521, Kampala';
 
 $services = [
@@ -194,7 +194,7 @@ $clients = [
           <div class="about__founded-year">2010</div>
           <div>
             <div class="about__founded-text">Founded in Kampala</div>
-            <div class="about__founded-text" style="opacity:0.6;font-size:0.78rem;margin-top:4px;">Plot 43 Nasser / Nkrumah Road</div>
+            <div class="about__founded-text" style="opacity:0.6;font-size:0.78rem;margin-top:4px;">Plot 1314 Church Road, Buye, Ntinda</div>
           </div>
         </div>
       </div>
@@ -452,7 +452,7 @@ $clients = [
         <div class="footer__col-title">Get in Touch</div>
         <div class="footer__contact-item">
           <span class="footer__contact-icon">📍</span>
-          <span class="footer__contact-text">Plot 43 Nasser/Nkrumah Rd, opposite Picfare, Kampala</span>
+          <span class="footer__contact-text">Plot 1314 Church Road, Buye, Ntinda, Kampala</span>
         </div>
         <div class="footer__contact-item">
           <span class="footer__contact-icon">📞</span>

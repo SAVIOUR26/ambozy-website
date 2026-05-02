@@ -1,5 +1,5 @@
 # GitHub Secrets Setup Guide
-## For ambozygraphics.shop deployment
+## For ambozygraphics.com deployment
 
 Go to your GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**
 
@@ -7,7 +7,7 @@ Add these secrets:
 
 | Secret Name      | Value | Where to find |
 |-----------------|-------|---------------|
-| `FTP_HOST`       | e.g. `ftp.ambozygraphics.shop` | Your hosting control panel |
+| `FTP_HOST`       | e.g. `ftp.ambozygraphics.com` | Your hosting control panel |
 | `FTP_USER`       | FTP username | Hosting control panel |
 | `FTP_PASS`       | FTP password | Hosting control panel |
 | `FTP_SERVER_DIR` | e.g. `/public_html/` | Root web folder on host |
@@ -24,8 +24,8 @@ Add these secrets:
 2. Add all secrets above
 3. In phpMyAdmin, create database `ambozy_db` and run `schema.sql`
 4. Push any commit to `main`/`master` to trigger deploy
-5. Visit `https://ambozygraphics.shop`
-6. Visit `https://ambozygraphics.shop/admin` → login with your admin credentials
+5. Visit `https://ambozygraphics.com`
+6. Visit `https://ambozygraphics.com/admin` → login with your admin credentials
 
 ## Generating ADMIN_HASH locally
 ```bash

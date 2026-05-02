@@ -63,9 +63,9 @@ try {
 }
 
 // Send email notification
-$to      = 'ambozygraphics@gmail.com';
+$to      = 'info@ambozygraphics.com';
 $subject = "New Quote Inquiry from $name — Ambozy Graphics";
-$body    = "New quote inquiry received via ambozygraphics.shop\n\n"
+$body    = "New quote inquiry received via ambozygraphics.com\n\n"
          . "Name:     $name\n"
          . "Email:    $email\n"
          . "Phone:    $phone\n"
@@ -75,7 +75,7 @@ $body    = "New quote inquiry received via ambozygraphics.shop\n\n"
          . "Message:\n$message\n\n"
          . "---\nSent: " . date('Y-m-d H:i:s');
 
-$headers  = "From: noreply@ambozygraphics.shop\r\n";
+$headers  = "From: noreply@ambozygraphics.com\r\n";
 $headers .= "Reply-To: $email\r\n";
 $headers .= "X-Mailer: PHP/" . phpversion();
 

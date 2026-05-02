@@ -6,7 +6,7 @@
  *          ready-to-paste config.local.php for the server.
  *
  * USAGE:
- *   1. Visit https://ambozygraphics.shop/setup.php
+ *   1. Visit https://ambozygraphics.com/setup.php
  *   2. Fill in your details and click Generate
  *   3. Copy the generated config.local.php content
  *   4. Create the file in public_html/ via cPanel File Manager
@@ -65,8 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $config = <<<PHP
 <?php
 define('SITE_NAME',  'Ambozy Graphics Solutions Ltd');
-define('SITE_URL',   'https://ambozygraphics.shop');
-define('SITE_EMAIL', 'ambozygraphics@gmail.com');
+define('SITE_URL',   'https://ambozygraphics.com');
+define('SITE_EMAIL', 'info@ambozygraphics.com');
 define('SITE_PHONE', '+256 782 187 799');
 define('WHATSAPP_NO','256782187799');
 
@@ -79,8 +79,8 @@ define('DB_CHARSET', 'utf8mb4');
 define('ADMIN_USER', '$admin_user');
 define('ADMIN_HASH', '$hash');
 
-define('MAIL_FROM',  'noreply@ambozygraphics.shop');
-define('MAIL_TO',    'ambozygraphics@gmail.com');
+define('MAIL_FROM',  'noreply@ambozygraphics.com');
+define('MAIL_TO',    'info@ambozygraphics.com');
 
 try {
     \$pdo = new PDO(

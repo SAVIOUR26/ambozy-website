@@ -1,7 +1,7 @@
 # Ambozy Graphics Solutions Ltd — Website Project
 
 **Client:** Ambozy Graphics Solutions Ltd  
-**Domain:** [ambozygraphics.shop](http://ambozygraphics.shop)  
+**Domain:** [ambozygraphics.com](http://ambozygraphics.com)  
 **Deployment:** FTP  
 **Stack:** PHP (landing) + PHP CMS (admin)  
 **Built by:** Thirdsan Enterprises / SEVIA
@@ -13,11 +13,11 @@
 ### Identity
 - **Full Name:** Ambozy Graphics Solutions Ltd
 - **Incorporated:** 2010 (Registered Company, Uganda)
-- **Location:** Plot 43 Nasser / Nkrumah Road, opposite Picfare, Kampala
+- **Location:** Plot 1314 Church Road, Buye, Ntinda, Kampala
 - **P.O. Box:** 74521 (profile cover) / 14521 (back page) — use **14521** (back page is more recent)
 - **Office:** +256-392839447
 - **Tel:** +256-782187799 / +256-702371230
-- **Email:** ambozygraphics@gmail.com | ambozygraphics@yahoo.com | info@ambozygroup
+- **Email:** info@ambozygraphics.com | ambozygraphics@yahoo.com | info@ambozygroup
 
 ### Brand Colors (official from logos.pdf)
 | Role | CMYK | RGB | HEX |
@@ -99,7 +99,7 @@ Ministry of Trade Industry & Co-operatives · Ministry of Water & Environment ·
 3. **Services** — Card grid of 10 service categories with icons/imagery
 4. **Clients** — Logo wall of notable clients
 5. **Gallery / Portfolio** — Sample work (use profile imagery)
-6. **Contact** — Address, phone, email, embedded map (Nasser/Nkrumah, Kampala), PHP contact form
+6. **Contact** — Address, phone, email, embedded map (Ntinda, Kampala), PHP contact form
 7. **Footer** — Brand strip, social links, copyright
 
 **Design Language:**
@@ -131,7 +131,7 @@ Ministry of Trade Industry & Co-operatives · Ministry of Water & Environment ·
 
 ### Phase 4 — FTP Deployment
 - Build production ZIP
-- FTP deploy to `ambozygraphics.shop`
+- FTP deploy to `ambozygraphics.com`
 - Test all PHP forms and DB connections on live server
 
 ---

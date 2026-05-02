@@ -80,7 +80,7 @@ VALUES (
   'admin',
   '$2y$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', -- admin123
   'Ambozy Admin',
-  'ambozygraphics@gmail.com'
+  'info@ambozygraphics.com'
 );
 
 -- ── Seed default services ────────────────────────────────────
@@ -100,8 +100,8 @@ INSERT IGNORE INTO `services` (`id`,`icon`,`title`,`items`,`sort_order`) VALUES
 INSERT IGNORE INTO `settings` (`key`,`value`) VALUES
 ('site_name',   'Ambozy Graphics Solutions Ltd'),
 ('site_phone',  '+256 782 187 799'),
-('site_email',  'ambozygraphics@gmail.com'),
-('site_address','Plot 43 Nasser/Nkrumah Road, opposite Picfare, Kampala'),
+('site_email',  'info@ambozygraphics.com'),
+('site_address','Plot 1314 Church Road, Buye, Ntinda, Kampala'),
 ('whatsapp',    '256782187799'),
 ('facebook',    ''),
 ('instagram',   ''),
