@@ -38,12 +38,31 @@ $values = [
     ['fa' => 'fa-people-group', 'name' => 'Team Work'],
 ];
 
-$clients = [
-    'Min. of Trade & Industry','Min. of Water & Environment','Inspectorate of Govt.',
-    'Uganda Investment Authority','ChildFund International','NCDC','Marie Stopes Uganda',
-    'AFENET','Finance Trust Bank','Kyambogo University','MSC','ERAM (U) Ltd',
-    'Semliki Dairy','Dooba Enterprises','Embassy of Eritrea','InterAid Uganda',
-    'LACCODEF','CEHURD','PACE','Private Sector Foundation UG',
+$client_logos = [
+    ['src' => 'assets/images/clients/client-1.jpg',  'alt' => 'Min. of Trade & Industry'],
+    ['src' => 'assets/images/clients/client-2.jpg',  'alt' => 'Min. of Water & Environment'],
+    ['src' => 'assets/images/clients/client-3.jpg',  'alt' => 'Inspectorate of Govt.'],
+    ['src' => 'assets/images/clients/client-4.jpg',  'alt' => 'Uganda Investment Authority'],
+    ['src' => 'assets/images/clients/client-5.jpg',  'alt' => 'ChildFund International'],
+    ['src' => 'assets/images/clients/client-6.jpg',  'alt' => 'NCDC'],
+    ['src' => 'assets/images/clients/client-8.jpg',  'alt' => 'Marie Stopes Uganda'],
+    ['src' => 'assets/images/clients/client-9.jpg',  'alt' => 'AFENET'],
+    ['src' => 'assets/images/clients/client-10.jpg', 'alt' => 'Finance Trust Bank'],
+    ['src' => 'assets/images/clients/client-11.jpg', 'alt' => 'Kyambogo University'],
+    ['src' => 'assets/images/clients/client-12.jpg', 'alt' => 'MSC'],
+    ['src' => 'assets/images/clients/client-13.jpg', 'alt' => 'ERAM (U) Ltd'],
+    ['src' => 'assets/images/clients/client-14.jpg', 'alt' => 'Semliki Dairy'],
+    ['src' => 'assets/images/clients/client-15.jpg', 'alt' => 'Dooba Enterprises'],
+    ['src' => 'assets/images/clients/client-16.jpg', 'alt' => 'Embassy of Eritrea'],
+    ['src' => 'assets/images/clients/client-17.jpg', 'alt' => 'InterAid Uganda'],
+    ['src' => 'assets/images/clients/client-18.jpg', 'alt' => 'LACCODEF'],
+    ['src' => 'assets/images/clients/client-19.jpg', 'alt' => 'CEHURD'],
+    ['src' => 'assets/images/clients/client-20.jpg', 'alt' => 'PACE'],
+    ['src' => 'assets/images/clients/client-21.jpg', 'alt' => 'Private Sector Foundation UG'],
+    ['src' => 'assets/images/clients/client-22.jpg', 'alt' => 'Marie Stopes Uganda'],
+    ['src' => 'assets/images/clients/client-23.jpg', 'alt' => 'BMCT'],
+    ['src' => 'assets/images/clients/client-24.jpg', 'alt' => 'Educate!'],
+    ['src' => 'assets/images/clients/client-25.jpg', 'alt' => 'Busia Area Communities Federation'],
 ];
 ?>
 <!DOCTYPE html>
@@ -307,13 +326,18 @@ $clients = [
     </div>
   </div>
 
-  <!-- Infinite scroll ticker -->
+  <!-- Infinite logo scroll ticker -->
   <div class="clients__track-wrap">
     <div class="clients__track">
       <?php
-        $all = array_merge($clients, $clients);
-        foreach ($all as $c): ?>
-      <div class="client-badge"><?= htmlspecialchars($c) ?></div>
+        // Duplicate for seamless infinite loop
+        $all_logos = array_merge($client_logos, $client_logos);
+        foreach ($all_logos as $logo): ?>
+      <div class="client-logo">
+        <img src="<?= htmlspecialchars($logo['src']) ?>"
+             alt="<?= htmlspecialchars($logo['alt']) ?>"
+             loading="lazy">
+      </div>
       <?php endforeach; ?>
     </div>
   </div>

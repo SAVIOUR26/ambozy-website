@@ -596,19 +596,26 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 .clients__track:hover { animation-play-state: paused; }
 @keyframes scroll-track { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-.client-badge {
-  display: flex; align-items: center; padding: 12px 22px;
-  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-  border-radius: 99px; white-space: nowrap;
-  font-family: var(--fd); font-weight: 700; font-size: 0.82rem;
-  letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim);
+/* Logo image cards in ticker */
+.client-logo {
+  display: flex; align-items: center; justify-content: center;
+  height: 80px; padding: 12px 24px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.25);
   transition: var(--ease); flex-shrink: 0;
+  overflow: hidden;
 }
-.client-badge:nth-child(5n+1):hover { color: var(--pink);   border-color: rgba(255,45,120,0.5);  background: rgba(255,45,120,0.06); }
-.client-badge:nth-child(5n+2):hover { color: var(--cyan);   border-color: rgba(0,212,255,0.5);   background: rgba(0,212,255,0.06); }
-.client-badge:nth-child(5n+3):hover { color: var(--amber);  border-color: rgba(255,184,0,0.5);   background: rgba(255,184,0,0.06); }
-.client-badge:nth-child(5n+4):hover { color: var(--violet); border-color: rgba(139,92,246,0.5);  background: rgba(139,92,246,0.06); }
-.client-badge:nth-child(5n+5):hover { color: var(--teal);   border-color: rgba(6,214,160,0.5);   background: rgba(6,214,160,0.06); }
+.client-logo img {
+  height: 52px; width: auto; max-width: 150px;
+  object-fit: contain; display: block;
+  transition: transform var(--ease);
+}
+.client-logo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.4);
+}
+.client-logo:hover img { transform: scale(1.06); }
 
 .clients__count-row {
   display: grid; grid-template-columns: repeat(3, 1fr);
