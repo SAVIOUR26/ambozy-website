@@ -39,30 +39,30 @@ $values = [
 ];
 
 $client_logos = [
-    ['src' => 'assets/images/clients/client-1.jpg',  'alt' => 'Min. of Trade & Industry'],
-    ['src' => 'assets/images/clients/client-2.jpg',  'alt' => 'Min. of Water & Environment'],
-    ['src' => 'assets/images/clients/client-3.jpg',  'alt' => 'Inspectorate of Govt.'],
-    ['src' => 'assets/images/clients/client-4.jpg',  'alt' => 'Uganda Investment Authority'],
-    ['src' => 'assets/images/clients/client-5.jpg',  'alt' => 'ChildFund International'],
-    ['src' => 'assets/images/clients/client-6.jpg',  'alt' => 'NCDC'],
-    ['src' => 'assets/images/clients/client-8.jpg',  'alt' => 'Marie Stopes Uganda'],
-    ['src' => 'assets/images/clients/client-9.jpg',  'alt' => 'AFENET'],
-    ['src' => 'assets/images/clients/client-10.jpg', 'alt' => 'Finance Trust Bank'],
-    ['src' => 'assets/images/clients/client-11.jpg', 'alt' => 'Kyambogo University'],
-    ['src' => 'assets/images/clients/client-12.jpg', 'alt' => 'MSC'],
-    ['src' => 'assets/images/clients/client-13.jpg', 'alt' => 'ERAM (U) Ltd'],
-    ['src' => 'assets/images/clients/client-14.jpg', 'alt' => 'Semliki Dairy'],
-    ['src' => 'assets/images/clients/client-15.jpg', 'alt' => 'Dooba Enterprises'],
-    ['src' => 'assets/images/clients/client-16.jpg', 'alt' => 'Embassy of Eritrea'],
-    ['src' => 'assets/images/clients/client-17.jpg', 'alt' => 'InterAid Uganda'],
-    ['src' => 'assets/images/clients/client-18.jpg', 'alt' => 'LACCODEF'],
-    ['src' => 'assets/images/clients/client-19.jpg', 'alt' => 'CEHURD'],
-    ['src' => 'assets/images/clients/client-20.jpg', 'alt' => 'PACE'],
-    ['src' => 'assets/images/clients/client-21.jpg', 'alt' => 'Private Sector Foundation UG'],
-    ['src' => 'assets/images/clients/client-22.jpg', 'alt' => 'Marie Stopes Uganda'],
-    ['src' => 'assets/images/clients/client-23.jpg', 'alt' => 'BMCT'],
-    ['src' => 'assets/images/clients/client-24.jpg', 'alt' => 'Educate!'],
-    ['src' => 'assets/images/clients/client-25.jpg', 'alt' => 'Busia Area Communities Federation'],
+    ['img' => 'assets/images/clients/client-1.jpeg',  'name' => 'Min. of Trade & Industry'],
+    ['img' => 'assets/images/clients/client-2.jpeg',  'name' => 'Min. of Water & Environment'],
+    ['img' => 'assets/images/clients/client-3.jpeg',  'name' => 'Inspectorate of Govt.'],
+    ['img' => 'assets/images/clients/client-4.jpeg',  'name' => 'Uganda Investment Authority'],
+    ['img' => 'assets/images/clients/client-5.jpeg',  'name' => 'ChildFund International'],
+    ['img' => 'assets/images/clients/client-6.jpeg',  'name' => 'NCDC'],
+    ['img' => 'assets/images/clients/client-8.jpeg',  'name' => 'Marie Stopes Uganda'],
+    ['img' => 'assets/images/clients/client-9.jpeg',  'name' => 'AFENET'],
+    ['img' => 'assets/images/clients/client-10.jpeg', 'name' => 'Finance Trust Bank'],
+    ['img' => 'assets/images/clients/client-11.jpeg', 'name' => 'Kyambogo University'],
+    ['img' => 'assets/images/clients/client-12.jpeg', 'name' => 'MSC'],
+    ['img' => 'assets/images/clients/client-13.jpeg', 'name' => 'ERAM (U) Ltd'],
+    ['img' => 'assets/images/clients/client-14.jpeg', 'name' => 'Semliki Dairy'],
+    ['img' => 'assets/images/clients/client-15.jpeg', 'name' => 'Dooba Enterprises'],
+    ['img' => 'assets/images/clients/client-16.jpeg', 'name' => 'Embassy of Eritrea'],
+    ['img' => 'assets/images/clients/client-17.jpeg', 'name' => 'InterAid Uganda'],
+    ['img' => 'assets/images/clients/client-18.jpeg', 'name' => 'LACCODEF'],
+    ['img' => 'assets/images/clients/client-19.jpeg', 'name' => 'CEHURD'],
+    ['img' => 'assets/images/clients/client-20.jpeg', 'name' => 'PACE'],
+    ['img' => 'assets/images/clients/client-21.jpeg', 'name' => 'Private Sector Foundation UG'],
+    ['img' => 'assets/images/clients/client-22.jpeg', 'name' => 'Partner Organisation'],
+    ['img' => 'assets/images/clients/client-23.jpeg', 'name' => 'Partner Organisation'],
+    ['img' => 'assets/images/clients/client-24.jpeg', 'name' => 'Partner Organisation'],
+    ['img' => 'assets/images/clients/client-25.jpeg', 'name' => 'Partner Organisation'],
 ];
 ?>
 <!DOCTYPE html>
@@ -326,19 +326,33 @@ $client_logos = [
     </div>
   </div>
 
-  <!-- Infinite logo scroll ticker -->
-  <div class="clients__track-wrap">
-    <div class="clients__track">
-      <?php
-        // Duplicate for seamless infinite loop
-        $all_logos = array_merge($client_logos, $client_logos);
-        foreach ($all_logos as $logo): ?>
-      <div class="client-logo">
-        <img src="<?= htmlspecialchars($logo['src']) ?>"
-             alt="<?= htmlspecialchars($logo['alt']) ?>"
-             loading="lazy">
+  <!-- Dual-row logo marquee -->
+  <div class="clients__marquee-wrap">
+    <!-- Row 1 — scrolls left -->
+    <div class="clients__row">
+      <div class="clients__track clients__track--left">
+        <?php
+          $row1 = array_slice($client_logos, 0, 12);
+          $row1 = array_merge($row1, $row1);
+          foreach ($row1 as $c): ?>
+        <div class="client-logo-card" title="<?= htmlspecialchars($c['name']) ?>">
+          <img src="<?= htmlspecialchars($c['img']) ?>" alt="<?= htmlspecialchars($c['name']) ?>" loading="lazy">
+        </div>
+        <?php endforeach; ?>
       </div>
-      <?php endforeach; ?>
+    </div>
+    <!-- Row 2 — scrolls right -->
+    <div class="clients__row">
+      <div class="clients__track clients__track--right">
+        <?php
+          $row2 = array_slice($client_logos, 12);
+          $row2 = array_merge($row2, $row2);
+          foreach ($row2 as $c): ?>
+        <div class="client-logo-card" title="<?= htmlspecialchars($c['name']) ?>">
+          <img src="<?= htmlspecialchars($c['img']) ?>" alt="<?= htmlspecialchars($c['name']) ?>" loading="lazy">
+        </div>
+        <?php endforeach; ?>
+      </div>
     </div>
   </div>
 
