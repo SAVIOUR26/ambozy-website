@@ -132,6 +132,93 @@ function quote_badge(string $status): string
 }
 
 /**
+ * Return a Tailwind badge class for a purchase/supplier payment status.
+ */
+function purchase_badge(string $status): string
+{
+    return match ($status) {
+        'pending'   => 'bg-yellow-100 text-yellow-700',
+        'received'  => 'bg-blue-100 text-blue-700',
+        'partial'   => 'bg-orange-100 text-orange-700',
+        'paid'      => 'bg-green-100 text-green-700',
+        'cancelled' => 'bg-gray-100 text-gray-400',
+        default     => 'bg-gray-100 text-gray-600',
+    };
+}
+
+/**
+ * Return a Tailwind badge class for a loan status.
+ */
+function loan_badge(string $status): string
+{
+    return match ($status) {
+        'active'      => 'bg-blue-100 text-blue-700',
+        'fully_paid'  => 'bg-green-100 text-green-700',
+        'defaulted'   => 'bg-red-100 text-red-700',
+        'written_off' => 'bg-gray-100 text-gray-400',
+        default       => 'bg-gray-100 text-gray-600',
+    };
+}
+
+/**
+ * Return a Tailwind badge class for a payroll status.
+ */
+function payroll_badge(string $status): string
+{
+    return match ($status) {
+        'draft'    => 'bg-gray-100 text-gray-600',
+        'approved' => 'bg-blue-100 text-blue-700',
+        'paid'     => 'bg-green-100 text-green-700',
+        default    => 'bg-gray-100 text-gray-600',
+    };
+}
+
+/**
+ * Return a Tailwind badge class for a statutory obligation status.
+ */
+function statutory_badge(string $status): string
+{
+    return match ($status) {
+        'pending' => 'bg-yellow-100 text-yellow-700',
+        'paid'    => 'bg-green-100 text-green-700',
+        'partial' => 'bg-orange-100 text-orange-700',
+        'overdue' => 'bg-red-100 text-red-700',
+        default   => 'bg-gray-100 text-gray-600',
+    };
+}
+
+/**
+ * Return a Tailwind badge class for an employee status.
+ */
+function employee_badge(string $status): string
+{
+    return match ($status) {
+        'active'     => 'bg-green-100 text-green-700',
+        'terminated' => 'bg-red-100 text-red-700',
+        'on_leave'   => 'bg-yellow-100 text-yellow-700',
+        default      => 'bg-gray-100 text-gray-600',
+    };
+}
+
+/**
+ * Calculate Uganda PAYE (monthly) on a given gross salary (UGX).
+ * Rates per URA individual income tax (2024/2025):
+ *   0 – 235,000          : 0%
+ *   235,001 – 335,000    : 10% on excess of 235,000
+ *   335,001 – 410,000    : 10,000 + 20% on excess of 335,000
+ *   410,001 – 10,000,000 : 25,000 + 30% on excess of 410,000
+ *   Over 10,000,000      : +10% additional on excess (upper band)
+ */
+function calculate_paye(float $gross): float
+{
+    if ($gross <= 235000) return 0.0;
+    if ($gross <= 335000) return ($gross - 235000) * 0.10;
+    if ($gross <= 410000) return 10000 + ($gross - 335000) * 0.20;
+    if ($gross <= 10000000) return 25000 + ($gross - 410000) * 0.30;
+    return 25000 + (10000000 - 410000) * 0.30 + ($gross - 10000000) * 0.40;
+}
+
+/**
  * Sanitise a plain text string from POST/GET input.
  */
 function clean(string $val): string
