@@ -95,11 +95,7 @@ $client_logos = [
 ============================================================ -->
 <nav class="nav" id="nav">
   <a href="#" class="nav__logo">
-    <div class="logo-badge"><i class="fa-solid fa-palette"></i></div>
-    <div class="logo-wordmark">
-      <span class="logo-wordmark__main">Ambozy</span>
-      <span class="logo-wordmark__sub">Graphics Solutions Ltd</span>
-    </div>
+    <img src="assets/images/logo_main.png" alt="Ambozy Graphics Solutions Ltd" class="nav__logo-img">
   </a>
 
   <ul class="nav__links">

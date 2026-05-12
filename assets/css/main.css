@@ -137,6 +137,7 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 
 /* ── LOGO ───────────────────────────────────────────────── */
 .nav__logo { display: flex; align-items: center; gap: 14px; }
+.nav__logo-img { height: 50px; width: auto; display: block; }
 
 .logo-badge {
   width: 52px; height: 52px;
@@ -227,7 +228,8 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 .hero-slides { position: absolute; inset: 0; z-index: 0; }
 .hero-slide {
   position: absolute; inset: 0;
-  background-size: cover; background-position: center center;
+  background-size: contain; background-position: center center;
+  background-repeat: no-repeat;
   opacity: 0;
   animation: hero-slide 40s infinite both;
 }
@@ -435,14 +437,14 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 /* hide dark-bg blobs — they're invisible on white anyway */
 .about .blobs { display: none; }
 
-/* text colour overrides for white background */
+/* text colour overrides for white background — use double-class selectors for specificity */
 .about .section-title              { color: #0f172a; }
 .about .section-sub                { color: #475569; }
-.about__vm-card                    { background: #f8fafc; border-color: #e2e8f0; }
-.about__vm-text                    { color: #475569; }
-.about__values-title               { color: #0f172a; }
-.about__value                      { background: #f8fafc; border-color: #e2e8f0; }
-.about__value-name                 { color: #334155; }
+.about .about__vm-card             { background: #f8fafc; border-color: #e2e8f0; }
+.about .about__vm-text             { color: #475569; }
+.about .about__values-title        { color: #0f172a; }
+.about .about__value               { background: #f8fafc; border-color: #e2e8f0; }
+.about .about__value-name          { color: #334155; }
 .about .tag--fire                  { background: rgba(255,45,120,.08); }
 
 .about__grid {
