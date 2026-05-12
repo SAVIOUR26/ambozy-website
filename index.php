@@ -126,18 +126,31 @@ $client_logos = [
      HERO
 ============================================================ -->
 <section class="hero" id="home">
-  <!-- Background photo slideshow -->
+  <!-- Background horizontal scrolling photo strip -->
   <div class="hero-slides">
-    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
-    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-2.jpeg')"></div>
-    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
-    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-4.jpeg')"></div>
-    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-5.jpeg')"></div>
-    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-6.jpeg')"></div>
-    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-7.jpeg')"></div>
-    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-8.jpeg')"></div>
-    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-9.jpeg')"></div>
-    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-10.jpeg')"></div>
+    <div class="hero-slides-track">
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-2.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-4.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-5.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-6.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-7.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-8.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-9.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-10.jpeg')"></div>
+      <!-- Duplicate set — enables seamless infinite loop -->
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-2.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-4.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-5.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-6.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-7.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-8.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-9.jpeg')"></div>
+      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-10.jpeg')"></div>
+    </div>
   </div>
 
   <div class="hero__content">

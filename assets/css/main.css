@@ -224,31 +224,31 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
   background: rgba(6,7,26,0.58); z-index: 1; pointer-events: none;
 }
 
-/* ── HERO BACKGROUND SLIDESHOW ──────────────────────────── */
-.hero-slides { position: absolute; inset: 0; z-index: 0; }
-.hero-slide {
-  position: absolute; inset: 0;
-  background-size: contain; background-position: center center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  animation: hero-slide 40s infinite both;
+/* ── HERO BACKGROUND HORIZONTAL SCROLL ──────────────────── */
+.hero-slides {
+  position: absolute; inset: 0; z-index: 0;
+  overflow: hidden;
+  display: flex; align-items: center; /* vertically centres the strip */
 }
-.hero-slide:nth-child(1)  { animation-delay: 0s;  }
-.hero-slide:nth-child(2)  { animation-delay: 4s;  }
-.hero-slide:nth-child(3)  { animation-delay: 8s;  }
-.hero-slide:nth-child(4)  { animation-delay: 12s; }
-.hero-slide:nth-child(5)  { animation-delay: 16s; }
-.hero-slide:nth-child(6)  { animation-delay: 20s; }
-.hero-slide:nth-child(7)  { animation-delay: 24s; }
-.hero-slide:nth-child(8)  { animation-delay: 28s; }
-.hero-slide:nth-child(9)  { animation-delay: 32s; }
-.hero-slide:nth-child(10) { animation-delay: 36s; }
-@keyframes hero-slide {
-  0%    { opacity: 0; }
-  2.5%  { opacity: 1; }
-  10%   { opacity: 1; }
-  12.5% { opacity: 0; }
-  100%  { opacity: 0; }
+.hero-slides-track {
+  display: flex;
+  gap: 18px;
+  padding: 0 9px;
+  animation: hero-hscroll 60s linear infinite;
+  will-change: transform;
+}
+.hero-slide {
+  height: 58vh;               /* reduced — doesn't reach the nav */
+  width: calc(58vh * 1.45);   /* ~16:10 landscape ratio */
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  border-radius: 22px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+}
+@keyframes hero-hscroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* scroll one full set then loop */
 }
 
 .hero__content {
