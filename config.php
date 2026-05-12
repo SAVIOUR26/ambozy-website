@@ -17,8 +17,8 @@ if (file_exists(__DIR__ . '/config.local.php')) {
 define('SITE_NAME',  'Ambozy Graphics Solutions Ltd');
 define('SITE_URL',   'https://ambozygraphics.com');
 define('SITE_EMAIL', 'info@ambozygraphics.com');
-define('SITE_PHONE', '+256 782 187 799');
-define('WHATSAPP_NO','256782187799');   // digits only, no +
+define('SITE_PHONE', '+256 702 371 230');
+define('WHATSAPP_NO','256702371230');   // digits only, no +
 
 // ── Database ────────────────────────────────────────────────────────
 define('DB_HOST',    'localhost');

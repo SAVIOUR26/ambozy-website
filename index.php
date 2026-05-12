@@ -7,8 +7,8 @@
 $site_name  = 'Ambozy Graphics Solutions Ltd';
 $site_desc  = 'Printing · Designing · Contractors · General Supplies — Kampala, Uganda';
 $site_url   = 'https://ambozygraphics.com';
-$whatsapp   = '256782187799'; // no +, no spaces
-$phone_1    = '+256 782 187 799';
+$whatsapp   = '256702371230'; // no +, no spaces
+$phone_1    = '+256 702 371 230';
 $phone_2    = '+256 702 371 230';
 $phone_off  = '+256 392 839 447';
 $email_main = 'info@ambozygraphics.com';
@@ -130,12 +130,18 @@ $client_logos = [
      HERO
 ============================================================ -->
 <section class="hero" id="home">
-  <!-- Paint blobs -->
-  <div class="blobs">
-    <div class="blob blob--pink"   style="width:650px;height:650px;top:-200px;left:-180px"></div>
-    <div class="blob blob--cyan"   style="width:550px;height:550px;top:-80px;right:-180px"></div>
-    <div class="blob blob--orange" style="width:420px;height:420px;bottom:-80px;right:18%"></div>
-    <div class="blob blob--violet" style="width:280px;height:280px;bottom:15%;left:10%;opacity:0.08"></div>
+  <!-- Background photo slideshow -->
+  <div class="hero-slides">
+    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-2.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-4.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-5.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-6.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-7.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-8.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-9.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-10.jpeg')"></div>
   </div>
 
   <div class="hero__content">
