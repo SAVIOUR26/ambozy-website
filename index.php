@@ -169,6 +169,14 @@ $client_logos = [
       <p class="hero__body">
         From bold branded merchandise to stunning outdoor signage — Ambozy Graphics Solutions brings your brand to life with premium printing, creative design, and end-to-end supply.
       </p>
+
+      <!-- Mobile-only photo thumbnails -->
+      <div class="hero__mobile-photos">
+        <div style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
+        <div style="background-image:url('/assets/images/hero/hero-2.jpeg')"></div>
+        <div style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
+      </div>
+
       <div class="hero__actions">
         <a href="#contact" class="btn btn-primary">
           <i class="fa-solid fa-comment-dots"></i> Get a Quote
@@ -182,8 +190,8 @@ $client_logos = [
         <div class="hero__strip-items">
           <span class="hero__strip-item">Printing</span>
           <span class="hero__strip-item">Designing</span>
-          <span class="hero__strip-item">Branding</span>
-          <span class="hero__strip-item">Supply</span>
+          <span class="hero__strip-item">Contractors</span>
+          <span class="hero__strip-item">General Supplies</span>
         </div>
       </div>
     </div>
