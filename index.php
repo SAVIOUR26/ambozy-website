@@ -170,11 +170,23 @@ $client_logos = [
         From bold branded merchandise to stunning outdoor signage — Ambozy Graphics Solutions brings your brand to life with premium printing, creative design, and end-to-end supply.
       </p>
 
-      <!-- Mobile-only photo thumbnails -->
+      <!-- Mobile-only auto-scrolling photo strip -->
       <div class="hero__mobile-photos">
-        <div style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
-        <div style="background-image:url('/assets/images/hero/hero-2.jpeg')"></div>
-        <div style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
+        <div class="hero__mobile-track">
+          <div style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
+          <div style="background-image:url('/assets/images/hero/hero-2.jpeg')"></div>
+          <div style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
+          <div style="background-image:url('/assets/images/hero/hero-4.jpeg')"></div>
+          <div style="background-image:url('/assets/images/hero/hero-5.jpeg')"></div>
+          <div style="background-image:url('/assets/images/hero/hero-6.jpeg')"></div>
+          <!-- duplicate for seamless loop -->
+          <div style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
+          <div style="background-image:url('/assets/images/hero/hero-2.jpeg')"></div>
+          <div style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
+          <div style="background-image:url('/assets/images/hero/hero-4.jpeg')"></div>
+          <div style="background-image:url('/assets/images/hero/hero-5.jpeg')"></div>
+          <div style="background-image:url('/assets/images/hero/hero-6.jpeg')"></div>
+        </div>
       </div>
 
       <div class="hero__actions">
