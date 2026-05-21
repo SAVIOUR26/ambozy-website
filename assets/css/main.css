@@ -224,13 +224,14 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 /* No dark overlay — light theme */
 .hero::before { display: none; }
 
-/* ── HERO PHOTO STRIP (visible cards at bottom) ──────────── */
+/* ── HERO PHOTO STRIP (scrolls in background, behind content) ── */
 .hero-slides {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  top: 58%; left: 0; right: 0;
   height: 220px; z-index: 1;
   overflow: hidden;
   display: flex; align-items: center;
+  opacity: 0.55;
   mask-image: linear-gradient(to right, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
 }
@@ -258,7 +259,7 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 .hero__content {
   position: relative; z-index: 2;
   max-width: 1200px; margin: 0 auto;
-  padding: 120px 24px 260px;
+  padding: 120px 24px 80px;
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 60px; align-items: center; width: 100%;
 }
