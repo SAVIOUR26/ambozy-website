@@ -12,7 +12,7 @@ require_login();
 
 $quote = null; $items = [];
 if ($pdo) {
-    $s = $pdo->prepare("SELECT q.*, c.name client_name, c.email client_email, c.phone client_phone, c.company client_company, c.address client_address, c.city client_city FROM quotations q JOIN clients c ON q.client_id=c.id WHERE q.id=?");
+    $s = $pdo->prepare("SELECT q.*, c.name client_name, c.email client_email, c.phone client_phone, c.company client_company, c.address client_address, c.city client_city, a.full_name prepared_by, a.signature_path FROM quotations q JOIN clients c ON q.client_id=c.id LEFT JOIN admin_users a ON q.created_by=a.id WHERE q.id=?");
     $s->execute([$id]); $quote = $s->fetch();
     if ($quote) { $si = $pdo->prepare("SELECT * FROM quotation_items WHERE quotation_id=? ORDER BY sort_order"); $si->execute([$id]); $items=$si->fetchAll(); }
 }
@@ -133,6 +133,15 @@ $phone_2    = '+256 782 187 799';
     .notes-section{background:#f8fafc;border-radius:8px;padding:16px;margin-bottom:20px;font-size:12px;color:#475569;line-height:1.7}
     .notes-section h3{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:6px}
 
+    /* ── Signature block ── */
+    .sig-section{display:flex;justify-content:space-between;gap:32px;margin-top:28px;margin-bottom:24px}
+    .sig-box{flex:1;max-width:260px}
+    .sig-box .sig-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:8px}
+    .sig-box .sig-image-wrap{height:64px;display:flex;align-items:flex-end;padding-bottom:6px;border-bottom:1px solid #cbd5e1}
+    .sig-box .sig-image-wrap img{max-height:56px;max-width:180px;object-fit:contain}
+    .sig-box .sig-name{font-size:11px;color:#334155;font-weight:600;margin-top:5px}
+    .sig-box .sig-org{font-size:10.5px;color:#94a3b8}
+    .sig-box .sig-empty{height:64px;border-bottom:1px solid #cbd5e1}
     /* ── Footer ── */
     .footer-strip{border-top:1px solid #e2e8f0;padding-top:14px;display:flex;justify-content:space-between;font-size:10.5px;color:#94a3b8}
 
@@ -261,6 +270,35 @@ $phone_2    = '+256 782 187 799';
       <?php endif; ?>
     </div>
   <?php endif; ?>
+
+  <!-- ── Signature block ── -->
+  <div class="sig-section">
+    <!-- Client acceptance -->
+    <div class="sig-box">
+      <div class="sig-label">Client Acceptance</div>
+      <div class="sig-empty"></div>
+      <div class="sig-name" style="color:#94a3b8"><?= htmlspecialchars($quote['client_name']) ?></div>
+      <div class="sig-org" style="font-size:10px;margin-top:2px">Signature &amp; Date</div>
+    </div>
+
+    <!-- Prepared by -->
+    <div class="sig-box" style="text-align:right">
+      <div class="sig-label">Prepared &amp; Authorized by</div>
+      <div class="sig-image-wrap" style="justify-content:flex-end">
+        <?php
+          $sig = $quote['signature_path'] ?? null;
+          $sig_file = $sig ? __DIR__ . '/../../' . $sig : null;
+          if ($sig_file && file_exists($sig_file)):
+        ?>
+          <img src="/<?= htmlspecialchars($sig) ?>" alt="Signature">
+        <?php else: ?>
+          <span style="font-size:10px;color:#e2e8f0;align-self:center">No signature uploaded</span>
+        <?php endif; ?>
+      </div>
+      <div class="sig-name"><?= htmlspecialchars($quote['prepared_by'] ?: 'Ambozy Team') ?></div>
+      <div class="sig-org"><?= SITE_NAME ?></div>
+    </div>
+  </div>
 
   <!-- ── Footer ── -->
   <div class="footer-strip">

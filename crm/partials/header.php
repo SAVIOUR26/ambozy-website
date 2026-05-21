@@ -165,7 +165,11 @@ $_icons = [
         </div>
         <div class="flex-1 min-w-0">
           <p class="text-white text-sm font-medium truncate"><?= htmlspecialchars($_admin_name) ?></p>
-          <a href="/crm/logout" class="text-slate-400 hover:text-red-400 text-xs transition-colors">Sign out</a>
+          <div class="flex items-center gap-2">
+            <a href="/crm/profile" class="text-slate-400 hover:text-amber-400 text-xs transition-colors">My Profile</a>
+            <span class="text-slate-600 text-xs">·</span>
+            <a href="/crm/logout" class="text-slate-400 hover:text-red-400 text-xs transition-colors">Sign out</a>
+          </div>
         </div>
         <a href="/" target="_blank" title="View website"
            class="p-1.5 text-slate-500 hover:text-white rounded transition-colors shrink-0">

@@ -7,7 +7,7 @@ require_login();
 
 $invoice=null;$items=[];$payments=[];
 if($pdo){
-    $s=$pdo->prepare("SELECT i.*,c.name client_name,c.email client_email,c.phone client_phone,c.company client_company,c.address client_address,c.city client_city FROM invoices i JOIN clients c ON i.client_id=c.id WHERE i.id=?");
+    $s=$pdo->prepare("SELECT i.*,c.name client_name,c.email client_email,c.phone client_phone,c.company client_company,c.address client_address,c.city client_city,a.full_name prepared_by,a.signature_path FROM invoices i JOIN clients c ON i.client_id=c.id LEFT JOIN admin_users a ON i.created_by=a.id WHERE i.id=?");
     $s->execute([$id]);$invoice=$s->fetch();
     if($invoice){$si=$pdo->prepare("SELECT * FROM invoice_items WHERE invoice_id=? ORDER BY sort_order");$si->execute([$id]);$items=$si->fetchAll();$sp=$pdo->prepare("SELECT * FROM payments WHERE invoice_id=? ORDER BY payment_date");$sp->execute([$id]);$payments=$sp->fetchAll();}
 }
@@ -59,6 +59,14 @@ $tax_amt=round($tax_base*$invoice['tax_percent']/100,0);
     .pay-row:last-child{border-bottom:none}
     .notes-section{background:#f8fafc;border-radius:8px;padding:16px;margin-bottom:20px;font-size:12px;color:#475569}
     .notes-section h3{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:6px}
+    .sig-section{display:flex;justify-content:space-between;gap:32px;margin-top:28px;margin-bottom:24px}
+    .sig-box{flex:1;max-width:260px}
+    .sig-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:8px}
+    .sig-image-wrap{height:64px;display:flex;align-items:flex-end;padding-bottom:6px;border-bottom:1px solid #cbd5e1}
+    .sig-image-wrap img{max-height:56px;max-width:180px;object-fit:contain}
+    .sig-name{font-size:11px;color:#334155;font-weight:600;margin-top:5px}
+    .sig-org{font-size:10.5px;color:#94a3b8}
+    .sig-empty{height:64px;border-bottom:1px solid #cbd5e1}
     .footer-strip{border-top:1px solid #e2e8f0;padding-top:16px;display:flex;justify-content:space-between;font-size:11px;color:#94a3b8}
     .print-btn{position:fixed;top:16px;right:16px;background:#f59e0b;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}
     @media print{.print-btn{display:none}body{padding:20px}}
@@ -130,6 +138,32 @@ $tax_amt=round($tax_base*$invoice['tax_percent']/100,0);
       <?php if($invoice['terms']): ?><div class="notes-section"><h3>Terms</h3><?=nl2br(htmlspecialchars($invoice['terms']))?></div><?php endif;?>
     </div>
   <?php endif;?>
+
+  <!-- ── Signature block ── -->
+  <div class="sig-section">
+    <div class="sig-box">
+      <div class="sig-label">Received by</div>
+      <div class="sig-empty"></div>
+      <div class="sig-name" style="color:#94a3b8"><?=htmlspecialchars($invoice['client_name'])?></div>
+      <div class="sig-org" style="font-size:10px;margin-top:2px">Signature &amp; Date</div>
+    </div>
+    <div class="sig-box" style="text-align:right">
+      <div class="sig-label">Issued by</div>
+      <div class="sig-image-wrap" style="justify-content:flex-end">
+        <?php
+          $sig = $invoice['signature_path'] ?? null;
+          $sig_file = $sig ? __DIR__ . '/../../' . $sig : null;
+          if ($sig_file && file_exists($sig_file)):
+        ?>
+          <img src="/<?=htmlspecialchars($sig)?>" alt="Signature">
+        <?php else: ?>
+          <span style="font-size:10px;color:#e2e8f0;align-self:center">No signature uploaded</span>
+        <?php endif; ?>
+      </div>
+      <div class="sig-name"><?=htmlspecialchars($invoice['prepared_by'] ?: 'Ambozy Team')?></div>
+      <div class="sig-org"><?=SITE_NAME?></div>
+    </div>
+  </div>
 
   <div class="footer-strip">
     <span><?=SITE_NAME?> | Plot 1314 Church Road, Buye, Ntinda, Kampala</span>

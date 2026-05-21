@@ -31,3 +31,7 @@ public/uploads/*
 # Logs
 *.log
 error_log
+
+# Allow signatures .htaccess
+!public/uploads/signatures/
+!public/uploads/signatures/.htaccess
