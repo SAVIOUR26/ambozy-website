@@ -74,11 +74,11 @@ CREATE TABLE IF NOT EXISTS `settings` (
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ── Seed default admin (password: admin123 — CHANGE IMMEDIATELY) ──
+-- ── Seed default admin (password: Admin@2026 — CHANGE IMMEDIATELY) ──
 INSERT IGNORE INTO `admin_users` (`username`, `password_hash`, `full_name`, `email`)
 VALUES (
   'admin',
-  '$2y$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', -- admin123
+  '$2y$12$HGBTk1rluBn9bZu/ox2BUOe8W299lkprEWi3nti5I/M9MI2uwHqaK', -- Admin@2026
   'Ambozy Admin',
   'info@ambozygraphics.com'
 );
