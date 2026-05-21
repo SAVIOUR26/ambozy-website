@@ -280,7 +280,10 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
   line-height: 0.95; text-transform: uppercase; letter-spacing: -0.02em;
 }
 .hero__title .line-1 { background: var(--gfire); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.hero__title .line-2 { color: #ffffff; -webkit-text-fill-color: #ffffff; }
+.hero__title .line-2 {
+  color: #ffffff; -webkit-text-fill-color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.45), 0 0 32px rgba(0,0,0,0.25);
+}
 .hero__title .line-3 { background: none; -webkit-background-clip: unset; background-clip: unset; color: #1B2A6B; -webkit-text-fill-color: #1B2A6B; }
 
 .hero__body {
@@ -960,7 +963,7 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
   .hero-slides { display: none; }
 
   .hero__content {
-    padding: 96px 20px 0;
+    padding: 96px 20px 40px;
     gap: 0;
   }
 
@@ -968,6 +971,13 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 
   /* Body text */
   .hero__body { margin: 16px 0 0; }
+
+  /* Keep CTA buttons side by side */
+  .hero__actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
 
   /* Mobile photo scroll strip */
   .hero__mobile-photos {
