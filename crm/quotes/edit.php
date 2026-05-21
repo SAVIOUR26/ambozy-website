@@ -120,7 +120,7 @@ $prefill_items = json_encode(array_map(fn($it) => [
     <p class="font-bold text-amber-800"><?= fmt_money($quote['total']) ?></p>
   </div>
 
-  <form method="POST" x-data="quoteBuilder()" x-init="init()">
+  <form method="POST" x-data="quoteBuilder()">
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
 

@@ -134,14 +134,14 @@ $phone_2    = '+256 782 187 799';
     .notes-section h3{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:6px}
 
     /* ── Signature block ── */
-    .sig-section{display:flex;justify-content:space-between;gap:32px;margin-top:28px;margin-bottom:24px}
-    .sig-box{flex:1;max-width:260px}
-    .sig-box .sig-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:8px}
-    .sig-box .sig-image-wrap{height:64px;display:flex;align-items:flex-end;padding-bottom:6px;border-bottom:1px solid #cbd5e1}
-    .sig-box .sig-image-wrap img{max-height:56px;max-width:180px;object-fit:contain}
-    .sig-box .sig-name{font-size:11px;color:#334155;font-weight:600;margin-top:5px}
-    .sig-box .sig-org{font-size:10.5px;color:#94a3b8}
-    .sig-box .sig-empty{height:64px;border-bottom:1px solid #cbd5e1}
+    .sig-section{display:flex;justify-content:space-between;gap:48px;margin-top:32px;margin-bottom:24px;padding-top:20px;border-top:1px solid #e2e8f0}
+    .sig-box{flex:1}
+    .sig-box .sig-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:10px}
+    .sig-box .sig-area{height:72px;border:1.5px dashed #cbd5e1;border-radius:6px;background:#f8fafc;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+    .sig-box .sig-area img{max-height:60px;max-width:200px;object-fit:contain}
+    .sig-box .sig-area .sig-placeholder{font-size:10px;color:#cbd5e1;letter-spacing:.04em}
+    .sig-box .sig-name{font-size:12px;color:#334155;font-weight:600}
+    .sig-box .sig-sub{font-size:10.5px;color:#94a3b8;margin-top:2px}
     /* ── Footer ── */
     .footer-strip{border-top:1px solid #e2e8f0;padding-top:14px;display:flex;justify-content:space-between;font-size:10.5px;color:#94a3b8}
 
@@ -161,7 +161,7 @@ $phone_2    = '+256 782 187 799';
       <img src="/assets/images/logo_main.png" alt="Ambozy Graphics Solutions Ltd">
       <div>
         <div class="company-name"><?= SITE_NAME ?></div>
-        <div class="company-sub">Print · Brand · Deliver · Est. 2010</div>
+        <div class="company-sub">Print · Brand · Deliver</div>
         <div class="company-sub" style="margin-top:4px;font-size:10px;color:#94a3b8">Plot 1314 Church Road, Buye, Ntinda, Kampala</div>
       </div>
     </div>
@@ -182,11 +182,6 @@ $phone_2    = '+256 782 187 799';
       <h1>QUOTATION</h1>
       <div class="doc-no"><?= htmlspecialchars($quote['quote_number']) ?></div>
       <div class="status-badge"><?= strtoupper($quote['status']) ?></div>
-    </div>
-    <div class="title-bar-contacts">
-      <span><span class="icon-email"></span> <?= SITE_EMAIL ?></span>
-      <span><span class="icon-phone"></span> <?= $phone_2 ?></span>
-      <span><span class="icon-wa">WA</span> <?= $wa_display ?></span>
     </div>
   </div>
 
@@ -276,15 +271,17 @@ $phone_2    = '+256 782 187 799';
     <!-- Client acceptance -->
     <div class="sig-box">
       <div class="sig-label">Client Acceptance</div>
-      <div class="sig-empty"></div>
-      <div class="sig-name" style="color:#94a3b8"><?= htmlspecialchars($quote['client_name']) ?></div>
-      <div class="sig-org" style="font-size:10px;margin-top:2px">Signature &amp; Date</div>
+      <div class="sig-area">
+        <span class="sig-placeholder">Sign here</span>
+      </div>
+      <div class="sig-name"><?= htmlspecialchars($quote['client_name']) ?></div>
+      <div class="sig-sub">Signature &amp; Date</div>
     </div>
 
     <!-- Prepared by -->
     <div class="sig-box" style="text-align:right">
       <div class="sig-label">Prepared &amp; Authorized by</div>
-      <div class="sig-image-wrap" style="justify-content:flex-end">
+      <div class="sig-area" style="justify-content:flex-end;padding-right:12px">
         <?php
           $sig = $quote['signature_path'] ?? null;
           $sig_file = $sig ? __DIR__ . '/../../' . $sig : null;
@@ -292,11 +289,11 @@ $phone_2    = '+256 782 187 799';
         ?>
           <img src="/<?= htmlspecialchars($sig) ?>" alt="Signature">
         <?php else: ?>
-          <span style="font-size:10px;color:#e2e8f0;align-self:center">No signature uploaded</span>
+          <span class="sig-placeholder">Signature pending</span>
         <?php endif; ?>
       </div>
       <div class="sig-name"><?= htmlspecialchars($quote['prepared_by'] ?: 'Ambozy Team') ?></div>
-      <div class="sig-org"><?= SITE_NAME ?></div>
+      <div class="sig-sub"><?= SITE_NAME ?></div>
     </div>
   </div>
 

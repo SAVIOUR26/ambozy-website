@@ -107,7 +107,7 @@ $catalog_json = json_encode(array_map(fn($c) => [
     </a>
   </div>
 
-  <form method="POST" x-data="quoteBuilder()" x-init="init()">
+  <form method="POST" x-data="quoteBuilder()">
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
 

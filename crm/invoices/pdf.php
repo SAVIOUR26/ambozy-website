@@ -59,14 +59,14 @@ $tax_amt=round($tax_base*$invoice['tax_percent']/100,0);
     .pay-row:last-child{border-bottom:none}
     .notes-section{background:#f8fafc;border-radius:8px;padding:16px;margin-bottom:20px;font-size:12px;color:#475569}
     .notes-section h3{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:6px}
-    .sig-section{display:flex;justify-content:space-between;gap:32px;margin-top:28px;margin-bottom:24px}
-    .sig-box{flex:1;max-width:260px}
-    .sig-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:8px}
-    .sig-image-wrap{height:64px;display:flex;align-items:flex-end;padding-bottom:6px;border-bottom:1px solid #cbd5e1}
-    .sig-image-wrap img{max-height:56px;max-width:180px;object-fit:contain}
-    .sig-name{font-size:11px;color:#334155;font-weight:600;margin-top:5px}
-    .sig-org{font-size:10.5px;color:#94a3b8}
-    .sig-empty{height:64px;border-bottom:1px solid #cbd5e1}
+    .sig-section{display:flex;justify-content:space-between;gap:48px;margin-top:32px;margin-bottom:24px;padding-top:20px;border-top:1px solid #e2e8f0}
+    .sig-box{flex:1}
+    .sig-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:10px}
+    .sig-area{height:72px;border:1.5px dashed #cbd5e1;border-radius:6px;background:#f8fafc;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+    .sig-area img{max-height:60px;max-width:200px;object-fit:contain}
+    .sig-placeholder{font-size:10px;color:#cbd5e1;letter-spacing:.04em}
+    .sig-name{font-size:12px;color:#334155;font-weight:600}
+    .sig-sub{font-size:10.5px;color:#94a3b8;margin-top:2px}
     .footer-strip{border-top:1px solid #e2e8f0;padding-top:16px;display:flex;justify-content:space-between;font-size:11px;color:#94a3b8}
     .print-btn{position:fixed;top:16px;right:16px;background:#f59e0b;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}
     @media print{.print-btn{display:none}body{padding:20px}}
@@ -80,7 +80,7 @@ $tax_amt=round($tax_base*$invoice['tax_percent']/100,0);
       <div class="logo-box">AG</div>
       <div>
         <div class="company-name"><?=SITE_NAME?></div>
-        <div class="company-sub">Print · Brand · Deliver · Est. 2010</div>
+        <div class="company-sub">Print · Brand · Deliver</div>
         <div class="company-sub"><?=SITE_PHONE?> | <?=SITE_EMAIL?></div>
       </div>
     </div>
@@ -143,13 +143,15 @@ $tax_amt=round($tax_base*$invoice['tax_percent']/100,0);
   <div class="sig-section">
     <div class="sig-box">
       <div class="sig-label">Received by</div>
-      <div class="sig-empty"></div>
-      <div class="sig-name" style="color:#94a3b8"><?=htmlspecialchars($invoice['client_name'])?></div>
-      <div class="sig-org" style="font-size:10px;margin-top:2px">Signature &amp; Date</div>
+      <div class="sig-area">
+        <span class="sig-placeholder">Sign here</span>
+      </div>
+      <div class="sig-name"><?=htmlspecialchars($invoice['client_name'])?></div>
+      <div class="sig-sub">Signature &amp; Date</div>
     </div>
     <div class="sig-box" style="text-align:right">
       <div class="sig-label">Issued by</div>
-      <div class="sig-image-wrap" style="justify-content:flex-end">
+      <div class="sig-area" style="justify-content:flex-end;padding-right:12px">
         <?php
           $sig = $invoice['signature_path'] ?? null;
           $sig_file = $sig ? __DIR__ . '/../../' . $sig : null;
@@ -157,11 +159,11 @@ $tax_amt=round($tax_base*$invoice['tax_percent']/100,0);
         ?>
           <img src="/<?=htmlspecialchars($sig)?>" alt="Signature">
         <?php else: ?>
-          <span style="font-size:10px;color:#e2e8f0;align-self:center">No signature uploaded</span>
+          <span class="sig-placeholder">Signature pending</span>
         <?php endif; ?>
       </div>
       <div class="sig-name"><?=htmlspecialchars($invoice['prepared_by'] ?: 'Ambozy Team')?></div>
-      <div class="sig-org"><?=SITE_NAME?></div>
+      <div class="sig-sub"><?=SITE_NAME?></div>
     </div>
   </div>
 
