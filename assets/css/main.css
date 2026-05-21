@@ -227,11 +227,11 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 /* ── HERO PHOTO STRIP (scrolls in background, behind content) ── */
 .hero-slides {
   position: absolute;
-  top: 58%; left: 0; right: 0;
+  top: 28%; left: 0; right: 0;
   height: 220px; z-index: 1;
   overflow: hidden;
   display: flex; align-items: center;
-  opacity: 0.55;
+  opacity: 0.45;
   mask-image: linear-gradient(to right, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
 }
@@ -892,15 +892,14 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
   animation: mob-hscroll 22s linear infinite;
   will-change: transform;
 }
-.hero__mobile-photos > div {
-  flex: none;
+.hero__mobile-track > div {
+  flex-shrink: 0;
   width: 140px;
   aspect-ratio: 3 / 2;
   background-size: cover;
   background-position: center;
   border-radius: 14px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.18);
-  flex-shrink: 0;
 }
 @keyframes mob-hscroll {
   from { transform: translateX(0); }
