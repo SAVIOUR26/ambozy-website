@@ -546,10 +546,10 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 }
 
 /* ── SERVICES ───────────────────────────────────────────── */
-.services { background: var(--ink); }
+.services { background: #f0f4f8; }
 
-.services .blob:nth-child(1) { width: 600px; height: 600px; left: -180px; top: 50%; transform: translateY(-50%); }
-.services .blob:nth-child(2) { width: 450px; height: 450px; right: -120px; bottom: 0; }
+.services .blob:nth-child(1) { width: 600px; height: 600px; left: -180px; top: 50%; transform: translateY(-50%); opacity: 0.06; }
+.services .blob:nth-child(2) { width: 450px; height: 450px; right: -120px; bottom: 0; opacity: 0.06; }
 
 .services__header {
   position: relative; z-index: 1;
@@ -623,6 +623,25 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
   transform: translateX(-8px); transition: var(--ease);
 }
 .service-card:hover .service-card__arrow { opacity: 1; transform: translateX(0); }
+
+/* ── Services: light-theme overrides ── */
+.services .tag--cool {
+  background: rgba(241,94,36,0.10);
+  color: #F15E24;
+  border-color: rgba(241,94,36,0.28);
+}
+.services .section-title { color: #0f172a; }
+.services .section-sub   { color: #475569; }
+.services .service-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+.services .service-card:hover {
+  box-shadow: 0 20px 52px rgba(var(--cr),0.14), 0 2px 8px rgba(0,0,0,0.06);
+}
+.services .service-card__title { color: #0f172a; }
+.services .service-card__items { color: #64748b; }
 
 /* ── CLIENTS ────────────────────────────────────────────── */
 .clients { background: var(--ink-2); }
