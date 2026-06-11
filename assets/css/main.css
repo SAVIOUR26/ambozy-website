@@ -1103,51 +1103,25 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
     -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
   }
 
-  /* CTA buttons: stacked full-width — no overflow risk */
+  /* CTA buttons: stacked full-width on mobile */
   .hero__actions {
-    display: flex;
     flex-direction: column;
     gap: 12px;
     width: 100%;
-    margin-top: 4px;
+    margin-top: 20px;
   }
-  .hero__actions .btn-primary {
-    display: flex;
+  .hero__actions .btn {
     width: 100%;
-    background: var(--orange);
-    color: #ffffff;
-    -webkit-text-fill-color: #ffffff;
-    box-shadow: 0 4px 18px rgba(241,94,36,0.35);
-    border-radius: 14px;
     justify-content: center;
-    align-items: center;
-    font-size: 0.9rem;
-    padding: 15px 20px;
-    letter-spacing: 0.05em;
+    padding: 16px 20px;
+    font-size: 0.88rem;
+    border-radius: 14px;
   }
-  .hero__actions .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(241,94,36,0.45);
-    background: #d94e1a;
-  }
+  /* Outline btn needs a solid dark bg so white text is readable on peach hero */
   .hero__actions .btn-outline {
-    display: flex;
-    width: 100%;
     background: #0f172a;
+    border-color: #0f172a;
     color: #ffffff;
-    -webkit-text-fill-color: #ffffff;
-    border: none;
-    border-radius: 14px;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.9rem;
-    padding: 15px 20px;
-    letter-spacing: 0.05em;
-  }
-  .hero__actions .btn-outline:hover {
-    background: #1e293b;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    transform: translateY(-2px);
   }
 
   /* Services strip: orange full-bleed bar */
