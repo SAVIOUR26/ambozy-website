@@ -370,8 +370,9 @@ $client_logos = [
           $row1 = array_slice($client_logos, 0, 12);
           $row1 = array_merge($row1, $row1);
           foreach ($row1 as $c): ?>
-        <div class="client-logo-card" title="<?= htmlspecialchars($c['name']) ?>">
+        <div class="client-logo-card">
           <img src="<?= htmlspecialchars($c['img']) ?>" alt="<?= htmlspecialchars($c['name']) ?>" loading="lazy">
+          <span class="client-logo-name"><?= htmlspecialchars($c['name']) ?></span>
         </div>
         <?php endforeach; ?>
       </div>
@@ -383,8 +384,9 @@ $client_logos = [
           $row2 = array_slice($client_logos, 12);
           $row2 = array_merge($row2, $row2);
           foreach ($row2 as $c): ?>
-        <div class="client-logo-card" title="<?= htmlspecialchars($c['name']) ?>">
+        <div class="client-logo-card">
           <img src="<?= htmlspecialchars($c['img']) ?>" alt="<?= htmlspecialchars($c['name']) ?>" loading="lazy">
+          <span class="client-logo-name"><?= htmlspecialchars($c['name']) ?></span>
         </div>
         <?php endforeach; ?>
       </div>
