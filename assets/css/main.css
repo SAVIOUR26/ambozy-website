@@ -1091,59 +1091,60 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
   .hero__eyebrow { margin-bottom: 16px; }
 
   /* Body text */
-  .hero__body { margin: 16px 0 0; }
-
-  /* Keep CTA buttons side by side */
-  .hero__actions {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 12px;
-    width: 100%;
-  }
+  .hero__body { margin: 16px 0 0; font-size: 0.95rem; line-height: 1.65; max-width: 100%; }
 
   /* Mobile photo scroll strip */
   .hero__mobile-photos {
     display: flex;
     overflow: hidden;
-    margin: 20px 0 24px;
-    mask-image: linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+    margin: 22px -20px 22px;
+    mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
   }
 
-  /* CTA buttons: dark pill style */
+  /* CTA buttons: stacked full-width — no overflow risk */
+  .hero__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 4px;
+  }
   .hero__actions .btn-primary {
+    display: flex;
+    width: 100%;
     background: var(--orange);
     color: #ffffff;
     -webkit-text-fill-color: #ffffff;
-    box-shadow: none;
+    box-shadow: 0 4px 18px rgba(241,94,36,0.35);
     border-radius: 14px;
-    flex: 1 1 0;
-    min-width: 0;
     justify-content: center;
-    font-size: 0.88rem;
-    padding: 14px 12px;
+    align-items: center;
+    font-size: 0.9rem;
+    padding: 15px 20px;
+    letter-spacing: 0.05em;
   }
   .hero__actions .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(241,94,36,0.4);
+    box-shadow: 0 8px 24px rgba(241,94,36,0.45);
     background: #d94e1a;
   }
   .hero__actions .btn-outline {
-    background: #1c1c1e;
+    display: flex;
+    width: 100%;
+    background: #0f172a;
     color: #ffffff;
     -webkit-text-fill-color: #ffffff;
-    border-color: #1c1c1e;
+    border: none;
     border-radius: 14px;
-    flex: 1 1 0;
-    min-width: 0;
     justify-content: center;
-    font-size: 0.88rem;
-    padding: 14px 12px;
+    align-items: center;
+    font-size: 0.9rem;
+    padding: 15px 20px;
+    letter-spacing: 0.05em;
   }
   .hero__actions .btn-outline:hover {
-    background: #2c2c2e;
-    border-color: #2c2c2e;
+    background: #1e293b;
     box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     transform: translateY(-2px);
   }
@@ -1151,7 +1152,7 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
   /* Services strip: orange full-bleed bar */
   .hero__services-strip {
     background: var(--orange);
-    margin: 28px -20px 0;
+    margin: 24px -20px 0;
     padding: 16px 20px;
     border-radius: 0;
     flex-direction: row;
