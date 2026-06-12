@@ -137,7 +137,7 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 
 /* ── LOGO ───────────────────────────────────────────────── */
 .nav__logo { display: flex; align-items: center; gap: 14px; }
-.nav__logo-img { height: 50px; width: auto; display: block; }
+.nav__logo-img { height: 64px; width: auto; display: block; }
 
 .logo-badge {
   width: 52px; height: 52px;
@@ -170,7 +170,7 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 /* ── NAV ────────────────────────────────────────────────── */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  padding: 0 32px; height: 76px;
+  padding: 0 32px; height: 84px;
   display: flex; align-items: center; justify-content: space-between;
   background: rgba(255,255,255,0.92);
   backdrop-filter: blur(16px);
@@ -184,7 +184,7 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 }
 .nav__links { display: flex; align-items: center; gap: 36px; }
 .nav__links a {
-  font-family: var(--fd); font-weight: 600; font-size: 0.95rem;
+  font-family: var(--fd); font-weight: 600; font-size: 1.05rem;
   letter-spacing: 0.08em; text-transform: uppercase;
   color: rgba(0,0,0,0.55); transition: color var(--ease);
   position: relative;
@@ -246,8 +246,10 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
   height: 176px;
   width: calc(176px * 1.5);
   flex-shrink: 0;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
+  background-color: rgba(255,255,255,0.6);
   border-radius: 16px;
   box-shadow: 0 6px 28px rgba(0,0,0,0.18);
 }
@@ -657,9 +659,18 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
   padding: 80px 0 64px;
   overflow-x: clip;
   overflow-y: visible;
-  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
+/* Side-fade via pseudo-elements — avoids mask-image stacking context that clips tooltips */
+.clients__marquee-wrap::before,
+.clients__marquee-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; width: 120px;
+  pointer-events: none;
+  z-index: 5;
+}
+.clients__marquee-wrap::before { left: 0;  background: linear-gradient(to right, #ffffff 30%, transparent); }
+.clients__marquee-wrap::after  { right: 0; background: linear-gradient(to left,  #ffffff 30%, transparent); }
 .clients__row { overflow-x: clip; overflow-y: visible; }
 
 .clients__track {
@@ -1021,8 +1032,10 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
   flex-shrink: 0;
   width: 140px;
   aspect-ratio: 3 / 2;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
+  background-color: rgba(255,255,255,0.6);
   border-radius: 14px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.18);
 }
