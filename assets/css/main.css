@@ -1102,10 +1102,20 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
     gap: 0;
   }
 
+  /* Grid item must shrink below content-width so text can wrap */
+  .hero__left { min-width: 0; }
+
   .hero__eyebrow { margin-bottom: 16px; }
 
-  /* Body text */
-  .hero__body { margin: 16px 0 0; font-size: 0.95rem; line-height: 1.65; max-width: 100%; }
+  /* Body text — force word-wrap on narrow screens */
+  .hero__body {
+    margin: 16px 0 0;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
 
   /* Mobile photo scroll strip */
   .hero__mobile-photos {
@@ -1116,39 +1126,34 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
     -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
   }
 
-  /* CTA buttons: centered pills — not full-width, not touching edges */
+  /* CTA buttons: side-by-side, centered, not touching edges */
   .hero__actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-    width: 100%;
+    justify-content: center;
+    gap: 10px;
     margin-top: 24px;
   }
   .hero__actions .btn {
-    display: inline-flex;
-    width: auto;
-    min-width: 220px;
-    max-width: 88%;
+    flex: 0 0 auto;
+    max-width: 46%;
     justify-content: center;
-    align-items: center;
-    padding: 16px 32px;
-    font-size: 0.9rem;
+    font-size: 0.72rem;
+    padding: 14px 12px;
+    letter-spacing: 0.03em;
     border-radius: 14px;
   }
   .hero__actions .btn-primary {
-    background: var(--orange);
-    background-image: none;
-    color: #ffffff;
-    -webkit-text-fill-color: #ffffff;
-    box-shadow: 0 4px 20px rgba(241,94,36,0.38);
+    background: var(--orange) !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    box-shadow: 0 4px 18px rgba(241,94,36,0.35);
   }
   .hero__actions .btn-outline {
-    background: #0f172a;
-    background-image: none;
+    background: #0f172a !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
     border-color: #0f172a;
-    color: #ffffff;
-    -webkit-text-fill-color: #ffffff;
   }
 
   /* Services strip: orange full-bleed bar */
