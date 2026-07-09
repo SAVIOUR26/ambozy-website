@@ -121,124 +121,61 @@ $client_logos = [
 </nav>
 
 <!-- ============================================================
-     HERO
+     HERO — full-bleed photo overlay, centered content
 ============================================================ -->
 <section class="hero" id="home">
-  <!-- Background horizontal scrolling photo strip -->
-  <div class="hero-slides">
-    <div class="hero-slides-track">
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-2.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-4.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-5.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-6.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-7.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-8.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-9.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-10.jpeg')"></div>
-      <!-- Duplicate set — enables seamless infinite loop -->
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-2.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-4.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-5.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-6.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-7.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-8.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-9.jpeg')"></div>
-      <div class="hero-slide" style="background-image:url('/assets/images/hero/hero-10.jpeg')"></div>
+  <!-- Full-bleed crossfading background photos -->
+  <div class="hero-bg">
+    <div class="hero-bg__slide" style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
+    <div class="hero-bg__slide" style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
+    <div class="hero-bg__slide" style="background-image:url('/assets/images/hero/hero-5.jpeg')"></div>
+    <div class="hero-bg__slide" style="background-image:url('/assets/images/hero/hero-7.jpeg')"></div>
+    <div class="hero-bg__slide" style="background-image:url('/assets/images/hero/hero-9.jpeg')"></div>
+  </div>
+  <div class="hero__overlay"></div>
+
+  <div class="hero__content">
+    <div class="hero__eyebrow">
+      <i class="fa-solid fa-location-dot"></i>
+      Est. 2010 — Kampala, Uganda
+    </div>
+    <h1 class="hero__title">
+      We Print. We Brand.<br>We Deliver.
+    </h1>
+    <p class="hero__body">
+      From bold branded merchandise to stunning outdoor signage — Ambozy Graphics Solutions brings your brand to life with premium printing, creative design, and end-to-end supply.
+    </p>
+
+    <div class="hero__actions">
+      <a href="#contact" class="btn btn-primary">
+        <i class="fa-solid fa-comment-dots"></i> Get a Quote
+      </a>
+      <a href="#services" class="btn btn-outline">
+        View Services <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="hero__stats-row">
+      <div class="hero__stats-item">
+        <div class="hero__stats-num" data-target="14" data-suffix="+">0+</div>
+        <div class="hero__stats-label">Years in Business</div>
+      </div>
+      <div class="hero__stats-item">
+        <div class="hero__stats-num" data-target="200" data-suffix="+">0+</div>
+        <div class="hero__stats-label">Happy Clients</div>
+      </div>
+      <div class="hero__stats-item">
+        <div class="hero__stats-num" data-target="10" data-suffix="">0</div>
+        <div class="hero__stats-label">Service Categories</div>
+      </div>
     </div>
   </div>
 
-  <div class="hero__content">
-
-    <!-- Left copy -->
-    <div class="hero__left">
-      <div class="hero__eyebrow">
-        <i class="fa-solid fa-location-dot" style="color:var(--pink)"></i>
-        Est. 2010 — Kampala, Uganda
-      </div>
-      <h1 class="hero__title">
-        <span class="line-1">We Print.</span><br>
-        <span class="line-2">We Brand.</span><br>
-        <span class="line-3">We Deliver.</span>
-      </h1>
-      <p class="hero__body">
-        From bold branded merchandise to stunning outdoor signage — Ambozy Graphics Solutions brings your brand to life with premium printing, creative design, and end-to-end supply.
-      </p>
-
-      <!-- Mobile-only auto-scrolling photo strip -->
-      <div class="hero__mobile-photos">
-        <div class="hero__mobile-track">
-          <div style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
-          <div style="background-image:url('/assets/images/hero/hero-2.jpeg')"></div>
-          <div style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
-          <div style="background-image:url('/assets/images/hero/hero-4.jpeg')"></div>
-          <div style="background-image:url('/assets/images/hero/hero-5.jpeg')"></div>
-          <div style="background-image:url('/assets/images/hero/hero-6.jpeg')"></div>
-          <!-- duplicate for seamless loop -->
-          <div style="background-image:url('/assets/images/hero/hero-1.jpeg')"></div>
-          <div style="background-image:url('/assets/images/hero/hero-2.jpeg')"></div>
-          <div style="background-image:url('/assets/images/hero/hero-3.jpeg')"></div>
-          <div style="background-image:url('/assets/images/hero/hero-4.jpeg')"></div>
-          <div style="background-image:url('/assets/images/hero/hero-5.jpeg')"></div>
-          <div style="background-image:url('/assets/images/hero/hero-6.jpeg')"></div>
-        </div>
-      </div>
-
-      <div class="hero__actions">
-        <a href="#contact" class="btn btn-primary">
-          <i class="fa-solid fa-comment-dots"></i> Get a Quote
-        </a>
-        <a href="#services" class="btn btn-outline">
-          View Services <i class="fa-solid fa-arrow-right"></i>
-        </a>
-      </div>
-      <div class="hero__services-strip">
-        <span class="hero__strip-label">We do</span>
-        <div class="hero__strip-items">
-          <span class="hero__strip-item">Printing</span>
-          <span class="hero__strip-item">Designing</span>
-          <span class="hero__strip-item">Contractors</span>
-          <span class="hero__strip-item">General Supplies</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right graphic composition -->
-    <div class="hero__right">
-      <div class="hero__art">
-        <!-- Spinning arcs -->
-        <div class="hero__arc"></div>
-        <div class="hero__arc"></div>
-        <div class="hero__arc"></div>
-
-        <!-- Center palette icon -->
-        <div class="hero__art-center">
-          <i class="fa-solid fa-palette"></i>
-        </div>
-
-        <!-- Orbit bubbles: top · right · bottom · left · top-right · bottom-right -->
-        <div class="hero__orb" title="Design"><i class="fa-solid fa-pen-nib"></i></div>
-        <div class="hero__orb" title="Print"><i class="fa-solid fa-print"></i></div>
-        <div class="hero__orb" title="Merchandise"><i class="fa-solid fa-shirt"></i></div>
-        <div class="hero__orb" title="Marketing"><i class="fa-solid fa-bullhorn"></i></div>
-        <div class="hero__orb" title="Awards"><i class="fa-solid fa-trophy"></i></div>
-        <div class="hero__orb" title="Packaging"><i class="fa-solid fa-box-open"></i></div>
-
-        <!-- Floating stat badges -->
-        <div class="hero__stat">
-          <div class="hero__stat-num" data-target="14" data-suffix="+">0+</div>
-          <div class="hero__stat-label">Years Active</div>
-        </div>
-        <div class="hero__stat">
-          <div class="hero__stat-num" data-target="200" data-suffix="+">0+</div>
-          <div class="hero__stat-label">Happy Clients</div>
-        </div>
-      </div>
-    </div>
-
+  <!-- Wave divider into the next section -->
+  <div class="hero__wave">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#ffffff" d="M0,0 C200,100 600,0 1000,100 1440,0 1440,100 1440,100 L1440,100 L0,100 Z"></path>
+    </svg>
   </div>
 </section>
 
