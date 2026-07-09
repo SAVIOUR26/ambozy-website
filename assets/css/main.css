@@ -235,10 +235,10 @@ button { border: none; cursor: pointer; font-family: inherit; background: none; 
 }
 
 /* Crossfading full-bleed background photos */
-.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg { position: absolute; inset: 0; z-index: 0; background: var(--navy-deep); }
 .hero-bg__slide {
   position: absolute; inset: 0;
-  background-size: cover; background-position: center;
+  background-size: contain; background-repeat: no-repeat; background-position: center;
   opacity: 0; animation: hero-crossfade 30s ease-in-out infinite;
 }
 .hero-bg__slide:nth-child(1) { animation-delay: 0s;  }
