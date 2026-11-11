@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1.5">Principal Amount (UGX) <span class="text-red-500">*</span></label>
-          <input type="number" name="principal" value="<?= htmlspecialchars($f['principal']) ?>" min="0" step="1000"
+          <input type="number" name="principal" value="<?= htmlspecialchars($f['principal']) ?>" min="0" step="any"
                  class="w-full border <?= isset($errors['principal']) ? 'border-red-400' : 'border-gray-200' ?> rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-amber-400">
           <?php if (isset($errors['principal'])): ?><p class="text-red-500 text-xs mt-1"><?= $errors['principal'] ?></p><?php endif; ?>
         </div>
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1.5">Monthly Installment (UGX)</label>
-        <input type="number" name="installment" value="<?= htmlspecialchars($f['installment']) ?>" min="0" step="1000"
+        <input type="number" name="installment" value="<?= htmlspecialchars($f['installment']) ?>" min="0" step="any"
                class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-amber-400">
         <p class="text-xs text-gray-400 mt-1">For reference — used on the dashboard reminders</p>
       </div>

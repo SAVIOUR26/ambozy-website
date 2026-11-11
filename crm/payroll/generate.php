@@ -192,14 +192,14 @@ $month_names = ['','January','February','March','April','May','June','July','Aug
                   <p class="text-xs text-gray-400"><?= htmlspecialchars($emp['position'] ?? '') ?></p>
                 </td>
                 <td class="px-3 py-2">
-                  <input type="number" name="gross_<?= $emp['id'] ?>" value="<?= $gross ?>" min="0" step="1000"
+                  <input type="number" name="gross_<?= $emp['id'] ?>" value="<?= $gross ?>" min="0" step="any"
                          class="w-28 border border-gray-200 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:border-amber-400">
                 </td>
                 <td class="px-3 py-3 text-right text-red-500"><?= number_format($paye, 0) ?></td>
                 <td class="px-3 py-3 text-right text-orange-500"><?= number_format($nssf_emp, 0) ?></td>
                 <td class="px-3 py-3 text-right text-gray-400 hidden lg:table-cell"><?= number_format($nssf_er, 0) ?></td>
                 <td class="px-3 py-2 hidden md:table-cell">
-                  <input type="number" name="extra_ded_<?= $emp['id'] ?>" value="<?= $extra ?>" min="0" step="1000"
+                  <input type="number" name="extra_ded_<?= $emp['id'] ?>" value="<?= $extra ?>" min="0" step="any"
                          class="w-28 border border-gray-200 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:border-amber-400">
                 </td>
                 <td class="px-5 py-3 text-right font-bold text-green-600"><?= number_format($net, 0) ?></td>

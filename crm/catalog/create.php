@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         <label class="block text-sm font-medium text-gray-700 mb-1.5">Unit Price (UGX)</label>
         <div class="relative">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">UGX</span>
-          <input type="number" name="unit_price" value="<?= $f['unit_price'] ?>" min="0" step="100"
+          <input type="number" name="unit_price" value="<?= $f['unit_price'] ?>" min="0" step="any"
                  class="w-full border <?= isset($errors['unit_price'])?'border-red-400':'border-gray-200' ?> rounded-lg pl-12 pr-3 py-2.5 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400">
         </div>
         <?php if(isset($errors['unit_price'])): ?><p class="text-red-500 text-xs mt-1"><?= $errors['unit_price'] ?></p><?php endif; ?>

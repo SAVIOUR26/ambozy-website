@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../partials/bootstrap.php';
 $id = (int)($_GET['id'] ?? 0);
 if (!$id) { header('Location: /crm/suppliers/'); exit; }
 
@@ -56,6 +57,7 @@ require_once __DIR__ . '/../partials/header.php';
             <?= ucfirst($supplier['status']) ?>
           </span>
           <span class="text-xs text-gray-400 font-mono"><?= htmlspecialchars($supplier['code']) ?></span>
+          <span class="ml-auto"><?= row_actions('/crm/suppliers', (int)$supplier['id'], 'Delete supplier ' . $supplier['name'] . '? (Suppliers with purchases cannot be deleted — set them Inactive instead.)') ?></span>
         </div>
         <?php if ($supplier['contact_name']): ?>
           <p class="text-sm text-gray-600 mt-1">Contact: <?= htmlspecialchars($supplier['contact_name']) ?></p>

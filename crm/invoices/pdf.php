@@ -7,6 +7,7 @@ require_login();
 
 $invoice=null;$items=[];$payments=[];
 if($pdo){
+    ensure_signature_column($pdo);
     $s=$pdo->prepare("SELECT i.*,c.name client_name,c.email client_email,c.phone client_phone,c.company client_company,c.address client_address,c.city client_city,a.full_name prepared_by,a.signature_path FROM invoices i JOIN clients c ON i.client_id=c.id LEFT JOIN admin_users a ON i.created_by=a.id WHERE i.id=?");
     $s->execute([$id]);$invoice=$s->fetch();
     if($invoice){$si=$pdo->prepare("SELECT * FROM invoice_items WHERE invoice_id=? ORDER BY sort_order");$si->execute([$id]);$items=$si->fetchAll();$sp=$pdo->prepare("SELECT * FROM payments WHERE invoice_id=? ORDER BY payment_date");$sp->execute([$id]);$payments=$sp->fetchAll();}

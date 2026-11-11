@@ -12,6 +12,7 @@ require_login();
 
 $quote = null; $items = [];
 if ($pdo) {
+    ensure_signature_column($pdo);
     $s = $pdo->prepare("SELECT q.*, c.name client_name, c.email client_email, c.phone client_phone, c.company client_company, c.address client_address, c.city client_city, a.full_name prepared_by, a.signature_path FROM quotations q JOIN clients c ON q.client_id=c.id LEFT JOIN admin_users a ON q.created_by=a.id WHERE q.id=?");
     $s->execute([$id]); $quote = $s->fetch();
     if ($quote) { $si = $pdo->prepare("SELECT * FROM quotation_items WHERE quotation_id=? ORDER BY sort_order"); $si->execute([$id]); $items=$si->fetchAll(); }

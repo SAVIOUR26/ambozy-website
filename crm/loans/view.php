@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../partials/bootstrap.php';
 $id = (int)($_GET['id'] ?? 0);
 if (!$id) { header('Location: /crm/loans/'); exit; }
 
@@ -45,6 +46,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['record_repayment']) &
     }
 }
 
+// Handle repayment delete (recalculates the loan balance)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_repayment']) && $pdo && $loan) {
+    if (csrf_valid()) {
+        $rid = (int)($_POST['repayment_id'] ?? 0);
+        try {
+            $pdo->beginTransaction();
+            $pdo->prepare("DELETE FROM loan_repayments WHERE id = ? AND loan_id = ?")->execute([$rid, $id]);
+            $sum = $pdo->prepare("SELECT IFNULL(SUM(amount),0) FROM loan_repayments WHERE loan_id = ?");
+            $sum->execute([$id]);
+            $new_repaid = (float)$sum->fetchColumn();
+            $new_status = $loan['status'];
+            if ($new_repaid >= $loan['principal']) { $new_status = 'fully_paid'; }
+            elseif ($loan['status'] === 'fully_paid') { $new_status = 'active'; }
+            $pdo->prepare("UPDATE loans SET amount_repaid=?, status=? WHERE id=?")->execute([$new_repaid, $new_status, $id]);
+            log_activity($pdo, 'loan_repayment_deleted', "A repayment on loan {$loan['ref']} was removed.", 'loan', $id);
+            $pdo->commit();
+            flash('success', 'Repayment removed and balance recalculated.');
+        } catch (Throwable $e) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
+            flash('error', 'Could not remove the repayment.');
+        }
+    } else {
+        flash('error', 'Invalid request.');
+    }
+    redirect("/crm/loans/view?id=$id");
+}
+
 $page_title = $loan['ref'] ?? 'Loan';
 $active_nav = 'loans';
 require_once __DIR__ . '/../partials/header.php';
@@ -68,9 +96,12 @@ $progress    = $loan['principal'] > 0 ? min(100, round(($loan['amount_repaid'] /
         <h2 class="text-xl font-bold text-gray-900"><?= htmlspecialchars($loan['lender']) ?></h2>
         <p class="text-sm text-gray-400 font-mono mt-0.5"><?= htmlspecialchars($loan['ref']) ?> · <?= ucfirst(str_replace('_',' ',$loan['loan_type'])) ?></p>
       </div>
-      <span class="inline-block text-sm px-3 py-1 rounded-full font-medium <?= loan_badge($loan['status']) ?>">
-        <?= ucfirst(str_replace('_',' ',$loan['status'])) ?>
-      </span>
+      <div class="flex items-center gap-2">
+        <span class="inline-block text-sm px-3 py-1 rounded-full font-medium <?= loan_badge($loan['status']) ?>">
+          <?= ucfirst(str_replace('_',' ',$loan['status'])) ?>
+        </span>
+        <?= row_actions('/crm/loans', (int)$loan['id'], 'Delete loan ' . $loan['ref'] . ' and all its repayments? This cannot be undone.') ?>
+      </div>
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm mb-6">
@@ -121,18 +152,18 @@ $progress    = $loan['principal'] > 0 ? min(100, round(($loan['amount_repaid'] /
             <input type="hidden" name="record_repayment" value="1">
             <div>
               <label class="block text-xs font-medium text-gray-600 mb-1">Total Amount (UGX)</label>
-              <input type="number" name="rep_amount" value="<?= $loan['installment'] > 0 ? $loan['installment'] : '' ?>" min="1" step="100" required
+              <input type="number" name="rep_amount" value="<?= $loan['installment'] > 0 ? $loan['installment'] : '' ?>" min="1" step="any" required
                      class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-400">
             </div>
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="block text-xs font-medium text-gray-600 mb-1">Principal</label>
-                <input type="number" name="rep_principal" value="0" min="0" step="100"
+                <input type="number" name="rep_principal" value="0" min="0" step="any"
                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-400">
               </div>
               <div>
                 <label class="block text-xs font-medium text-gray-600 mb-1">Interest</label>
-                <input type="number" name="rep_interest" value="0" min="0" step="100"
+                <input type="number" name="rep_interest" value="0" min="0" step="any"
                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-400">
               </div>
             </div>
@@ -180,6 +211,7 @@ $progress    = $loan['principal'] > 0 ? min(100, round(($loan['amount_repaid'] /
             <th class="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase hidden md:table-cell">Interest</th>
             <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase hidden lg:table-cell">Method</th>
             <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase hidden lg:table-cell">Reference</th>
+            <th class="px-4 py-3"></th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-50">
@@ -191,6 +223,16 @@ $progress    = $loan['principal'] > 0 ? min(100, round(($loan['amount_repaid'] /
               <td class="px-4 py-3 text-right text-orange-600 hidden md:table-cell"><?= fmt_money($r['interest']) ?></td>
               <td class="px-4 py-3 text-gray-500 hidden lg:table-cell capitalize"><?= str_replace('_',' ',$r['method']) ?></td>
               <td class="px-4 py-3 text-gray-400 font-mono text-xs hidden lg:table-cell"><?= htmlspecialchars($r['reference'] ?? '—') ?></td>
+              <td class="px-4 py-3 text-right">
+                <form method="POST" onsubmit="return confirm('Remove this repayment? The loan balance will be recalculated.')">
+                  <?= csrf_field() ?>
+                  <input type="hidden" name="delete_repayment" value="1">
+                  <input type="hidden" name="repayment_id" value="<?= (int)$r['id'] ?>">
+                  <button type="submit" title="Remove repayment" class="p-1.5 rounded-md text-gray-300 hover:text-red-600 hover:bg-red-50 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                  </button>
+                </form>
+              </td>
             </tr>
           <?php endforeach; ?>
         </tbody>

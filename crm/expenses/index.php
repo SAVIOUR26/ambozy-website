@@ -121,19 +121,21 @@ $pages = max(1, (int)ceil($total / $limit));
             <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden lg:table-cell">Vendor</th>
             <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">Date</th>
             <th class="text-right px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Amount</th>
+            <th class="px-4 py-3"></th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-50">
           <?php foreach ($expenses as $exp): ?>
             <tr class="hover:bg-gray-50 transition-colors">
               <td class="px-5 py-3.5">
-                <p class="font-medium text-gray-900"><?= htmlspecialchars($exp['description']) ?></p>
+                <a href="/crm/expenses/edit?id=<?= (int)$exp['id'] ?>" class="font-medium text-gray-900 hover:text-amber-600 transition-colors"><?= htmlspecialchars($exp['description']) ?></a>
                 <p class="text-xs text-gray-400 font-mono"><?= htmlspecialchars($exp['ref']) ?></p>
               </td>
               <td class="px-4 py-3.5 hidden md:table-cell text-gray-500"><?= htmlspecialchars($exp['category_name'] ?? '—') ?></td>
               <td class="px-4 py-3.5 hidden lg:table-cell text-gray-500"><?= htmlspecialchars($exp['vendor'] ?? '—') ?></td>
               <td class="px-4 py-3.5 hidden md:table-cell text-gray-500"><?= date('d M Y', strtotime($exp['expense_date'])) ?></td>
               <td class="px-5 py-3.5 text-right font-semibold text-gray-900"><?= fmt_money($exp['amount']) ?></td>
+              <td class="px-4 py-3.5 text-right whitespace-nowrap"><?= row_actions('/crm/expenses', (int)$exp['id'], 'Delete expense ' . $exp['ref'] . '? This cannot be undone.') ?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>

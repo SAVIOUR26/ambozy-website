@@ -97,13 +97,13 @@ $type_labels = ['paye'=>'PAYE (Income Tax)','vat'=>'VAT','withholding_tax'=>'Wit
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1.5">Amount Due (UGX) <span class="text-red-500">*</span></label>
-          <input type="number" name="amount_due" value="<?= htmlspecialchars($f['amount_due']) ?>" min="0" step="100"
+          <input type="number" name="amount_due" value="<?= htmlspecialchars($f['amount_due']) ?>" min="0" step="any"
                  class="w-full border <?= isset($errors['amount_due']) ? 'border-red-400' : 'border-gray-200' ?> rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-amber-400">
           <?php if (isset($errors['amount_due'])): ?><p class="text-red-500 text-xs mt-1"><?= $errors['amount_due'] ?></p><?php endif; ?>
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1.5">Amount Paid (UGX)</label>
-          <input type="number" name="amount_paid" value="<?= htmlspecialchars($f['amount_paid']) ?>" min="0" step="100"
+          <input type="number" name="amount_paid" value="<?= htmlspecialchars($f['amount_paid']) ?>" min="0" step="any"
                  class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-amber-400">
         </div>
       </div>

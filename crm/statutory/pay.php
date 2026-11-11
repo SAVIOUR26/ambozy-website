@@ -1,11 +1,7 @@
 <?php
+require_once __DIR__ . '/../partials/bootstrap.php';
 $id = (int)($_GET['id'] ?? 0);
 if (!$id) { header('Location: /crm/statutory/'); exit; }
-
-require_once __DIR__ . '/../../config.php';
-require_once __DIR__ . '/../../includes/auth.php';
-require_once __DIR__ . '/../../includes/crm_helpers.php';
-require_login();
 
 $ob = null;
 if ($pdo) { try {
@@ -77,7 +73,7 @@ $balance     = $ob['amount_due'] - $ob['amount_paid'];
     <form method="POST" class="px-6 py-5 space-y-4">
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1.5">Amount to Pay (UGX)</label>
-        <input type="number" name="amount_paid" value="<?= $balance ?>" min="1" step="100" required
+        <input type="number" name="amount_paid" value="<?= $balance ?>" min="1" step="any" required
                class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-amber-400">
       </div>
       <div>

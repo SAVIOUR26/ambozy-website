@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../partials/bootstrap.php';
 $id = (int)($_GET['id'] ?? 0);
 if (!$id) { header('Location: /crm/employees/'); exit; }
 
@@ -57,6 +58,7 @@ $net   = $employee['gross_salary'] - $paye - $nssf_emp;
           <h2 class="text-xl font-semibold text-gray-900"><?= htmlspecialchars($employee['name']) ?></h2>
           <span class="text-xs px-2 py-0.5 rounded-full font-medium <?= employee_badge($employee['status']) ?>"><?= ucfirst(str_replace('_',' ',$employee['status'])) ?></span>
           <span class="text-xs text-gray-400 font-mono"><?= htmlspecialchars($employee['emp_number']) ?></span>
+          <span class="ml-auto"><?= row_actions('/crm/employees', (int)$employee['id'], 'Delete ' . $employee['name'] . '? (Employees already in a payroll run cannot be deleted — mark them Terminated instead.)') ?></span>
         </div>
         <?php if ($employee['position']): ?>
           <p class="text-sm text-gray-600 mt-1"><?= htmlspecialchars($employee['position']) ?><?= $employee['department'] ? ' — ' . htmlspecialchars($employee['department']) : '' ?></p>

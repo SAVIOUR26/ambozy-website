@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../partials/bootstrap.php';
 $id = (int)($_GET['id'] ?? 0);
 if (!$id) { header('Location: /crm/purchases/'); exit; }
 
@@ -53,6 +54,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['record_payment']) && 
     }
 }
 
+// Handle payment delete (recalculates paid amount and status)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_payment']) && $pdo && $purchase) {
+    if (csrf_valid()) {
+        $pid = (int)($_POST['payment_id'] ?? 0);
+        try {
+            $pdo->beginTransaction();
+            $pdo->prepare("DELETE FROM supplier_payments WHERE id = ? AND purchase_id = ?")->execute([$pid, $id]);
+            $sum = $pdo->prepare("SELECT IFNULL(SUM(amount),0) FROM supplier_payments WHERE purchase_id = ?");
+            $sum->execute([$id]);
+            $paid = (float)$sum->fetchColumn();
+            if ($purchase['status'] === 'cancelled')                         $st = 'cancelled';
+            elseif ($paid >= $purchase['total'] && $purchase['total'] > 0)   $st = 'paid';
+            elseif ($paid > 0)                                               $st = 'partial';
+            else                                                             $st = ($purchase['payment_type'] === 'cash') ? 'received' : 'pending';
+            $pdo->prepare("UPDATE purchases SET amount_paid=?, status=? WHERE id=?")->execute([$paid, $st, $id]);
+            log_activity($pdo, 'supplier_payment_deleted', "A payment on purchase {$purchase['purchase_number']} was removed.", 'purchase', $id);
+            $pdo->commit();
+            flash('success', 'Payment removed and balance recalculated.');
+        } catch (Throwable $e) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
+            flash('error', 'Could not remove the payment.');
+        }
+    } else {
+        flash('error', 'Invalid request.');
+    }
+    redirect("/crm/purchases/view?id=$id");
+}
+
 $page_title = $purchase['purchase_number'] ?? 'Purchase';
 $active_nav = 'purchases';
 require_once __DIR__ . '/../partials/header.php';
@@ -77,9 +106,12 @@ $balance = ($purchase['total'] ?? 0) - ($purchase['amount_paid'] ?? 0);
           Supplier: <a href="/crm/suppliers/view?id=<?= $purchase['supplier_id'] ?>" class="text-amber-600 hover:text-amber-700 font-medium"><?= htmlspecialchars($purchase['supplier_name']) ?></a>
         </p>
       </div>
-      <span class="inline-block text-sm px-3 py-1 rounded-full font-medium <?= purchase_badge($purchase['status']) ?>">
-        <?= ucfirst($purchase['status']) ?>
-      </span>
+      <div class="flex items-center gap-2">
+        <span class="inline-block text-sm px-3 py-1 rounded-full font-medium <?= purchase_badge($purchase['status']) ?>">
+          <?= ucfirst($purchase['status']) ?>
+        </span>
+        <?= row_actions('/crm/purchases', (int)$purchase['id'], 'Delete purchase ' . $purchase['purchase_number'] . ' and its payments? This cannot be undone.') ?>
+      </div>
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm mb-5">
@@ -157,9 +189,19 @@ $balance = ($purchase['total'] ?? 0) - ($purchase['amount_paid'] ?? 0);
                 <p class="text-sm font-medium text-gray-900"><?= fmt_money($pay['amount']) ?></p>
                 <p class="text-xs text-gray-400"><?= date('d M Y', strtotime($pay['payment_date'])) ?> · <?= ucfirst(str_replace('_', ' ', $pay['method'])) ?></p>
               </div>
-              <?php if ($pay['reference']): ?>
-                <span class="text-xs text-gray-400 font-mono"><?= htmlspecialchars($pay['reference']) ?></span>
-              <?php endif; ?>
+              <div class="flex items-center gap-2">
+                <?php if ($pay['reference']): ?>
+                  <span class="text-xs text-gray-400 font-mono"><?= htmlspecialchars($pay['reference']) ?></span>
+                <?php endif; ?>
+                <form method="POST" onsubmit="return confirm('Remove this payment? The balance will be recalculated.')">
+                  <?= csrf_field() ?>
+                  <input type="hidden" name="delete_payment" value="1">
+                  <input type="hidden" name="payment_id" value="<?= (int)$pay['id'] ?>">
+                  <button type="submit" title="Remove payment" class="p-1 rounded text-gray-300 hover:text-red-600 hover:bg-red-50 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                  </button>
+                </form>
+              </div>
             </div>
           <?php endforeach; ?>
         </div>
@@ -181,7 +223,7 @@ $balance = ($purchase['total'] ?? 0) - ($purchase['amount_paid'] ?? 0);
             <input type="hidden" name="record_payment" value="1">
             <div>
               <label class="block text-xs font-medium text-gray-600 mb-1">Amount (UGX)</label>
-              <input type="number" name="pay_amount" value="<?= $balance ?>" min="1" step="100" required
+              <input type="number" name="pay_amount" value="<?= $balance ?>" min="1" step="any" required
                      class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-400">
             </div>
             <div>

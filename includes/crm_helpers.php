@@ -11,7 +11,9 @@ function next_doc_number(PDO $pdo, string $prefix): string
 {
     $year = (int) date('Y');
 
-    $pdo->beginTransaction();
+    // Join the caller's transaction if one is already open
+    $own_tx = !$pdo->inTransaction();
+    if ($own_tx) { $pdo->beginTransaction(); }
     try {
         $stmt = $pdo->prepare(
             "INSERT INTO doc_sequences (prefix, year, last_number)
@@ -26,9 +28,9 @@ function next_doc_number(PDO $pdo, string $prefix): string
                AND year   = $year"
         )->fetchColumn();
 
-        $pdo->commit();
+        if ($own_tx) { $pdo->commit(); }
     } catch (Throwable $e) {
-        $pdo->rollBack();
+        if ($own_tx && $pdo->inTransaction()) { $pdo->rollBack(); }
         throw $e;
     }
 
@@ -248,4 +250,64 @@ function get_flash(): ?array
     $f = $_SESSION['flash'] ?? null;
     unset($_SESSION['flash']);
     return $f;
+}
+
+/**
+ * CSRF protection for state-changing POST actions (delete, etc.)
+ */
+function csrf_token(): string
+{
+    if (empty($_SESSION['csrf'])) {
+        $_SESSION['csrf'] = bin2hex(random_bytes(16));
+    }
+    return $_SESSION['csrf'];
+}
+
+function csrf_field(): string
+{
+    return '<input type="hidden" name="csrf" value="' . htmlspecialchars(csrf_token()) . '">';
+}
+
+function csrf_valid(): bool
+{
+    return isset($_POST['csrf'], $_SESSION['csrf']) && hash_equals($_SESSION['csrf'], (string)$_POST['csrf']);
+}
+
+/**
+ * Edit + Delete icon buttons for a list row / detail page.
+ *   $base    e.g. '/crm/loans'  (edit page = $base/edit?id=, delete handler = $base/delete)
+ *   $confirm text shown in the browser confirm dialog
+ */
+function row_actions(string $base, int $id, string $confirm = 'Delete this record? This cannot be undone.'): string
+{
+    $edit = '<a href="' . $base . '/edit?id=' . $id . '" title="Edit" class="inline-flex p-1.5 rounded-md text-gray-400 hover:text-amber-600 hover:bg-amber-50 transition-colors">'
+          . '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></a>';
+    $del  = '<form method="POST" action="' . $base . '/delete" class="inline" onsubmit="return confirm(' . htmlspecialchars(json_encode($confirm), ENT_QUOTES) . ')">'
+          . csrf_field() . '<input type="hidden" name="id" value="' . $id . '">'
+          . '<button type="submit" title="Delete" class="inline-flex p-1.5 rounded-md text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors">'
+          . '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button></form>';
+    return '<span class="inline-flex items-center gap-0.5">' . $edit . $del . '</span>';
+}
+
+/**
+ * Reload previously stored (HTML-escaped by clean()) text so it can be shown in an edit form.
+ */
+function unclean(?string $val): string
+{
+    return html_entity_decode((string)$val, ENT_QUOTES, 'UTF-8');
+}
+
+/**
+ * Make sure admin_users.signature_path exists (used by the PDF signature block and the Profile page).
+ * Safe to call repeatedly; it only alters the table once.
+ */
+function ensure_signature_column(PDO $pdo): void
+{
+    try {
+        if (!$pdo->query("SHOW COLUMNS FROM admin_users LIKE 'signature_path'")->fetch()) {
+            $pdo->exec("ALTER TABLE admin_users ADD COLUMN signature_path VARCHAR(255) DEFAULT NULL");
+        }
+    } catch (Throwable $e) {
+        error_log('ensure_signature_column: ' . $e->getMessage());
+    }
 }

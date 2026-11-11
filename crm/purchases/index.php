@@ -135,8 +135,9 @@ $pages = max(1, (int)ceil($total / $limit));
                   <?= ucfirst($p['status']) ?>
                 </span>
               </td>
-              <td class="px-4 py-3.5 text-right">
-                <a href="/crm/purchases/view?id=<?= $p['id'] ?>" class="text-gray-400 hover:text-amber-600 transition-colors" title="View">
+              <td class="px-4 py-3.5 text-right whitespace-nowrap">
+                <?= row_actions('/crm/purchases', (int)$p['id'], 'Delete purchase ' . $p['purchase_number'] . ' and its payments? This cannot be undone.') ?>
+                <a href="/crm/purchases/view?id=<?= $p['id'] ?>" class="inline-flex p-1.5 text-gray-400 hover:text-amber-600 transition-colors" title="View">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>

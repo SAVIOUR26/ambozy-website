@@ -69,12 +69,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
           + Create Order
         </button>
       </form>
-      <form method="POST" class="inline">
-        <input type="hidden" name="action" value="create_invoice">
-        <button type="submit" class="text-sm bg-green-500 hover:bg-green-400 text-white px-3 py-2 rounded-lg font-medium">
-          + Invoice
-        </button>
-      </form>
+      <a href="/crm/invoices/create?quote_id=<?= $id ?>"
+         class="text-sm bg-green-500 hover:bg-green-400 text-white px-3 py-2 rounded-lg font-medium">
+        ➜ Convert to Invoice
+      </a>
+      <a href="/crm/delivery/create?quote_id=<?= $id ?>"
+         class="text-sm bg-teal-500 hover:bg-teal-400 text-white px-3 py-2 rounded-lg font-medium">
+        🚚 Create Delivery Note
+      </a>
     <?php endif; ?>
   </div>
 </div>

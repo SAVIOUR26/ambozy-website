@@ -1,10 +1,11 @@
 <?php
 $page_title = 'My Profile';
 $active_nav = '';
-require_once __DIR__ . '/../partials/header.php';
+require_once __DIR__ . '/partials/header.php';
 
 $user = null;
 if ($pdo) {
+    ensure_signature_column($pdo);
     $s = $pdo->prepare("SELECT id, username, full_name, email, signature_path FROM admin_users WHERE id = ?");
     $s->execute([$_SESSION['admin_id']]);
     $user = $s->fetch();
@@ -223,4 +224,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user && $pdo) {
   </div>
 
 </div>
-<?php require_once __DIR__ . '/../partials/footer.php'; ?>
+<?php require_once __DIR__ . '/partials/footer.php'; ?>

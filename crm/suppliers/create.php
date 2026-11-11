@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1.5">Credit Limit (UGX)</label>
           <input type="number" name="credit_limit" value="<?= htmlspecialchars($f['credit_limit']) ?>"
-                 min="0" step="1000" placeholder="0"
+                 min="0" step="any" placeholder="0"
                  class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400">
           <p class="text-xs text-gray-400 mt-1">0 = cash only / no credit</p>
         </div>

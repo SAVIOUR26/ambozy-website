@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../partials/bootstrap.php';
 $id = (int)($_GET['id'] ?? 0);
 if (!$id) { header('Location: /crm/payroll/'); exit; }
 
@@ -28,8 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_status']) && $
     if ($new_status) {
         $pdo->prepare("UPDATE payroll SET status=? WHERE id=?")->execute([$new_status, $id]);
         if ($new_status === 'paid') {
-            // Mark all PAYE/NSSF obligations for this payroll as paid
-            $pdo->prepare("UPDATE statutory_obligations SET status='paid', paid_date=CURDATE() WHERE payroll_id=?")->execute([$id]);
+            // Mark all PAYE/NSSF obligations for this payroll as fully paid
+            $pdo->prepare("UPDATE statutory_obligations SET status='paid', amount_paid=amount_due, paid_date=CURDATE() WHERE payroll_id=?")->execute([$id]);
         }
         flash('success', 'Payroll status updated.');
         redirect("/crm/payroll/view?id=$id");
@@ -72,12 +73,23 @@ require_once __DIR__ . '/../partials/header.php';
             </button>
           <?php endif; ?>
           <?php if ($payroll['status'] === 'approved'): ?>
+            <button type="submit" name="new_status" value="draft"
+                    class="text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1.5 rounded-lg font-medium transition-colors">
+              Back to Draft
+            </button>
             <button type="submit" name="new_status" value="paid"
                     class="text-xs bg-green-500 hover:bg-green-400 text-white px-3 py-1.5 rounded-lg font-medium transition-colors">
               Mark Paid
             </button>
           <?php endif; ?>
         </form>
+        <form method="POST" action="/crm/payroll/delete" class="inline" onsubmit="return confirm('Delete this payroll run? Its PAYE/NSSF obligations (if unpaid) are removed too, and you can generate the month again.')">
+          <?= csrf_field() ?>
+          <input type="hidden" name="id" value="<?= (int)$payroll['id'] ?>">
+          <button type="submit" class="text-xs bg-red-50 hover:bg-red-100 text-red-600 px-3 py-1.5 rounded-lg font-medium transition-colors">Delete</button>
+        </form>
+      <?php else: ?>
+        <span class="text-xs text-gray-400">Paid &middot; locked</span>
       <?php endif; ?>
     </div>
   </div>

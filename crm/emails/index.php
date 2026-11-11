@@ -26,7 +26,7 @@ if ($pdo) {
     $cnt = $pdo->prepare("SELECT COUNT(*) FROM email_logs WHERE $w");
     $cnt->execute($params); $total = (int)$cnt->fetchColumn();
 
-    $q = $pdo->prepare("SELECT * FROM email_logs WHERE $w ORDER BY sent_at DESC LIMIT $per_page OFFSET $offset");
+    $q = $pdo->prepare("SELECT * FROM email_logs WHERE $w ORDER BY created_at DESC LIMIT $per_page OFFSET $offset");
     $q->execute($params); $emails = $q->fetchAll();
 }
 
@@ -114,8 +114,8 @@ function email_type_badge(string $t): string {
           <?php foreach ($emails as $em): ?>
           <tr class="hover:bg-gray-50 transition-colors" x-data="{ expanded: false }">
             <td class="px-5 py-3 text-xs text-gray-400 whitespace-nowrap">
-              <?= date('d M Y', strtotime($em['sent_at'])) ?><br>
-              <span class="text-gray-300"><?= date('H:i', strtotime($em['sent_at'])) ?></span>
+              <?= date('d M Y', strtotime($em['created_at'])) ?><br>
+              <span class="text-gray-300"><?= date('H:i', strtotime($em['created_at'])) ?></span>
             </td>
             <td class="px-4 py-3">
               <span class="text-xs font-semibold px-2 py-0.5 rounded-full <?= email_type_badge($em['type']) ?>">

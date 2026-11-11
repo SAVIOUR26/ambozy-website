@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1.5">Amount (UGX) <span class="text-red-500">*</span></label>
-          <input type="number" name="amount" value="<?= htmlspecialchars($f['amount']) ?>" min="0" step="100"
+          <input type="number" name="amount" value="<?= htmlspecialchars($f['amount']) ?>" min="0" step="any"
                  class="w-full border <?= isset($errors['amount']) ? 'border-red-400' : 'border-gray-200' ?> rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400">
           <?php if (isset($errors['amount'])): ?><p class="text-red-500 text-xs mt-1"><?= $errors['amount'] ?></p><?php endif; ?>
         </div>

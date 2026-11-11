@@ -244,7 +244,7 @@ function email_order_status(array $order, array $client): string
   <div class="info-row"><span class="info-label">Order No.</span><span class="info-value" style="font-family:monospace">{$order['order_number']}</span></div>
   <div class="info-row"><span class="info-label">Description</span><span class="info-value">{$order['title']}</span></div>
   <div class="info-row"><span class="info-label">Status</span><span class="info-value">{$order['status']}</span></div>
-  HTML;
+HTML;
     if ($due) {
         $body .= "<div class='info-row'><span class='info-label'>Due Date</span><span class='info-value'>{$due}</span></div>";
     }

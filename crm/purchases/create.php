@@ -182,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
                 </td>
                 <td class="px-3 py-2">
                   <input type="number" :name="'item_price['+idx+']'" x-model.number="item.price" @input="calcRow(idx)"
-                         min="0" step="100" class="w-full border border-gray-200 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:border-amber-400">
+                         min="0" step="any" class="w-full border border-gray-200 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:border-amber-400">
                 </td>
                 <td class="px-3 py-2 text-right">
                   <span class="text-sm font-medium text-gray-700" x-text="item.total.toLocaleString()"></span>

@@ -222,7 +222,7 @@ $catalog_json = json_encode(array_map(fn($c) => [
                     </td>
                     <td class="px-3 py-2">
                       <input type="number" :name="'unit_price['+idx+']'" x-model.number="row.unit_price"
-                             @input="recalc()" min="0" step="100"
+                             @input="recalc()" min="0" step="any"
                              class="w-full text-right border border-gray-200 rounded px-2 py-1 text-sm focus:outline-none focus:border-amber-400">
                     </td>
                     <td class="px-4 py-2 text-right font-medium text-gray-800">

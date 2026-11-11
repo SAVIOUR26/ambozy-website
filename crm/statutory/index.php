@@ -147,11 +147,12 @@ $type_labels = ['paye'=>'PAYE','vat'=>'VAT','withholding_tax'=>'WHT','nssf'=>'NS
                   <?= ucfirst($ob['status']) ?>
                 </span>
               </td>
-              <td class="px-4 py-3.5 text-right">
+              <td class="px-4 py-3.5 text-right whitespace-nowrap">
                 <?php if ($ob['status'] !== 'paid'): ?>
                   <a href="/crm/statutory/pay?id=<?= $ob['id'] ?>"
-                     class="text-xs text-amber-600 hover:text-amber-700 font-medium">Pay</a>
+                     class="text-xs text-amber-600 hover:text-amber-700 font-medium mr-1">Pay</a>
                 <?php endif; ?>
+                <?= row_actions('/crm/statutory', (int)$ob['id'], 'Delete this ' . ($type_labels[$ob['type']] ?? 'statutory') . ' obligation for ' . $month_names[$ob['period_month']] . ' ' . $ob['period_year'] . '?') ?>
               </td>
             </tr>
           <?php endforeach; ?>
