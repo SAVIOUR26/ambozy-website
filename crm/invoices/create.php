@@ -54,7 +54,8 @@ if ($pdo) {
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
-    $client_id  = (int)($_POST['client_id'] ?? 0);
+    $client_choice = client_choice($errors);
+    $client_id  = max(0, $client_choice);
     $title      = clean($_POST['title'] ?? '');
     $due_date   = clean($_POST['due_date'] ?? '');
     $discount   = min(100,max(0,(float)($_POST['discount_percent']??0)));
@@ -68,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
     $prices = $_POST['unit_price'] ?? [];
     $cids   = $_POST['catalog_id'] ?? [];
 
-    if (!$client_id) $errors['client_id'] = 'Select a client.';
     if (empty(array_filter($descs))) $errors['items'] = 'Add at least one line item.';
 
     if (empty($errors)) {
@@ -85,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
         $tax_amt  = round($tax_base*$tax/100,2);
         $grand    = round($tax_base+$tax_amt,2);
 
+        if ($client_choice === -1) { $client_id = create_one_time_client($pdo); }
         $inv_no = next_doc_number($pdo,'INV');
         $pdo->prepare(
             "INSERT INTO invoices (invoice_number,client_id,order_id,quotation_id,status,subtotal,discount_percent,tax_percent,total,amount_paid,due_date,notes,terms,created_by)
@@ -161,11 +162,7 @@ $prefill_json = json_encode(array_map(fn($it)=>['description'=>$it['description'
           <h2 class="font-semibold text-gray-800">Invoice Details</h2>
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1.5">Client <span class="text-red-500">*</span></label>
-            <select name="client_id" required class="w-full border <?= isset($errors['client_id'])?'border-red-400':'border-gray-200' ?> rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-amber-400">
-              <option value="">— Select client —</option>
-              <?php foreach($clients as $cl): ?><option value="<?=$cl['id']?>" <?=$prefill_client==$cl['id']?'selected':''?>><?=htmlspecialchars($cl['name'])?><?=$cl['company']?' — '.htmlspecialchars($cl['company']):''?></option><?php endforeach; ?>
-            </select>
-            <?php if(isset($errors['client_id'])): ?><p class="text-red-500 text-xs mt-1"><?=$errors['client_id']?></p><?php endif; ?>
+            <?php $client_selected = $prefill_client ?: ''; include __DIR__ . '/../partials/client_picker.php'; ?>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>

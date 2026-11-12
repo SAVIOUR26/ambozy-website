@@ -19,6 +19,17 @@ if ($pdo) {
     try { ensure_delivery_tables($pdo); } catch (PDOException $e) { error_log('Delivery tables: ' . $e->getMessage()); $errors['general'] = 'Could not prepare delivery note tables.'; }
     $clients = $pdo->query("SELECT id,name,company,address,city FROM clients WHERE status='active' ORDER BY name")->fetchAll();
 
+    $quote_options = $pdo->query(
+        "SELECT q.id, q.quote_number, q.title, q.status, c.name client_name
+         FROM quotations q JOIN clients c ON q.client_id = c.id
+         ORDER BY FIELD(q.status,'accepted','sent','draft','expired','rejected'), q.id DESC LIMIT 150"
+    )->fetchAll();
+    $invoice_options = $pdo->query(
+        "SELECT i.id, i.invoice_number, i.status, c.name client_name
+         FROM invoices i JOIN clients c ON i.client_id = c.id
+         WHERE i.status <> 'cancelled' ORDER BY i.id DESC LIMIT 150"
+    )->fetchAll();
+
     $addr_of = function (int $cid) use ($clients): string {
         foreach ($clients as $c) if ((int)$c['id'] === $cid) return trim(unclean($c['address']) . ($c['city'] ? ', ' . unclean($c['city']) : ''), ', ');
         return '';
@@ -52,7 +63,8 @@ if ($pdo) {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errors['general'])) {
         if (!csrf_valid()) { $errors['general'] = 'Session expired — please try again.'; }
-        $f['client_id']        = (int)($_POST['client_id'] ?? 0);
+        $client_choice = client_choice($errors);
+        $f['client_id']        = max(0, $client_choice);
         $f['title']            = trim($_POST['title'] ?? '');
         $f['delivery_date']    = trim($_POST['delivery_date'] ?? '');
         $f['delivered_to']     = trim($_POST['delivered_to'] ?? '');
@@ -65,7 +77,6 @@ if ($pdo) {
         $items = delivery_post_items();
         $rows  = array_map(fn($i) => ['description' => $i['description'], 'quantity' => $i['quantity'], 'unit' => $i['unit']], $items);
 
-        if (!$f['client_id'])      $errors['client_id'] = 'Select a client.';
         if ($f['title'] === '')    $errors['title']     = 'Enter a description.';
         if (empty($items))         $errors['items']     = 'Add at least one item.';
         if (!$f['delivery_date'])  $f['delivery_date']  = date('Y-m-d');
@@ -73,6 +84,7 @@ if ($pdo) {
         if (empty($errors)) {
             try {
                 $pdo->beginTransaction();
+                if ($client_choice === -1) { $f['client_id'] = create_one_time_client($pdo); }
                 $dn_no = next_doc_number($pdo, 'DN');
                 $pdo->prepare(
                     "INSERT INTO delivery_notes (dn_number,client_id,quotation_id,invoice_id,title,delivery_date,delivered_to,delivery_address,driver_name,vehicle_no,status,notes,created_by)

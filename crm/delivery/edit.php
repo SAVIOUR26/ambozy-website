@@ -25,12 +25,12 @@ $si->execute([$id]); $rows = $si->fetchAll();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!csrf_valid()) { $errors['general'] = 'Session expired — please try again.'; }
     foreach (['title','delivery_date','delivered_to','delivery_address','driver_name','vehicle_no','notes','received_by'] as $k) $f[$k] = trim($_POST[$k] ?? '');
-    $f['client_id'] = (int)($_POST['client_id'] ?? 0);
+    $client_choice = client_choice($errors);
+    $f['client_id'] = max(0, $client_choice);
     $f['status']    = in_array($_POST['status'] ?? '', ['draft','dispatched','delivered','cancelled']) ? $_POST['status'] : $dn['status'];
     $items = delivery_post_items();
     $rows  = array_map(fn($i) => ['description' => $i['description'], 'quantity' => $i['quantity'], 'unit' => $i['unit']], $items);
 
-    if (!$f['client_id'])   $errors['client_id'] = 'Select a client.';
     if ($f['title'] === '') $errors['title']     = 'Enter a description.';
     if (empty($items))      $errors['items']     = 'Add at least one item.';
     if (!$f['delivery_date']) $f['delivery_date'] = $dn['delivery_date'];
@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         try {
             $pdo->beginTransaction();
+            if ($client_choice === -1) { $f['client_id'] = create_one_time_client($pdo); }
             $pdo->prepare(
                 "UPDATE delivery_notes SET client_id=?,title=?,delivery_date=?,delivered_to=?,delivery_address=?,driver_name=?,vehicle_no=?,status=?,notes=?,received_by=? WHERE id=?"
             )->execute([

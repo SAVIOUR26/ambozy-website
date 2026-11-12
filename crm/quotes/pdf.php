@@ -152,7 +152,7 @@ $phone_2    = '+256 782 187 799';
   </style>
 </head>
 <body>
-<button class="print-btn" onclick="window.print()">🖨 Print / Save PDF</button>
+<?php $pdf_filename = $quote['quote_number']; include __DIR__ . '/../partials/pdf_toolbar.php'; ?>
 
 <div class="page">
 

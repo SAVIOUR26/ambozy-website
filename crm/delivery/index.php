@@ -77,7 +77,7 @@ $pages = max(1, (int)ceil($total / $limit));
         <td class="px-4 py-3.5 hidden lg:table-cell text-center text-gray-500"><?= (int)$n['item_count'] ?></td>
         <td class="px-4 py-3.5"><span class="text-xs px-2 py-0.5 rounded-full font-medium <?= delivery_badge($n['status']) ?>"><?= ucfirst($n['status']) ?></span></td>
         <td class="px-4 py-3.5 text-right whitespace-nowrap">
-          <a href="/crm/delivery/pdf?id=<?= $n['id'] ?>" target="_blank" class="inline-flex p-1.5 text-gray-400 hover:text-indigo-600" title="Print / PDF">🖨</a>
+          <a href="/crm/delivery/pdf?id=<?= $n['id'] ?>&download=1" target="_blank" class="inline-flex p-1.5 text-gray-400 hover:text-indigo-600" title="Print / PDF">🖨</a>
           <?= row_actions('/crm/delivery', (int)$n['id'], 'Delete delivery note ' . $n['dn_number'] . '? This cannot be undone.') ?>
         </td>
       </tr>

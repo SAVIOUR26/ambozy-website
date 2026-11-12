@@ -39,7 +39,8 @@ if($_SERVER['REQUEST_METHOD']==='POST'&&$pdo){
     Invoices
   </a>
   <div class="flex items-center gap-2 flex-wrap">
-    <a href="/crm/invoices/pdf?id=<?=$id?>" target="_blank" class="text-sm bg-white border border-gray-200 hover:border-indigo-400 text-gray-700 px-3 py-2 rounded-lg">🖨 Print / PDF</a>
+    <a href="/crm/invoices/pdf?id=<?=$id?>&download=1" target="_blank" class="text-sm bg-amber-500 hover:bg-amber-400 text-white px-3 py-2 rounded-lg font-medium transition-colors">⬇ Download PDF</a>
+    <a href="/crm/invoices/pdf?id=<?=$id?>" target="_blank" class="text-sm bg-white border border-gray-200 hover:border-indigo-400 text-gray-700 px-3 py-2 rounded-lg">🖨 Print</a>
     <a href="/crm/delivery/create?invoice_id=<?=$id?>" class="text-sm bg-teal-500 hover:bg-teal-400 text-white px-3 py-2 rounded-lg font-medium">🚚 Delivery Note</a>
     <?php if(in_array($invoice['status'],['draft','sent','partial','overdue'])): ?>
       <a href="/crm/invoices/send?id=<?=$id?>" class="text-sm bg-blue-500 hover:bg-blue-400 text-white px-3 py-2 rounded-lg font-medium">✉ Send to Client</a>

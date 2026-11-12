@@ -14,6 +14,35 @@ $input = 'w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:out
 <div class="max-w-4xl">
   <div class="mb-5"><a href="<?= $cancel_url ?>" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>Back</a></div>
 
+  <?php if (empty($is_edit) && isset($quote_options)): ?>
+    <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 mb-5">
+      <h2 class="font-semibold text-amber-900 text-sm">Create from a quotation or invoice</h2>
+      <p class="text-xs text-amber-700 mt-0.5">Pick an existing document — the client and the items (quantities only, no prices) are filled in for you.</p>
+      <select onchange="if(this.value){var p=this.value.split(':');location.href='/crm/delivery/create?'+(p[0]==='q'?'quote_id=':'invoice_id=')+p[1];}"
+              class="mt-3 w-full border border-amber-300 bg-white rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-amber-500">
+        <option value="">— Select a quotation or invoice —</option>
+        <?php
+        $q_groups = ['accepted' => 'Quotations — accepted (client approved)', 'sent' => 'Quotations — sent to client', 'draft' => 'Quotations — draft', 'expired' => 'Quotations — expired', 'rejected' => 'Quotations — rejected'];
+        foreach ($q_groups as $gs => $gl):
+            $opts = array_filter($quote_options, fn($o) => $o['status'] === $gs);
+            if (!$opts) continue; ?>
+          <optgroup label="<?= $gl ?>">
+            <?php foreach ($opts as $o): ?>
+              <option value="q:<?= $o['id'] ?>" <?= (int)($f['quotation_id'] ?? 0) === (int)$o['id'] && empty($f['invoice_id']) ? 'selected' : '' ?>><?= htmlspecialchars($o['quote_number'] . ' · ' . $o['client_name'] . ' · ' . $o['title']) ?></option>
+            <?php endforeach; ?>
+          </optgroup>
+        <?php endforeach; ?>
+        <?php if ($invoice_options): ?>
+          <optgroup label="Invoices">
+            <?php foreach ($invoice_options as $o): ?>
+              <option value="i:<?= $o['id'] ?>" <?= (int)($f['invoice_id'] ?? 0) === (int)$o['id'] ? 'selected' : '' ?>><?= htmlspecialchars($o['invoice_number'] . ' · ' . $o['client_name'] . ' · ' . ucfirst($o['status'])) ?></option>
+            <?php endforeach; ?>
+          </optgroup>
+        <?php endif; ?>
+      </select>
+    </div>
+  <?php endif; ?>
+
   <?php if (!empty($source_html)): ?>
     <div class="bg-amber-50 border border-amber-200 rounded-xl px-5 py-3 mb-5 text-sm text-amber-800"><?= $source_html ?></div>
   <?php endif; ?>
@@ -30,11 +59,7 @@ $input = 'w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:out
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1.5">Client <span class="text-red-500">*</span></label>
-            <select name="client_id" required class="<?= $input ?> <?= isset($errors['client_id']) ? 'border-red-400' : '' ?>">
-              <option value="">— Select client —</option>
-              <?php foreach ($clients as $cl): ?><option value="<?= $cl['id'] ?>" <?= (int)$f['client_id'] === (int)$cl['id'] ? 'selected' : '' ?>><?= htmlspecialchars($cl['name']) ?><?= $cl['company'] ? ' — ' . htmlspecialchars($cl['company']) : '' ?></option><?php endforeach; ?>
-            </select>
-            <?php if (isset($errors['client_id'])): ?><p class="text-red-500 text-xs mt-1"><?= $errors['client_id'] ?></p><?php endif; ?>
+            <?php $client_selected = $f['client_id'] ?: ''; include __DIR__ . '/../partials/client_picker.php'; ?>
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1.5">Delivery Date <span class="text-red-500">*</span></label>

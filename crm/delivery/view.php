@@ -42,7 +42,8 @@ require_once __DIR__ . '/../partials/header.php';
 <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
   <a href="/crm/delivery/" class="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>Delivery Notes</a>
   <div class="flex items-center gap-2 flex-wrap">
-    <a href="/crm/delivery/pdf?id=<?= $id ?>" target="_blank" class="text-sm bg-white border border-gray-200 hover:border-indigo-400 text-gray-700 px-3 py-2 rounded-lg">🖨 Print / PDF</a>
+    <a href="/crm/delivery/pdf?id=<?= $id ?>&download=1" target="_blank" class="text-sm bg-amber-500 hover:bg-amber-400 text-white px-3 py-2 rounded-lg font-medium transition-colors">⬇ Download PDF</a>
+    <a href="/crm/delivery/pdf?id=<?= $id ?>" target="_blank" class="text-sm bg-white border border-gray-200 hover:border-indigo-400 text-gray-700 px-3 py-2 rounded-lg">🖨 Print</a>
     <a href="/crm/delivery/edit?id=<?= $id ?>" class="text-sm bg-white border border-gray-200 hover:border-amber-400 text-gray-700 px-3 py-2 rounded-lg">✎ Edit</a>
     <?= row_actions('/crm/delivery', $id, 'Delete delivery note ' . $dn['dn_number'] . '? This cannot be undone.') ?>
   </div>

@@ -134,7 +134,7 @@ $addr = $dn['delivery_address'] ?: trim(unclean($dn['client_address']) . ($dn['c
   </style>
 </head>
 <body>
-<button class="print-btn" onclick="window.print()">🖨 Print / Save PDF</button>
+<?php $pdf_filename = $dn['dn_number']; include __DIR__ . '/../partials/pdf_toolbar.php'; ?>
 
 <div class="page">
 

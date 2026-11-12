@@ -46,9 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
     Quotations
   </a>
   <div class="flex items-center gap-2 flex-wrap">
+    <a href="/crm/quotes/pdf?id=<?= $id ?>&download=1" target="_blank"
+       class="text-sm bg-amber-500 hover:bg-amber-400 text-white px-3 py-2 rounded-lg font-medium transition-colors">
+      ⬇ Download PDF
+    </a>
     <a href="/crm/quotes/pdf?id=<?= $id ?>" target="_blank"
        class="text-sm bg-white border border-gray-200 hover:border-indigo-400 text-gray-700 px-3 py-2 rounded-lg transition-colors">
-      🖨 Print / PDF
+      🖨 Print
     </a>
     <?php if (!in_array($quote['status'], ['accepted','invoiced'])): ?>
       <a href="/crm/quotes/edit?id=<?= $id ?>"

@@ -311,3 +311,56 @@ function ensure_signature_column(PDO $pdo): void
         error_log('ensure_signature_column: ' . $e->getMessage());
     }
 }
+
+/**
+ * Client selection for quotations, invoices and delivery notes.
+ * The client <select> may send an existing client id, or "new" together with a typed name
+ * (a one-time / walk-in client that is saved automatically).
+ *
+ * Returns: client id (> 0) for an existing client, -1 for a valid new client, 0 if invalid.
+ * Sets $errors['client_id'] when invalid.
+ */
+function client_choice(array &$errors): int
+{
+    $raw = $_POST['client_id'] ?? '';
+    if ($raw === 'new') {
+        $name  = trim($_POST['new_client_name'] ?? '');
+        $email = trim($_POST['new_client_email'] ?? '');
+        if ($name === '') { $errors['client_id'] = "Type the client's name."; return 0; }
+        if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) { $errors['client_id'] = 'The client email address is not valid.'; return 0; }
+        return -1;
+    }
+    $id = (int)$raw;
+    if ($id <= 0) { $errors['client_id'] = 'Select a client or choose "New / one-time client".'; return 0; }
+    return $id;
+}
+
+/**
+ * Save the typed one-time client and return its id.
+ * An existing client with the same name (and same phone, when given) is reused instead of duplicated.
+ */
+function create_one_time_client(PDO $pdo): int
+{
+    $name    = clean($_POST['new_client_name']    ?? '');
+    $phone   = clean($_POST['new_client_phone']   ?? '');
+    $email   = trim($_POST['new_client_email']    ?? '');
+    $company = clean($_POST['new_client_company'] ?? '');
+
+    $q = $pdo->prepare("SELECT id FROM clients WHERE LOWER(name) = LOWER(?) AND IFNULL(phone,'') = ? LIMIT 1");
+    $q->execute([$name, $phone]);
+    if ($existing = $q->fetchColumn()) { return (int)$existing; }
+
+    $code = next_doc_number($pdo, 'CLI');
+    $pdo->prepare(
+        "INSERT INTO clients (code, name, email, phone, company, type, source, notes, created_by)
+         VALUES (?,?,?,?,?,?,?,?,?)"
+    )->execute([
+        $code, $name, $email ?: null, $phone ?: null, $company ?: null,
+        $company ? 'business' : 'individual', 'walk-in',
+        'Added on the spot while preparing a document (one-time client).',
+        $_SESSION['admin_id'] ?? null,
+    ]);
+    $id = (int)$pdo->lastInsertId();
+    log_activity($pdo, 'client_created', "Client {$code} — {$name} added while creating a document.", 'client', $id);
+    return $id;
+}

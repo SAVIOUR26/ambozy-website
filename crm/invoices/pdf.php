@@ -80,7 +80,7 @@ $tax_amt=round($tax_base*$invoice['tax_percent']/100,0);
   </style>
 </head>
 <body>
-<button class="print-btn" onclick="window.print()">🖨 Print / Save PDF</button>
+<?php $pdf_filename = $invoice['invoice_number']; include __DIR__ . '/../partials/pdf_toolbar.php'; ?>
 <?php $wa_display='+256 702 371 230'; $phone_2='+256 782 187 799'; ?>
 <div class="page">
 
